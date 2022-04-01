@@ -1,0 +1,41 @@
+.zone {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background-color: #dda0dda1;
+}
+
+.noteMovingWrapper {
+  position: absolute;
+  top: 0;
+}
+
+.note {
+  border-radius: 12px;
+  background-color: plum;
+}
+
+.playBtn {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  padding: 16px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.line {
+  width: 100%;
+  outline: 1px solid rgba(0, 0, 0, 0.425);
+}
+
+.scores {
+  position: fixed;
+  top: 32px;
+  left: 32px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 24px;
+}
