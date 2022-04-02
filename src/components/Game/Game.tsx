@@ -44,7 +44,7 @@ const fetchMidi = async () => {
     bps,
     spb,
     barDuration,
-    notes: track.notes.map((note) => note.time * bps + 1),
+    notes: track.notes.map((note) => note.time * bps + 0.5),
   };
 };
 
@@ -160,51 +160,81 @@ const Notes: FC<
       ></div>
       <AnimatePresence>
         {notes.map((beat) => {
+          const initX = innerWidth / 2 - halfBeatSize / 2;
+          const initY = zonePos.y - beatSize * 5 - halfBeatSize;
+
+          const targetX = zonePos.x;
+          const targetY = zonePos.y - halfBeatSize;
+
           return (
-            <motion.div
-              className={classes.noteMovingWrapper}
-              data-id="note"
+            <Note
               key={beat}
-              initial={{ x: innerWidth / 2 - halfBeatSize / 2, y: zonePos.y - beatSize * 5 }}
-              animate={{ x: zonePos.x, y: zonePos.y }}
-              exit={{
-                opacity: 0,
-                transition: {
-                  type: 'tween',
-                  ease: 'linear',
-                  duration: 0.1,
-                },
-              }}
-              transition={{
-                type: 'tween',
-                ease: 'linear',
-                duration: midi.barDuration + LATENCY_COMPENSATION,
-                delay: midi.spb * beat,
-              }}
-              onAnimationComplete={(target: TargetAndTransition) => {
-                if (target.x && target.y) {
-                  onAnimationComplete(beat);
-                }
-              }}
-            >
-              <motion.div
-                initial={{ scale: 1 }}
-                animate={{ scale: 1.1 }}
-                transition={{
-                  type: 'spring',
-                  mass: 0.5,
-                  duration: midi.spb / 2,
-                  repeat: Infinity,
-                  repeatType: 'mirror',
-                }}
-                style={{ height: halfBeatSize, width: halfBeatSize }}
-                className={classes.note}
-              />
-            </motion.div>
+              beat={beat}
+              initPos={{ x: initX, y: initY }}
+              targetPos={{ x: targetX, y: targetY }}
+              translateDuration={midi.barDuration + LATENCY_COMPENSATION}
+              translateDelay={midi.spb * beat}
+              beatDuration={midi.spb / 2}
+              size={halfBeatSize}
+              onAnimationComplete={onAnimationComplete}
+            />
           );
         })}
       </AnimatePresence>
     </>
+  );
+};
+
+const Note: FC<{
+  initPos: Position;
+  targetPos: Position;
+  translateDuration: number;
+  translateDelay: number;
+  beatDuration: number;
+  beat: number;
+  size: number;
+  onAnimationComplete: (beat: number) => void;
+}> = ({ beat, size, initPos, targetPos, translateDuration, translateDelay, beatDuration, onAnimationComplete }) => {
+  return (
+    <motion.div
+      className={classes.noteMovingWrapper}
+      data-id="note"
+      initial={{ x: initPos.x, y: initPos.y }}
+      animate={{ x: targetPos.x, y: targetPos.y }}
+      exit={{
+        opacity: 0,
+        transition: {
+          type: 'tween',
+          ease: 'linear',
+          duration: 0.1,
+        },
+      }}
+      transition={{
+        type: 'tween',
+        ease: 'linear',
+        duration: translateDuration,
+        delay: translateDelay,
+      }}
+      onAnimationComplete={(target: TargetAndTransition) => {
+        if (target.x && target.y) {
+          onAnimationComplete(beat);
+        }
+      }}
+    >
+      <motion.div
+        initial={{ scale: 1 }}
+        animate={{ scale: 1.1 }}
+        transition={{
+          type: 'spring',
+          mass: 0.5,
+          duration: beatDuration,
+          repeat: Infinity,
+          repeatType: 'mirror',
+        }}
+        style={{ height: size, width: size }}
+        className={classes.note}
+      />
+    </motion.div>
   );
 };
 
@@ -247,7 +277,6 @@ function checkNoteHit(note: Element, zonePos: Position): boolean {
   const diff = Math.sqrt(Math.pow(zonePos.x - noteRect.x, 2) + Math.pow(zonePos.y - noteRect.y, 2));
 
   const percent = (diff / size) * 100;
-  console.log(percent);
 
   return percent >= HIT_PERCENT && percent <= 100 - HIT_PERCENT;
 }
