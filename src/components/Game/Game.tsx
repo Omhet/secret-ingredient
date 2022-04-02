@@ -1,6 +1,6 @@
 import { Midi } from '@tonejs/midi';
-import { motion } from 'framer-motion';
-import React, { FC, useEffect, useLayoutEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import React, { FC, forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useKeyPress } from 'react-use';
 import classes from './Game.module.scss';
 import { useAudio } from './useAudio';
@@ -14,12 +14,21 @@ enum HitRate {
   Perfect = 'Perfect',
 }
 
+type Position = {
+  x: number;
+  y: number;
+};
+
 type MidiType = {
   bpm: number;
   bps: number;
   spb: number;
   barDuration: number;
   notes: number[];
+};
+
+type WithMidi = {
+  midi: MidiType;
 };
 
 const TRACK_NAME = 'techno-120';
@@ -58,22 +67,36 @@ export const Game: FC<GameProps> = ({}) => {
   const [perfectHits, setPerfectHits] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [midi, setMidi] = useState<MidiType | undefined>();
+  const [notes, setNotes] = useState<MidiType['notes']>([]);
+
+  const zoneRef = useRef<HTMLDivElement>(null);
+  const [zonePos, setZonePos] = useState({ x: 0, y: 0 });
 
   const { isPlaying, toggle } = useAudio(`/music/${TRACK_NAME}.mp3`);
   const [isPressed] = useKeyPress(' ');
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (zoneRef.current) {
+        const { x, y } = zoneRef.current.getBoundingClientRect();
+        setZonePos({ x, y });
+      }
+    }, 0);
+  }, [zoneRef.current]);
 
   useEffect(() => {
     (async () => {
       setIsLoading(true);
       const midi = await fetchMidi();
       setMidi(midi);
+      setNotes(midi.notes);
       setIsLoading(false);
     })();
   }, []);
 
   useLayoutEffect(() => {
     if (isPressed) {
-      const rate = checkHit();
+      const rate = checkHit(zonePos);
       switch (rate) {
         case HitRate.Perfect: {
           setPerfectHits((prev) => prev + 1);
@@ -93,11 +116,15 @@ export const Game: FC<GameProps> = ({}) => {
         }
       }
     }
-  }, [isPressed]);
+  }, [isPressed, zonePos]);
 
   const playGame = () => {
     console.log('Play');
     toggle();
+  };
+
+  const handleAnimationComplete = (beat: number) => {
+    setNotes((prev) => prev.filter((b) => b !== beat));
   };
 
   return (
@@ -115,75 +142,119 @@ export const Game: FC<GameProps> = ({}) => {
           {isPlaying ? 'Playing' : 'Play'}
         </button>
       )}
-      {isPlaying && midi && <Notes midi={midi} />}
-      <Zone />
+      {isPlaying && midi && (
+        <Notes notes={notes} midi={midi} zonePos={zonePos} onAnimationComplete={handleAnimationComplete} />
+      )}
+      {midi && <Zone ref={zoneRef} midi={midi} isPlaying={isPlaying} />}
     </>
   );
 };
 
-type NotesProps = {
-  midi: MidiType;
-};
-const Notes: FC<NotesProps> = ({ midi }) => {
+const Notes: FC<
+  WithMidi & {
+    zonePos: Position;
+    notes: MidiType['notes'];
+    onAnimationComplete: (beat: number) => void;
+  }
+> = ({ midi, notes, zonePos, onAnimationComplete }) => {
   return (
     <>
-      {midi.notes.map((beat) => {
-        return (
-          <motion.div
-            data-id="note"
-            key={beat}
-            initial={{ y: -beatSize, originY: 0 }}
-            animate={{ y: beatSize * 4 }}
-            transition={{
-              type: 'tween',
-              ease: 'linear',
-              duration: midi.barDuration + LATENCY_COMPENSATION,
-              delay: midi.spb * beat,
-            }}
-            className={classes.noteMovingWrapper}
-          >
+      <div
+        style={{
+          width: 1,
+          background: 'black',
+          position: 'absolute',
+          height: innerHeight * 2,
+          left: innerWidth / 2 - halfBeatSize / 2,
+          top: zonePos.y - beatSize * 5,
+        }}
+      ></div>
+      <div
+        style={{
+          width: 4,
+          background: 'black',
+          position: 'absolute',
+          height: 4,
+          left: zonePos.x,
+          top: zonePos.y,
+        }}
+      ></div>
+      <AnimatePresence>
+        {notes.map((beat) => {
+          return (
             <motion.div
-              initial={{ scale: 1.1 }}
-              animate={{ scale: 1 }}
-              transition={{
-                type: 'spring',
-                mass: 0.5,
-                duration: midi.spb / 2,
-                repeat: Infinity,
-                repeatType: 'mirror',
+              className={classes.noteMovingWrapper}
+              data-id="note"
+              key={beat}
+              initial={{ x: innerWidth / 2 - halfBeatSize / 2, y: zonePos.y - beatSize * 5 }}
+              animate={{ x: zonePos.x, y: zonePos.y }}
+              exit={{
+                opacity: 0,
+                transition: {
+                  type: 'tween',
+                  ease: 'linear',
+                  duration: 0.3,
+                },
               }}
-              style={{ height: halfBeatSize, width: halfBeatSize }}
-              className={classes.note}
-            />
-          </motion.div>
-        );
-      })}
+              transition={{
+                type: 'tween',
+                ease: 'linear',
+                duration: midi.barDuration + LATENCY_COMPENSATION,
+                delay: midi.spb * beat,
+              }}
+              onAnimationComplete={() => onAnimationComplete(beat)}
+            >
+              <motion.div
+                initial={{ scale: 1 }}
+                animate={{ scale: 1.1 }}
+                transition={{
+                  type: 'spring',
+                  mass: 0.5,
+                  duration: midi.spb / 2,
+                  repeat: Infinity,
+                  repeatType: 'mirror',
+                }}
+                style={{ height: halfBeatSize, width: halfBeatSize }}
+                className={classes.note}
+              />
+            </motion.div>
+          );
+        })}
+      </AnimatePresence>
     </>
   );
 };
 
-const Zone: FC = () => {
+const Zone = forwardRef<HTMLDivElement, WithMidi & { isPlaying: boolean }>(({ midi, isPlaying }, ref) => {
   return (
-    <>
-      <div data-id="zone" style={{ height: halfBeatSize, top: halfBeatSize * 6 }} className={classes.zone} />
-      {/* <div style={{ height: beatSize }} className={classes.line} />
-      <div style={{ height: beatSize }} className={classes.line} />
-      <div style={{ height: beatSize }} className={classes.line} />
-      <div style={{ height: beatSize }} className={classes.line} /> */}
-    </>
+    <div className={classes.zone}>
+      <motion.div
+        data-id="zone"
+        ref={ref}
+        initial={{ scale: 1 }}
+        animate={isPlaying ? { scale: 1.1 } : undefined}
+        transition={{
+          type: 'spring',
+          mass: 0.5,
+          duration: midi.spb / 2,
+          repeat: Infinity,
+          repeatType: 'mirror',
+        }}
+        style={{ width: halfBeatSize, height: halfBeatSize }}
+        className={classes.zoneHeart}
+      />
+      <div className={classes.zoneFence} style={{ width: halfBeatSize * 5, height: halfBeatSize * 5 }}>
+        <div className={classes.zoneFenceInner} style={{ width: halfBeatSize * 3, height: halfBeatSize * 3 }} />
+      </div>
+    </div>
   );
-};
+});
 
-function checkHit() {
-  const zone = document.querySelector('[data-id="zone"]');
+function checkHit(zonePos: Position) {
   const notes = Array.from(document.querySelectorAll('[data-id="note"]'));
 
-  if (!zone) {
-    throw Error('no zone');
-  }
-
   for (const note of notes) {
-    const rate = getOverlapRate(note, zone);
+    const rate = getOverlapRate(note, zonePos);
     if (rate !== HitRate.Miss) {
       return rate;
     }
@@ -192,20 +263,18 @@ function checkHit() {
   return HitRate.Miss;
 }
 
-function getOverlapRate(note: Element, zone: Element): HitRate {
-  const zoneRect = zone.getBoundingClientRect();
+function getOverlapRate(note: Element, zonePos: Position): HitRate {
   const noteRect = note.getBoundingClientRect();
 
-  const height = zoneRect.height;
-  const noteCenter = noteRect.y + height / 2;
-  const zoneCenter = zoneRect.y + height / 2;
-  const diff = Math.abs(noteCenter - zoneCenter);
+  const size = noteRect.height * 3;
+  const diff = Math.sqrt(Math.pow(zonePos.x - noteRect.x, 2) + Math.pow(zonePos.y - noteRect.y, 2));
 
-  if (diff > height) {
+  if (diff > size) {
     return HitRate.Miss;
   }
 
-  const percent = 100 - (diff / height) * 100;
+  const percent = 100 - (diff / size) * 100;
+  console.log(diff, size, percent);
 
   if (percent >= 70) {
     return HitRate.Perfect;
