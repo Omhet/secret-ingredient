@@ -270,7 +270,6 @@ function checkNoteHit(note: HTMLDivElement, zonePos: Position) {
   const diff = Math.sqrt(Math.pow(zonePos.x - noteRect.x, 2) + Math.pow(zonePos.y - noteRect.y, 2));
 
   const percent = (diff / size) * 100;
-  console.log(percent);
 
   if (percent >= HIT_PERCENT_BOTTOM && percent <= 100 - HIT_PERCENT_TOP) {
     return Number(note.dataset.beat);
