@@ -1,18 +1,11 @@
 import { Midi } from '@tonejs/midi';
-import { AnimatePresence, motion } from 'framer-motion';
-import React, { FC, forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, TargetAndTransition } from 'framer-motion';
+import React, { FC, forwardRef, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useKeyPress } from 'react-use';
 import classes from './Game.module.scss';
 import { useAudio } from './useAudio';
 
 export interface GameProps {}
-
-enum HitRate {
-  Miss = 'Miss',
-  Bad = 'Bad',
-  Good = 'Good',
-  Perfect = 'Perfect',
-}
 
 type Position = {
   x: number;
@@ -61,10 +54,9 @@ const beatSize = halfBeatSize * 2;
 const LATENCY_COMPENSATION = 0.05;
 
 export const Game: FC<GameProps> = ({}) => {
-  const [missHits, setMissHits] = useState(0);
-  const [badHits, setBadHits] = useState(0);
-  const [goodHits, setGoodHits] = useState(0);
-  const [perfectHits, setPerfectHits] = useState(0);
+  const [missCount, setMissCount] = useState(0);
+  const [hitCount, setHitCount] = useState(0);
+  const [touchedHeartCount, setTouchedHeartCountCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [midi, setMidi] = useState<MidiType | undefined>();
   const [notes, setNotes] = useState<MidiType['notes']>([]);
@@ -96,24 +88,11 @@ export const Game: FC<GameProps> = ({}) => {
 
   useLayoutEffect(() => {
     if (isPressed) {
-      const rate = checkHit(zonePos);
-      switch (rate) {
-        case HitRate.Perfect: {
-          setPerfectHits((prev) => prev + 1);
-          break;
-        }
-        case HitRate.Good: {
-          setGoodHits((prev) => prev + 1);
-          break;
-        }
-        case HitRate.Bad: {
-          setBadHits((prev) => prev + 1);
-          break;
-        }
-        case HitRate.Miss: {
-          setMissHits((prev) => prev + 1);
-          break;
-        }
+      const isHit = checkHit(zonePos);
+      if (isHit) {
+        setHitCount((prev) => prev + 1);
+      } else {
+        setMissCount((prev) => prev + 1);
       }
     }
   }, [isPressed, zonePos]);
@@ -123,17 +102,17 @@ export const Game: FC<GameProps> = ({}) => {
     toggle();
   };
 
-  const handleAnimationComplete = (beat: number) => {
+  const handleAnimationComplete = useCallback((beat: number) => {
+    setTouchedHeartCountCount((prev) => prev + 1);
     setNotes((prev) => prev.filter((b) => b !== beat));
-  };
+  }, []);
 
   return (
     <>
       <div className={classes.scores}>
-        <div>Miss: {missHits}</div>
-        <div>Bad: {badHits}</div>
-        <div>Good: {goodHits}</div>
-        <div>Perfect: {perfectHits}</div>
+        <div>Touched heart: {touchedHeartCount}</div>
+        <div>Miss: {missCount}</div>
+        <div>Hit: {hitCount}</div>
       </div>
       {isLoading ? (
         <p>Loading...</p>
@@ -193,7 +172,7 @@ const Notes: FC<
                 transition: {
                   type: 'tween',
                   ease: 'linear',
-                  duration: 0.3,
+                  duration: 0.1,
                 },
               }}
               transition={{
@@ -202,7 +181,11 @@ const Notes: FC<
                 duration: midi.barDuration + LATENCY_COMPENSATION,
                 delay: midi.spb * beat,
               }}
-              onAnimationComplete={() => onAnimationComplete(beat)}
+              onAnimationComplete={(target: TargetAndTransition) => {
+                if (target.x && target.y) {
+                  onAnimationComplete(beat);
+                }
+              }}
             >
               <motion.div
                 initial={{ scale: 1 }}
@@ -253,34 +236,18 @@ const Zone = forwardRef<HTMLDivElement, WithMidi & { isPlaying: boolean }>(({ mi
 function checkHit(zonePos: Position) {
   const notes = Array.from(document.querySelectorAll('[data-id="note"]'));
 
-  for (const note of notes) {
-    const rate = getOverlapRate(note, zonePos);
-    if (rate !== HitRate.Miss) {
-      return rate;
-    }
-  }
-
-  return HitRate.Miss;
+  return notes.some((note) => checkNoteHit(note, zonePos));
 }
 
-function getOverlapRate(note: Element, zonePos: Position): HitRate {
+const HIT_PERCENT = 20;
+function checkNoteHit(note: Element, zonePos: Position): boolean {
   const noteRect = note.getBoundingClientRect();
 
   const size = noteRect.height * 3;
   const diff = Math.sqrt(Math.pow(zonePos.x - noteRect.x, 2) + Math.pow(zonePos.y - noteRect.y, 2));
 
-  if (diff > size) {
-    return HitRate.Miss;
-  }
+  const percent = (diff / size) * 100;
+  console.log(percent);
 
-  const percent = 100 - (diff / size) * 100;
-  console.log(diff, size, percent);
-
-  if (percent >= 70) {
-    return HitRate.Perfect;
-  } else if (percent >= 40) {
-    return HitRate.Good;
-  } else {
-    return HitRate.Bad;
-  }
+  return percent >= HIT_PERCENT && percent <= 100 - HIT_PERCENT;
 }
