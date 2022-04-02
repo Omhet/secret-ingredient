@@ -142,52 +142,30 @@ const Notes: FC<
     onAnimationComplete: (beat: number) => void;
   }
 > = ({ midi, notes, zonePos, onAnimationComplete }) => {
+  const targetX = zonePos.x;
+  const targetY = zonePos.y - halfBeatSize;
+
   return (
-    <>
-      <div
-        style={{
-          width: 1,
-          background: 'black',
-          position: 'absolute',
-          height: innerHeight * 2,
-          left: innerWidth / 2 - halfBeatSize / 2,
-          top: zonePos.y - beatSize * 5,
-        }}
-      ></div>
-      <div
-        style={{
-          width: 4,
-          background: 'black',
-          position: 'absolute',
-          height: 4,
-          left: zonePos.x,
-          top: zonePos.y,
-        }}
-      ></div>
-      <AnimatePresence>
-        {notes.map((beat) => {
-          const initX = innerWidth / 2 - halfBeatSize / 2;
-          const initY = zonePos.y - beatSize * 5 - halfBeatSize;
+    <AnimatePresence>
+      {notes.map((beat) => {
+        const initX = innerWidth / 2 - halfBeatSize / 2;
+        const initY = zonePos.y - beatSize * 5 - halfBeatSize;
 
-          const targetX = zonePos.x;
-          const targetY = zonePos.y - halfBeatSize;
-
-          return (
-            <Note
-              key={beat}
-              beat={beat}
-              initPos={{ x: initX, y: initY }}
-              targetPos={{ x: targetX, y: targetY }}
-              translateDuration={midi.barDuration + LATENCY_COMPENSATION}
-              translateDelay={midi.spb * beat}
-              beatDuration={midi.spb / 2}
-              size={halfBeatSize}
-              onAnimationComplete={onAnimationComplete}
-            />
-          );
-        })}
-      </AnimatePresence>
-    </>
+        return (
+          <Note
+            key={beat}
+            beat={beat}
+            initPos={{ x: initX, y: initY }}
+            targetPos={{ x: targetX, y: targetY }}
+            translateDuration={midi.barDuration + LATENCY_COMPENSATION}
+            translateDelay={midi.spb * beat}
+            beatDuration={midi.spb / 2}
+            size={halfBeatSize}
+            onAnimationComplete={onAnimationComplete}
+          />
+        );
+      })}
+    </AnimatePresence>
   );
 };
 
