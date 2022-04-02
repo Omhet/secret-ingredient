@@ -1,6 +1,6 @@
 import { Midi } from '@tonejs/midi';
 import { AnimatePresence, motion, TargetAndTransition } from 'framer-motion';
-import React, { FC, forwardRef, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { FC, forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useKeyPress } from 'react-use';
 import classes from './Game.module.scss';
 import { useAudio } from './useAudio';
@@ -86,10 +86,12 @@ export const Game: FC<GameProps> = ({}) => {
     })();
   }, []);
 
+  // Key press
   useLayoutEffect(() => {
     if (isPressed) {
-      const isHit = checkHit(zonePos);
-      if (isHit) {
+      const beat = checkHit(zonePos);
+      if (beat !== undefined) {
+        removeNote(beat);
         setHitCount((prev) => prev + 1);
       } else {
         setMissCount((prev) => prev + 1);
@@ -102,10 +104,14 @@ export const Game: FC<GameProps> = ({}) => {
     toggle();
   };
 
-  const handleAnimationComplete = useCallback((beat: number) => {
-    setTouchedHeartCountCount((prev) => prev + 1);
+  const removeNote = (beat: number) => {
     setNotes((prev) => prev.filter((b) => b !== beat));
-  }, []);
+  };
+
+  const handleAnimationComplete = (beat: number) => {
+    setTouchedHeartCountCount((prev) => prev + 1);
+    removeNote(beat);
+  };
 
   return (
     <>
@@ -199,6 +205,7 @@ const Note: FC<{
     <motion.div
       className={classes.noteMovingWrapper}
       data-id="note"
+      data-beat={beat}
       initial={{ x: initPos.x, y: initPos.y }}
       animate={{ x: targetPos.x, y: targetPos.y }}
       exit={{
@@ -257,26 +264,37 @@ const Zone = forwardRef<HTMLDivElement, WithMidi & { isPlaying: boolean }>(({ mi
         className={classes.zoneHeart}
       />
       <div className={classes.zoneFence} style={{ width: halfBeatSize * 5, height: halfBeatSize * 5 }}>
-        <div className={classes.zoneFenceInner} style={{ width: halfBeatSize * 3, height: halfBeatSize * 3 }} />
+        <div className={classes.zoneFenceInner} style={{ width: halfBeatSize * 3.2, height: halfBeatSize * 3.2 }} />
       </div>
     </div>
   );
 });
 
 function checkHit(zonePos: Position) {
-  const notes = Array.from(document.querySelectorAll('[data-id="note"]'));
+  const notes = Array.from(document.querySelectorAll<HTMLDivElement>('[data-id="note"]'));
 
-  return notes.some((note) => checkNoteHit(note, zonePos));
+  for (const note of notes) {
+    const beat = checkNoteHit(note, zonePos);
+    if (beat !== undefined) {
+      return beat;
+    }
+  }
+
+  return undefined;
 }
 
-const HIT_PERCENT = 20;
-function checkNoteHit(note: Element, zonePos: Position): boolean {
+const HIT_PERCENT_BOTTOM = 40;
+const HIT_PERCENT_TOP = 10;
+function checkNoteHit(note: HTMLDivElement, zonePos: Position) {
   const noteRect = note.getBoundingClientRect();
 
   const size = noteRect.height * 3;
   const diff = Math.sqrt(Math.pow(zonePos.x - noteRect.x, 2) + Math.pow(zonePos.y - noteRect.y, 2));
 
   const percent = (diff / size) * 100;
+  console.log(percent);
 
-  return percent >= HIT_PERCENT && percent <= 100 - HIT_PERCENT;
+  if (percent >= HIT_PERCENT_BOTTOM && percent <= 100 - HIT_PERCENT_TOP) {
+    return Number(note.dataset.beat);
+  }
 }
