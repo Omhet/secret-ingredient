@@ -27,7 +27,8 @@
     "react": "17.0.0",
     "react-dom": "17.0.0",
     "react-router-dom": "5.2.0",
-    "react-use": "^17.3.2"
+    "react-use": "^17.3.2",
+    "zustand": "^3.7.1"
   },
   "devDependencies": {
     "@babel/core": "7.14.2",

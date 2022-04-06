@@ -1,4 +1,5 @@
 import { Markup } from '@app-types/music';
+import { useGameStore } from '@store/game';
 import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useKeyPress } from 'react-use';
 import { Notes } from './components/Notes/Notes';
@@ -13,9 +14,10 @@ const halfBeatSize = innerHeight / 8;
 const beatSize = halfBeatSize * 2;
 
 export const Game: FC = () => {
-  const [missCount, setMissCount] = useState(0);
-  const [hitCount, setHitCount] = useState(0);
-  const [touchedHeartCount, setTouchedHeartCountCount] = useState(0);
+  const increaseMissCount = useGameStore((state) => state.increaseMissCount);
+  const increaseHitCount = useGameStore((state) => state.increaseHitCount);
+  const increaseTouchedHeartCount = useGameStore((state) => state.increaseTouchedHeartCount);
+
   const [isLoading, setIsLoading] = useState(true);
   const [markup, setMarkup] = useState<Markup | undefined>();
   const [notes, setNotes] = useState<Markup['notes']>([]);
@@ -51,9 +53,9 @@ export const Game: FC = () => {
       const beat = checkHit(zonePosition);
       if (beat !== undefined) {
         removeNote(beat);
-        setHitCount((prev) => prev + 1);
+        increaseHitCount();
       } else {
-        setMissCount((prev) => prev + 1);
+        increaseMissCount();
       }
     }
   }, [isPressed, zonePosition]);
@@ -63,17 +65,12 @@ export const Game: FC = () => {
   };
 
   const handleAnimationComplete = (beat: number) => {
-    setTouchedHeartCountCount((prev) => prev + 1);
+    increaseTouchedHeartCount();
     removeNote(beat);
   };
 
   return (
     <>
-      <div className={s.scores}>
-        <div>Touched heart: {touchedHeartCount}</div>
-        <div>Miss: {missCount}</div>
-        <div>Hit: {hitCount}</div>
-      </div>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
