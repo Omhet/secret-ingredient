@@ -1,7 +1,7 @@
 import { Position } from '@app-types/game';
 import { motion, TargetAndTransition } from 'framer-motion';
 import React, { FC } from 'react';
-import classes from './Note.module.scss';
+import s from './Note.module.scss';
 
 export interface NoteProps {
   initPos: Position;
@@ -26,7 +26,7 @@ export const Note: FC<NoteProps> = ({
 }) => {
   return (
     <motion.div
-      className={classes.noteMovingWrapper}
+      className={s.root}
       data-id="note"
       data-beat={beat}
       initial={{ x: initPos.x, y: initPos.y }}
@@ -62,7 +62,7 @@ export const Note: FC<NoteProps> = ({
           repeatType: 'mirror',
         }}
         style={{ height: size, width: size }}
-        className={classes.note}
+        className={s.body}
       />
     </motion.div>
   );

@@ -1,7 +1,7 @@
 import { Markup } from '@app-types/music';
 import { motion } from 'framer-motion';
 import React, { forwardRef } from 'react';
-import classes from './Zone.module.scss';
+import s from './Zone.module.scss';
 
 export interface ZoneProps {
   markup: Markup;
@@ -13,7 +13,7 @@ export const Zone = forwardRef<HTMLDivElement, ZoneProps>(({ markup, beatSize, i
   const halfBeatSize = beatSize / 2;
 
   return (
-    <div className={classes.zone}>
+    <div className={s.root}>
       <motion.div
         data-id="zone"
         ref={ref}
@@ -27,10 +27,10 @@ export const Zone = forwardRef<HTMLDivElement, ZoneProps>(({ markup, beatSize, i
           repeatType: 'mirror',
         }}
         style={{ width: halfBeatSize, height: halfBeatSize }}
-        className={classes.zoneHeart}
+        className={s.heart}
       />
-      <div className={classes.zoneFence} style={{ width: halfBeatSize * 5, height: halfBeatSize * 5 }}>
-        <div className={classes.zoneFenceInner} style={{ width: halfBeatSize * 3.2, height: halfBeatSize * 3.2 }} />
+      <div className={s.fence} style={{ width: halfBeatSize * 5, height: halfBeatSize * 5 }}>
+        <div className={s.fenceInner} style={{ width: halfBeatSize * 3.2, height: halfBeatSize * 3.2 }} />
       </div>
     </div>
   );

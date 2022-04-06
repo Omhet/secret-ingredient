@@ -3,12 +3,12 @@ import { MainPage } from '@pages/MainPage/MainPage';
 import { NotFoundPage } from '@pages/NotFoundPage/NotFoundPage';
 import React, { FC } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import classes from './App.module.scss';
+import s from './App.module.scss';
 
 export const App: FC = () => {
   return (
     <Router>
-      <div className={classes.main}>
+      <div className={s.main}>
         <Switch>
           <Route exact path="/">
             <MainPage />

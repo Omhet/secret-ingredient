@@ -3,7 +3,7 @@ import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useKeyPress } from 'react-use';
 import { Notes } from './components/Notes/Notes';
 import { Zone } from './components/Zone/Zone';
-import classes from './Game.module.scss';
+import s from './Game.module.scss';
 import { useAudio } from './useAudio';
 import { checkHit, fetchMarkup } from './utils';
 
@@ -71,7 +71,7 @@ export const Game: FC<GameProps> = ({}) => {
 
   return (
     <>
-      <div className={classes.scores}>
+      <div className={s.scores}>
         <div>Touched heart: {touchedHeartCount}</div>
         <div>Miss: {missCount}</div>
         <div>Hit: {hitCount}</div>
@@ -79,7 +79,7 @@ export const Game: FC<GameProps> = ({}) => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <button disabled={isPlaying} onClick={toggleMusic} className={classes.playBtn}>
+        <button disabled={isPlaying} onClick={toggleMusic} className={s.playBtn}>
           {isPlaying ? 'Playing' : 'Play'}
         </button>
       )}

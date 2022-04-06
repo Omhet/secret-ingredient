@@ -1,2 +1,10 @@
-.main {
+.root {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.body {
+  border-radius: 50%;
+  background-color: tomato;
 }
