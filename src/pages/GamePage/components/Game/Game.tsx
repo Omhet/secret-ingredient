@@ -223,6 +223,7 @@ const Note: FC<{
   );
 };
 
+// eslint-disable-next-line react/display-name
 const Zone = forwardRef<HTMLDivElement, WithMidi & { isPlaying: boolean }>(({ midi, isPlaying }, ref) => {
   return (
     <div className={classes.zone}>
