@@ -9,9 +9,6 @@ import { checkHit } from './utils';
 
 const TRACK_NAME = 'techno-120';
 
-const halfBeatSize = innerHeight / 8;
-const beatSize = halfBeatSize * 2;
-
 export const Game: FC = () => {
   const { increaseMissCount, increaseHitCount, increaseTouchedHeartCount, removeNote } = useGameStore();
 
@@ -56,10 +53,8 @@ export const Game: FC = () => {
           Play
         </button>
       )}
-      {isPlaying && (
-        <Notes beatSize={beatSize} zonePosition={zonePosition} onAnimationComplete={handleAnimationComplete} />
-      )}
-      <Zone ref={zoneRef} beatSize={beatSize} isPlaying={isPlaying} />
+      {isPlaying && <Notes zonePosition={zonePosition} onAnimationComplete={handleAnimationComplete} />}
+      <Zone ref={zoneRef} isPlaying={isPlaying} />
     </>
   );
 };
