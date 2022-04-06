@@ -7,14 +7,12 @@ import s from './Game.module.scss';
 import { useAudio } from './useAudio';
 import { checkHit, fetchMarkup } from './utils';
 
-export interface GameProps {}
-
 const TRACK_NAME = 'techno-120';
 
 const halfBeatSize = innerHeight / 8;
 const beatSize = halfBeatSize * 2;
 
-export const Game: FC<GameProps> = ({}) => {
+export const Game: FC = () => {
   const [missCount, setMissCount] = useState(0);
   const [hitCount, setHitCount] = useState(0);
   const [touchedHeartCount, setTouchedHeartCountCount] = useState(0);
