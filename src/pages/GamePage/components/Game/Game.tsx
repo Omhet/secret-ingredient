@@ -10,7 +10,14 @@ import { checkHit } from './utils';
 const TRACK_NAME = 'techno-120';
 
 export const Game: FC = () => {
-  const { increaseMissCount, increaseHitCount, increaseTouchedHeartCount, removeNote } = useGameStore();
+  const {
+    hasBlasts,
+    increaseMissCount,
+    increaseHitCount,
+    increaseTouchedHeartCount,
+    decreaseBlastCount,
+    removeNote,
+  } = useGameStore();
 
   const zoneRef = useRef<HTMLDivElement>(null);
   const [zonePosition, setZonePos] = useState({ x: 0, y: 0 });
@@ -30,7 +37,9 @@ export const Game: FC = () => {
 
   // Key press
   useLayoutEffect(() => {
-    if (isPressed) {
+    if (isPressed && isPlaying && hasBlasts) {
+      decreaseBlastCount();
+
       const beat = checkHit(zonePosition);
       if (beat !== undefined) {
         removeNote(beat);
@@ -39,7 +48,7 @@ export const Game: FC = () => {
         increaseMissCount();
       }
     }
-  }, [isPressed, zonePosition]);
+  }, [isPressed, zonePosition, isPlaying, hasBlasts]);
 
   const handleAnimationComplete = (beat: number) => {
     increaseTouchedHeartCount();

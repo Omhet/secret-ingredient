@@ -6,6 +6,8 @@ type GameStore = {
   missCount: number;
   hitCount: number;
   touchedHeartCount: number;
+  blastCount: number;
+  hasBlasts: boolean;
   markup: Markup;
   notes: NotesType;
   setIsLoading: (isLoading: boolean) => void;
@@ -15,6 +17,8 @@ type GameStore = {
   increaseMissCount: () => void;
   increaseHitCount: () => void;
   increaseTouchedHeartCount: () => void;
+  setBlastCount: (count: number) => void;
+  decreaseBlastCount: () => void;
 };
 
 export const useGameStore = create<GameStore>((set) => ({
@@ -23,6 +27,8 @@ export const useGameStore = create<GameStore>((set) => ({
   markup: {} as Markup,
   missCount: 0,
   hitCount: 0,
+  blastCount: 0,
+  hasBlasts: true,
   touchedHeartCount: 0,
   setIsLoading: (isLoading) => set(() => ({ isLoading })),
   setMarkup: (markup) => set(() => ({ markup })),
@@ -31,4 +37,10 @@ export const useGameStore = create<GameStore>((set) => ({
   increaseMissCount: () => set((state) => ({ missCount: state.missCount + 1 })),
   increaseHitCount: () => set((state) => ({ hitCount: state.hitCount + 1 })),
   increaseTouchedHeartCount: () => set((state) => ({ touchedHeartCount: state.touchedHeartCount + 1 })),
+  setBlastCount: (blastCount) => set(() => ({ blastCount })),
+  decreaseBlastCount: () =>
+    set((state) => ({
+      blastCount: state.blastCount > 0 ? state.blastCount - 1 : 0,
+      hasBlasts: state.blastCount > 0,
+    })),
 }));

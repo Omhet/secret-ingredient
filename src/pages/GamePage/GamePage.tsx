@@ -8,7 +8,7 @@ import s from './GamePage.module.scss';
 const TRACK_NAME = 'techno-120';
 
 export const GamePage: FC = () => {
-  const { isLoading, setIsLoading, setMarkup, setNotes } = useGameStore();
+  const { isLoading, setIsLoading, setMarkup, setNotes, setBlastCount } = useGameStore();
 
   useEffect(() => {
     (async () => {
@@ -16,14 +16,21 @@ export const GamePage: FC = () => {
       const markup = await fetchMarkup(TRACK_NAME);
       setMarkup(markup);
       setNotes(markup.notes);
+      setBlastCount(markup.notes.length);
       setIsLoading(false);
     })();
   }, []);
 
   return (
     <div className={s.main}>
-      <Header />
-      {isLoading ? 'Loading...' : <Game />}
+      {isLoading ? (
+        'Loading...'
+      ) : (
+        <>
+          <Header />
+          <Game />
+        </>
+      )}
     </div>
   );
 };
