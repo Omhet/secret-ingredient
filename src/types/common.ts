@@ -1,6 +1,3 @@
-export enum RequestStatus {
-  Idle,
-  Loading,
-  Success,
-  Error,
+export enum TODO {
+  TODO,
 }
