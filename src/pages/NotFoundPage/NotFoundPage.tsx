@@ -1,8 +1,8 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import classes from './NotFoundPage.module.scss';
 
 export interface NotFoundPageProps {}
 
-export const NotFoundPage: FunctionComponent = () => {
+export const NotFoundPage: FC = () => {
   return <div className={classes.main}>404</div>;
 };

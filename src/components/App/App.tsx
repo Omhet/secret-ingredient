@@ -1,11 +1,11 @@
 import { GamePage } from '@pages/GamePage/GamePage';
 import { MainPage } from '@pages/MainPage/MainPage';
 import { NotFoundPage } from '@pages/NotFoundPage/NotFoundPage';
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import classes from './App.module.scss';
 
-export const App: FunctionComponent = () => {
+export const App: FC = () => {
   return (
     <Router>
       <div className={classes.main}>
