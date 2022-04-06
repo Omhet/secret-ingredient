@@ -19,30 +19,18 @@
     "make:component": "hygen component new --name",
     "make:page": "hygen page new --name",
     "make:container": "hygen container new --name",
-    "make:slice": "hygen slice new --name",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "make:slice": "hygen slice new --name"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "1.5.1",
     "@tonejs/midi": "^2.0.28",
-    "axios": "0.21.1",
     "framer-motion": "^6.2.8",
     "react": "17.0.0",
     "react-dom": "17.0.0",
-    "react-redux": "7.2.3",
     "react-router-dom": "5.2.0",
-    "react-use": "^17.3.2",
-    "use-sound": "^4.0.1"
+    "react-use": "^17.3.2"
   },
   "devDependencies": {
     "@babel/core": "7.14.2",
-    "@storybook/addon-actions": "6.2.9",
-    "@storybook/addon-essentials": "6.2.9",
-    "@storybook/addon-links": "6.2.9",
-    "@storybook/addon-postcss": "2.0.0",
-    "@storybook/preset-scss": "1.0.3",
-    "@storybook/react": "6.2.9",
     "@types/react": "17.0.5",
     "@types/react-dom": "17.0.5",
     "@types/react-router-dom": "5.1.7",
