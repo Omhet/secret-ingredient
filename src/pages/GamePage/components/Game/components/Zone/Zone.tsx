@@ -1,15 +1,16 @@
-import { Markup } from '@app-types/music';
+import { useGameStore } from '@store/game';
 import { motion } from 'framer-motion';
 import React, { forwardRef } from 'react';
 import s from './Zone.module.scss';
 
 export interface ZoneProps {
-  markup: Markup;
   beatSize: number;
   isPlaying: boolean;
 }
 
-export const Zone = forwardRef<HTMLDivElement, ZoneProps>(({ markup, beatSize, isPlaying }, ref) => {
+export const Zone = forwardRef<HTMLDivElement, ZoneProps>(({ beatSize, isPlaying }, ref) => {
+  const markup = useGameStore(({ markup }) => markup);
+
   const halfBeatSize = beatSize / 2;
 
   return (

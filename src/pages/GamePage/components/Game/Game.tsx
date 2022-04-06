@@ -1,4 +1,3 @@
-import { Markup } from '@app-types/music';
 import { useGameStore } from '@store/game';
 import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useKeyPress } from 'react-use';
@@ -6,7 +5,7 @@ import { Notes } from './components/Notes/Notes';
 import { Zone } from './components/Zone/Zone';
 import s from './Game.module.scss';
 import { useAudio } from './useAudio';
-import { checkHit, fetchMarkup } from './utils';
+import { checkHit } from './utils';
 
 const TRACK_NAME = 'techno-120';
 
@@ -14,13 +13,7 @@ const halfBeatSize = innerHeight / 8;
 const beatSize = halfBeatSize * 2;
 
 export const Game: FC = () => {
-  const increaseMissCount = useGameStore((state) => state.increaseMissCount);
-  const increaseHitCount = useGameStore((state) => state.increaseHitCount);
-  const increaseTouchedHeartCount = useGameStore((state) => state.increaseTouchedHeartCount);
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [markup, setMarkup] = useState<Markup | undefined>();
-  const [notes, setNotes] = useState<Markup['notes']>([]);
+  const { increaseMissCount, increaseHitCount, increaseTouchedHeartCount, removeNote } = useGameStore();
 
   const zoneRef = useRef<HTMLDivElement>(null);
   const [zonePosition, setZonePos] = useState({ x: 0, y: 0 });
@@ -28,6 +21,7 @@ export const Game: FC = () => {
   const { isPlaying, toggle: toggleMusic } = useAudio(`/music/${TRACK_NAME}.mp3`);
   const [isPressed] = useKeyPress(' ');
 
+  // Get zone target position
   useEffect(() => {
     setTimeout(() => {
       if (zoneRef.current) {
@@ -36,16 +30,6 @@ export const Game: FC = () => {
       }
     }, 0);
   }, [zoneRef.current]);
-
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      const markup = await fetchMarkup(TRACK_NAME);
-      setMarkup(markup);
-      setNotes(markup.notes);
-      setIsLoading(false);
-    })();
-  }, []);
 
   // Key press
   useLayoutEffect(() => {
@@ -60,10 +44,6 @@ export const Game: FC = () => {
     }
   }, [isPressed, zonePosition]);
 
-  const removeNote = (beat: number) => {
-    setNotes((prev) => prev.filter((b) => b !== beat));
-  };
-
   const handleAnimationComplete = (beat: number) => {
     increaseTouchedHeartCount();
     removeNote(beat);
@@ -71,23 +51,15 @@ export const Game: FC = () => {
 
   return (
     <>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <button disabled={isPlaying} onClick={toggleMusic} className={s.playBtn}>
-          {isPlaying ? 'Playing' : 'Play'}
+      {!isPlaying && (
+        <button onClick={toggleMusic} className={s.playBtn}>
+          Play
         </button>
       )}
-      {isPlaying && markup && (
-        <Notes
-          notes={notes}
-          beatSize={beatSize}
-          markup={markup}
-          zonePosition={zonePosition}
-          onAnimationComplete={handleAnimationComplete}
-        />
+      {isPlaying && (
+        <Notes beatSize={beatSize} zonePosition={zonePosition} onAnimationComplete={handleAnimationComplete} />
       )}
-      {markup && <Zone ref={zoneRef} beatSize={beatSize} markup={markup} isPlaying={isPlaying} />}
+      <Zone ref={zoneRef} beatSize={beatSize} isPlaying={isPlaying} />
     </>
   );
 };

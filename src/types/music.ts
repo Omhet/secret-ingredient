@@ -5,3 +5,5 @@ export type Markup = {
   barDuration: number;
   notes: number[];
 };
+
+export type NotesType = Markup['notes'];

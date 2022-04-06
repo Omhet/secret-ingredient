@@ -1,13 +1,29 @@
 import { Game } from '@pages/GamePage/components/Game/Game';
-import React, { FC } from 'react';
+import { useGameStore } from '@store/game';
+import React, { FC, useEffect } from 'react';
+import { fetchMarkup } from './components/Game/utils';
 import { Header } from './components/Header/Header';
 import s from './GamePage.module.scss';
 
-export const GamePage: FC = ({}) => {
+const TRACK_NAME = 'techno-120';
+
+export const GamePage: FC = () => {
+  const { isLoading, setIsLoading, setMarkup, setNotes } = useGameStore();
+
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true);
+      const markup = await fetchMarkup(TRACK_NAME);
+      setMarkup(markup);
+      setNotes(markup.notes);
+      setIsLoading(false);
+    })();
+  }, []);
+
   return (
     <div className={s.main}>
       <Header />
-      <Game />
+      {isLoading ? 'Loading...' : <Game />}
     </div>
   );
 };

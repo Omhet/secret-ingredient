@@ -1,5 +1,5 @@
 import { Position } from '@app-types/game';
-import { Markup } from '@app-types/music';
+import { useGameStore } from '@store/game';
 import { AnimatePresence } from 'framer-motion';
 import React, { FC } from 'react';
 import { Note } from './Note/Note';
@@ -7,14 +7,14 @@ import { Note } from './Note/Note';
 const LATENCY_COMPENSATION = 0.05;
 
 type NotesProps = {
-  markup: Markup;
   zonePosition: Position;
-  notes: Markup['notes'];
   beatSize: number;
   onAnimationComplete: (beat: number) => void;
 };
 
-export const Notes: FC<NotesProps> = ({ markup, notes, beatSize, zonePosition, onAnimationComplete }) => {
+export const Notes: FC<NotesProps> = ({ beatSize, zonePosition, onAnimationComplete }) => {
+  const { notes, markup } = useGameStore(({ notes, markup }) => ({ notes, markup }));
+
   const halfBeatSize = beatSize / 2;
 
   const targetX = zonePosition.x;
