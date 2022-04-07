@@ -3,20 +3,17 @@ import React, { FC } from 'react';
 import s from './Header.module.scss';
 
 export const Header: FC = () => {
-  const { missCount, hitCount, touchedHeartCount, blastCount } = useGameStore(
-    ({ missCount, hitCount, touchedHeartCount, blastCount }) => ({
-      missCount,
-      hitCount,
-      touchedHeartCount,
-      blastCount,
-    })
-  );
+  const { hitCount, blastCount, notesInitialCount } = useGameStore(({ hitCount, blastCount, markup }) => ({
+    hitCount,
+    blastCount,
+    notesInitialCount: markup.notes.length,
+  }));
 
   return (
     <div className={s.root}>
-      <div>Touched heart: {touchedHeartCount}</div>
-      <div>Miss: {missCount}</div>
-      <div>Hit: {hitCount}</div>
+      <div>
+        Hits: {hitCount} / {notesInitialCount}
+      </div>
       <div>Blasts: {blastCount}</div>
     </div>
   );
