@@ -23,12 +23,13 @@
   },
   "dependencies": {
     "@tonejs/midi": "^2.0.28",
+    "effector": "^22.2.0",
+    "effector-react": "^22.0.6",
     "framer-motion": "^6.2.8",
     "react": "17.0.0",
     "react-dom": "17.0.0",
     "react-router-dom": "5.2.0",
-    "react-use": "^17.3.2",
-    "zustand": "^3.7.1"
+    "react-use": "^17.3.2"
   },
   "devDependencies": {
     "@babel/core": "7.14.2",
@@ -74,8 +75,5 @@
       "yarn format",
       "git add ."
     ]
-  },
-  "msw": {
-    "workerDirectory": "public"
   }
 }

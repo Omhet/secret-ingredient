@@ -1,11 +1,22 @@
-import { useGame } from '@store/game';
+import { setZonePosition, useGame } from '@store/game';
 import { motion } from 'framer-motion';
-import React, { forwardRef } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { HALF_BEAT_SIZE } from '../../constants';
 import s from './Zone.module.scss';
 
-export const Zone = forwardRef<HTMLDivElement>((_, ref) => {
+export const Zone: FC = () => {
   const { markup, isGameStarted } = useGame();
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Get zone target position
+  useEffect(() => {
+    setTimeout(() => {
+      if (ref.current) {
+        const { x, y } = ref.current.getBoundingClientRect();
+        setZonePosition({ x, y });
+      }
+    }, 0);
+  }, [ref.current]);
 
   return (
     <div className={s.root}>
@@ -29,6 +40,6 @@ export const Zone = forwardRef<HTMLDivElement>((_, ref) => {
       </div>
     </div>
   );
-});
+};
 
 Zone.displayName = 'Zone';

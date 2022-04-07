@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\omhet\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @types/zustand
+  C:\Program Files\nodejs\node.exe C:\Users\omhet\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
 
 PATH: 
   C:\Users\omhet\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\omhet\bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\dotnet;C:\Program Files\nodejs;D:\Program Files\GitHub CLI;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\omhet\AppData\Local\Microsoft\WindowsApps;C:\Users\omhet\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\omhet\.dotnet\tools;D:\Program Files\heroku\bin;C:\Users\omhet\AppData\Roaming\npm;D:\Program Files (x86)\ffmpeg\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
@@ -14,17 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fzustand: Not found
-      at Request.params.callback [as _callback] (C:\Users\omhet\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66988:18)
-      at Request.self.callback (C:\Users\omhet\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140662:22)
-      at Request.emit (node:events:390:28)
-      at Request.<anonymous> (C:\Users\omhet\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141634:10)
-      at Request.emit (node:events:390:28)
-      at IncomingMessage.<anonymous> (C:\Users\omhet\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141556:12)
-      at Object.onceWrapper (node:events:509:28)
-      at IncomingMessage.emit (node:events:402:35)
-      at endReadableNT (node:internal/streams/readable:1343:12)
-      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+  Error: EPERM: operation not permitted, unlink 'D:\code\projects\rhythm-game\prototype\poc-react\node_modules\esbuild\esbuild.exe'
 
 npm manifest: 
   {
@@ -52,12 +42,13 @@ npm manifest:
     },
     "dependencies": {
       "@tonejs/midi": "^2.0.28",
+      "effector": "^22.2.0",
+      "effector-react": "^22.0.6",
       "framer-motion": "^6.2.8",
       "react": "17.0.0",
       "react-dom": "17.0.0",
       "react-router-dom": "5.2.0",
-      "react-use": "^17.3.2",
-      "zustand": "^3.7.1"
+      "react-use": "^17.3.2"
     },
     "devDependencies": {
       "@babel/core": "7.14.2",
@@ -103,9 +94,6 @@ npm manifest:
         "yarn format",
         "git add ."
       ]
-    },
-    "msw": {
-      "workerDirectory": "public"
     }
   }
 
@@ -1415,6 +1403,21 @@ Lockfile:
     integrity sha1-NNzzf1Co6TwrO8qLt/uRVcfaO+4=
     dependencies:
       no-case "^2.2.0"
+  
+  effector-hotkey@^0.1.0:
+    version "0.1.0"
+    resolved "https://registry.yarnpkg.com/effector-hotkey/-/effector-hotkey-0.1.0.tgz#f8b29a3a4498c1274efecea501a8442e0f6b6d70"
+    integrity sha512-TNkUcVVqEQ3NBaF9PEnFR68TuWwV/hkAwwF5LHy9Sm0YORDU8treUwmmVllz2CzRkXoSJqJ8bqw8rkHcnVx9YA==
+  
+  effector-react@^22.0.6:
+    version "22.0.6"
+    resolved "https://registry.yarnpkg.com/effector-react/-/effector-react-22.0.6.tgz#e6651febfc124a8adf550deb950fbd03dfb9ec4e"
+    integrity sha512-uzVjrh5S94eMeihu8N8eQvLFnZA56VT00etMVovnSyZxujo0f8gtZZebIYOKyYFkGcYUyfiOHRRzBhYpIfAIhg==
+  
+  effector@^22.2.0:
+    version "22.2.0"
+    resolved "https://registry.yarnpkg.com/effector/-/effector-22.2.0.tgz#61667313cbe4fddeb9983582c3b59e1aae3603ec"
+    integrity sha512-N0dDgEO3/b9InYkPsoSM5YSJgVwJ1bQ/DWHU7C6sm9+L1CrT6gat0pLvey/ljFPNdNKL0S6MW5DEmDUvzJe1Ng==
   
   ejs@^2.6.1:
     version "2.7.4"

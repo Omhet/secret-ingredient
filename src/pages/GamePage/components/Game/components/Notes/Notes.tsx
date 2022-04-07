@@ -1,5 +1,4 @@
-import { Position } from '@app-types/game';
-import { useGame } from '@store/game';
+import { noteTouchedHeart, useGame } from '@store/game';
 import { AnimatePresence } from 'framer-motion';
 import React, { FC, useCallback, useState } from 'react';
 import { BEAT_SIZE, HALF_BEAT_SIZE } from '../../constants';
@@ -8,12 +7,8 @@ import { Note } from './Note/Note';
 
 const LATENCY_COMPENSATION = 0.05;
 
-type NotesProps = {
-  zonePosition: Position;
-};
-
-export const Notes: FC<NotesProps> = ({ zonePosition }) => {
-  const { notes, markup, increaseTouchedHeartCount, removeNote } = useGame();
+export const Notes: FC = () => {
+  const { notes, markup, zonePosition } = useGame();
 
   const [notesCoords] = useState(() => {
     const map: Record<number, any> = {};
@@ -38,8 +33,7 @@ export const Notes: FC<NotesProps> = ({ zonePosition }) => {
   });
 
   const handleAnimationComplete = useCallback((beat: number) => {
-    increaseTouchedHeartCount();
-    removeNote(beat);
+    noteTouchedHeart(beat);
   }, []);
 
   return (
