@@ -8,13 +8,17 @@ import { useAudio } from './useAudio';
 const TRACK_NAME = 'techno-120';
 
 export const Game: FC = () => {
-  const { isGameStarted } = useGame();
+  const { isGameStarted, isGameLost } = useGame();
   const { toggle: toggleMusic } = useAudio(`/music/${TRACK_NAME}.mp3`);
 
   const start = () => {
     startGame();
     toggleMusic();
   };
+
+  if (isGameLost) {
+    return <>GAME OVER</>;
+  }
 
   return (
     <>

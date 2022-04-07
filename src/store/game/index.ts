@@ -23,16 +23,20 @@ export const gameStore = createStore<GameStore>({
   markup: {} as Markup,
   missCount: 0,
   hitCount: 0,
-  blastCount: 0,
+  blastCount: Infinity,
   touchedHeartCount: 0,
   zonePosition: {} as Position,
 });
+
+export const blastCountStore = gameStore.map((state) => state.blastCount);
 
 export const useGame = () => {
   const state = useStore(gameStore);
 
   return {
     isGameStarted: state.status === GameStatus.InProgress,
+    isGameLost: state.status === GameStatus.Lose,
+    isGameWon: state.status === GameStatus.Win,
     hasBlasts: state.blastCount > 0,
     notesInitialCount: state.markup?.notes?.length,
     ...state,

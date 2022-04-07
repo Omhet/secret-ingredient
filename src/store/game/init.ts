@@ -2,6 +2,7 @@ import { GameStatus } from '@app-types/game';
 import { guard } from 'effector';
 import {
   blast,
+  blastCountStore,
   decreaseBlastCount,
   gameStore,
   increaseHitCount,
@@ -69,5 +70,11 @@ blast.watch(() => {
     increaseHitCount();
   } else {
     increaseMissCount();
+  }
+});
+
+blastCountStore.watch((count) => {
+  if (count === 0) {
+    setGameStatus(GameStatus.Lose);
   }
 });
