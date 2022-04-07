@@ -16,7 +16,6 @@ export const Game: FC = () => {
     hasBlasts,
     increaseMissCount,
     increaseHitCount,
-    increaseTouchedHeartCount,
     decreaseBlastCount,
     removeNote,
     setGameStatus,
@@ -53,11 +52,6 @@ export const Game: FC = () => {
     }
   }, [isPressed, zonePosition, isPlaying, hasBlasts]);
 
-  const handleAnimationComplete = (beat: number) => {
-    increaseTouchedHeartCount();
-    removeNote(beat);
-  };
-
   const startGame = () => {
     setGameStatus(GameStatus.InProgress);
     toggleMusic();
@@ -70,7 +64,7 @@ export const Game: FC = () => {
           Play
         </button>
       )}
-      {isGameStarted && <Notes zonePosition={zonePosition} onAnimationComplete={handleAnimationComplete} />}
+      {isGameStarted && <Notes zonePosition={zonePosition} />}
       <Zone ref={zoneRef} />
     </>
   );

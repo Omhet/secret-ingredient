@@ -1,7 +1,7 @@
 import { Position } from '@app-types/game';
-import { useGameStore } from '@store/game';
+import { useGame } from '@store/game';
 import { AnimatePresence } from 'framer-motion';
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { BEAT_SIZE, HALF_BEAT_SIZE } from '../../constants';
 import { getRandomAngle } from '../../utils';
 import { Note } from './Note/Note';
@@ -10,11 +10,10 @@ const LATENCY_COMPENSATION = 0.05;
 
 type NotesProps = {
   zonePosition: Position;
-  onAnimationComplete: (beat: number) => void;
 };
 
-export const Notes: FC<NotesProps> = ({ zonePosition, onAnimationComplete }) => {
-  const { notes, markup } = useGameStore(({ notes, markup }) => ({ notes, markup }));
+export const Notes: FC<NotesProps> = ({ zonePosition }) => {
+  const { notes, markup, increaseTouchedHeartCount, removeNote } = useGame();
 
   const [notesCoords] = useState(() => {
     const map: Record<number, any> = {};
@@ -38,6 +37,11 @@ export const Notes: FC<NotesProps> = ({ zonePosition, onAnimationComplete }) => 
     return map;
   });
 
+  const handleAnimationComplete = useCallback((beat: number) => {
+    increaseTouchedHeartCount();
+    removeNote(beat);
+  }, []);
+
   return (
     <>
       <AnimatePresence>
@@ -54,7 +58,7 @@ export const Notes: FC<NotesProps> = ({ zonePosition, onAnimationComplete }) => 
               translateDelay={markup.spb * beat}
               beatDuration={markup.spb / 2}
               size={HALF_BEAT_SIZE}
-              onAnimationComplete={onAnimationComplete}
+              onAnimationComplete={handleAnimationComplete}
             />
           );
         })}
