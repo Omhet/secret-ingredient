@@ -1,4 +1,5 @@
-import { useGameStore } from '@store/game';
+import { GameStatus } from '@app-types/game';
+import { useGame } from '@store/game';
 import React, { FC, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useKeyPress } from 'react-use';
 import { Notes } from './components/Notes/Notes';
@@ -11,13 +12,15 @@ const TRACK_NAME = 'techno-120';
 
 export const Game: FC = () => {
   const {
+    isGameStarted,
     hasBlasts,
     increaseMissCount,
     increaseHitCount,
     increaseTouchedHeartCount,
     decreaseBlastCount,
     removeNote,
-  } = useGameStore();
+    setGameStatus,
+  } = useGame();
 
   const zoneRef = useRef<HTMLDivElement>(null);
   const [zonePosition, setZonePos] = useState({ x: 0, y: 0 });
@@ -55,15 +58,20 @@ export const Game: FC = () => {
     removeNote(beat);
   };
 
+  const startGame = () => {
+    setGameStatus(GameStatus.InProgress);
+    toggleMusic();
+  };
+
   return (
     <>
-      {!isPlaying && (
-        <button onClick={toggleMusic} className={s.playBtn}>
+      {!isGameStarted && (
+        <button onClick={startGame} className={s.playBtn}>
           Play
         </button>
       )}
-      {isPlaying && <Notes zonePosition={zonePosition} onAnimationComplete={handleAnimationComplete} />}
-      <Zone ref={zoneRef} isPlaying={isPlaying} />
+      {isGameStarted && <Notes zonePosition={zonePosition} onAnimationComplete={handleAnimationComplete} />}
+      <Zone ref={zoneRef} />
     </>
   );
 };

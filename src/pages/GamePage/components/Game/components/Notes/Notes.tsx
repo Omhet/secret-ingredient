@@ -15,6 +15,7 @@ type NotesProps = {
 
 export const Notes: FC<NotesProps> = ({ zonePosition, onAnimationComplete }) => {
   const { notes, markup } = useGameStore(({ notes, markup }) => ({ notes, markup }));
+
   const [notesCoords] = useState(() => {
     const map: Record<number, any> = {};
     notes.forEach((note) => {

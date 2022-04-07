@@ -1,15 +1,11 @@
-import { useGameStore } from '@store/game';
+import { useGame } from '@store/game';
 import { motion } from 'framer-motion';
 import React, { forwardRef } from 'react';
 import { HALF_BEAT_SIZE } from '../../constants';
 import s from './Zone.module.scss';
 
-export interface ZoneProps {
-  isPlaying: boolean;
-}
-
-export const Zone = forwardRef<HTMLDivElement, ZoneProps>(({ isPlaying }, ref) => {
-  const markup = useGameStore(({ markup }) => markup);
+export const Zone = forwardRef<HTMLDivElement>((_, ref) => {
+  const { markup, isGameStarted } = useGame();
 
   return (
     <div className={s.root}>
@@ -17,7 +13,7 @@ export const Zone = forwardRef<HTMLDivElement, ZoneProps>(({ isPlaying }, ref) =
         data-id="zone"
         ref={ref}
         initial={{ scale: 1 }}
-        animate={isPlaying ? { scale: 1.1 } : undefined}
+        animate={isGameStarted ? { scale: 1.1 } : undefined}
         transition={{
           type: 'spring',
           mass: 0.5,
