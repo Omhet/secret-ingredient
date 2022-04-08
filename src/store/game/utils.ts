@@ -29,8 +29,8 @@ export const checkNoteHit = (note: HTMLDivElement, zonePosition: Position) => {
   }
 };
 
-export const fetchMarkup = async (name: string) => {
-  const midi = await Midi.fromUrl(`midi/${name}.mid`);
+export const fetchMarkup = async (url: string) => {
+  const midi = await Midi.fromUrl(url);
   const bpm = midi.header.tempos[0]?.bpm;
   const track = midi.tracks.find((track) => track.name === 'lead');
 

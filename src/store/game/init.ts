@@ -1,4 +1,6 @@
 import { GameStatus } from '@app-types/game';
+import { getLevelData } from '@data/levels';
+import { levelsStore } from '@store/levels';
 import { openGameEndModal } from '@store/modals';
 import { guard } from 'effector';
 import {
@@ -34,14 +36,13 @@ gameStore
   .on(increaseTouchedHeartCount, (state) => ({ ...state, touchedHeartCount: state.touchedHeartCount + 1 }))
   .on(decreaseBlastCount, (state) => ({ ...state, blastCount: state.blastCount > 0 ? state.blastCount - 1 : 0 }));
 
-loadGame.watch(async () => {
-  const TRACK_NAME = 'techno-120';
+loadGame.use(async () => {
+  const { currentLevelNumber } = levelsStore.getState();
+  const { midiUrl } = getLevelData(currentLevelNumber);
 
-  setIsLoading(true);
-  const markup = await fetchMarkup(TRACK_NAME);
+  const markup = await fetchMarkup(midiUrl);
   setMarkup(markup);
   setBlastCount(markup.notes.length * 1.25);
-  setIsLoading(false);
 });
 
 startGame.watch(() => {

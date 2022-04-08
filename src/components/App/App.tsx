@@ -30,3 +30,6 @@ export const App: FC = () => {
     </>
   );
 };
+function createBrowserHistory() {
+  throw new Error('Function not implemented.');
+}

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Levels } from './components/Levels/Levels';
 import s from './MainPage.module.scss';
 
 export interface MainPageProps {}
@@ -7,7 +7,7 @@ export interface MainPageProps {}
 export const MainPage: FC = () => {
   return (
     <div className={s.main}>
-      <Link to="/game">Start</Link>
+      <Levels />
     </div>
   );
 };
