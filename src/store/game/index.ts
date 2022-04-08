@@ -35,8 +35,7 @@ export const useGame = () => {
 
   return {
     isGameStarted: state.status === GameStatus.InProgress,
-    isGameLost: state.status === GameStatus.Lose,
-    isGameWon: state.status === GameStatus.Win,
+    isGameEnd: state.status === GameStatus.End,
     hasBlasts: state.blastCount > 0,
     notesInitialCount: state.markup?.notes?.length,
     ...state,

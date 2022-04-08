@@ -2,7 +2,6 @@ import { GameStatus } from '@app-types/game';
 import { guard } from 'effector';
 import {
   blast,
-  blastCountStore,
   decreaseBlastCount,
   gameStore,
   increaseHitCount,
@@ -33,18 +32,13 @@ gameStore
   .on(increaseTouchedHeartCount, (state) => ({ ...state, touchedHeartCount: state.touchedHeartCount + 1 }))
   .on(decreaseBlastCount, (state) => ({ ...state, blastCount: state.blastCount > 0 ? state.blastCount - 1 : 0 }));
 
-noteTouchedHeart.watch((note) => {
-  removeNote(note);
-  increaseTouchedHeartCount();
-});
-
 loadGame.watch(async () => {
   const TRACK_NAME = 'techno-120';
 
   setIsLoading(true);
   const markup = await fetchMarkup(TRACK_NAME);
   setMarkup(markup);
-  setBlastCount(markup.notes.length);
+  setBlastCount(markup.notes.length * 1.25);
   setIsLoading(false);
 });
 
@@ -52,13 +46,13 @@ startGame.watch(() => {
   setGameStatus(GameStatus.InProgress);
 });
 
+// Blast
 guard({
   source: gameStore,
   clock: spaceDown,
   filter: ({ status, blastCount }) => status === GameStatus.InProgress && blastCount > 0,
   target: blast,
 });
-
 blast.watch(() => {
   const { zonePosition } = gameStore.getState();
 
@@ -73,8 +67,16 @@ blast.watch(() => {
   }
 });
 
-blastCountStore.watch((count) => {
-  if (count === 0) {
-    setGameStatus(GameStatus.Lose);
-  }
+// Touch heart
+noteTouchedHeart.watch((note) => {
+  removeNote(note);
+  increaseTouchedHeartCount();
+});
+
+// End game
+guard({
+  source: gameStore,
+  filter: ({ status, blastCount, notes }) =>
+    status === GameStatus.InProgress && (blastCount === 0 || notes.length === 0),
+  target: setGameStatus.prepend(() => GameStatus.End),
 });

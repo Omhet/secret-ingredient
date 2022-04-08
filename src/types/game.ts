@@ -6,6 +6,5 @@ export type Position = {
 export enum GameStatus {
   NotStarted = 'NotStarted',
   InProgress = 'InProgress',
-  Lose = 'Lose',
-  Win = 'Win',
+  End = 'End',
 }
