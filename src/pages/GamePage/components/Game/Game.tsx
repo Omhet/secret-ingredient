@@ -17,7 +17,7 @@ export const Game: FC = () => {
   };
 
   if (isGameEnd) {
-    return <>GAME END</>;
+    return null;
   }
 
   return (

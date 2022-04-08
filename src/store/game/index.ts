@@ -29,6 +29,7 @@ export const gameStore = createStore<GameStore>({
 });
 
 export const blastCountStore = gameStore.map((state) => state.blastCount);
+export const gameStatusStore = gameStore.map((state) => state.status);
 
 export const useGame = () => {
   const state = useStore(gameStore);

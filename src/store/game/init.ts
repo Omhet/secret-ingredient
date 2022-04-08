@@ -1,8 +1,10 @@
 import { GameStatus } from '@app-types/game';
+import { openGameEndModal } from '@store/modals';
 import { guard } from 'effector';
 import {
   blast,
   decreaseBlastCount,
+  gameStatusStore,
   gameStore,
   increaseHitCount,
   increaseMissCount,
@@ -79,4 +81,10 @@ guard({
   filter: ({ status, blastCount, notes }) =>
     status === GameStatus.InProgress && (blastCount === 0 || notes.length === 0),
   target: setGameStatus.prepend(() => GameStatus.End),
+});
+// Open end game modal
+guard({
+  source: gameStatusStore,
+  filter: (status) => status === GameStatus.End,
+  target: openGameEndModal,
 });

@@ -1,3 +1,4 @@
+import { Modals } from '@components/Modals/Modals';
 import { GamePage } from '@pages/GamePage/GamePage';
 import { MainPage } from '@pages/MainPage/MainPage';
 import { NotFoundPage } from '@pages/NotFoundPage/NotFoundPage';
@@ -7,20 +8,23 @@ import s from './App.module.scss';
 
 export const App: FC = () => {
   return (
-    <Router>
-      <div className={s.main}>
-        <Switch>
-          <Route exact path="/">
-            <MainPage />
-          </Route>
-          <Route exact path="/game">
-            <GamePage />
-          </Route>
-          <Route>
-            <NotFoundPage />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <>
+      <Router>
+        <div className={s.main}>
+          <Switch>
+            <Route exact path="/">
+              <MainPage />
+            </Route>
+            <Route exact path="/game">
+              <GamePage />
+            </Route>
+            <Route>
+              <NotFoundPage />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+      <Modals />
+    </>
   );
 };
