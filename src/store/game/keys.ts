@@ -24,7 +24,7 @@ interface hotkeyT {
 }
 
 /** Returns `Event` that gets triggered when a certain key pressed (or keyup/keydown events triggered) */
-export const hotkey: hotkeyT = (...args) => {
+export const hotkey: hotkeyT = (...args: any[]) => {
   const normalizedParams =
     typeof args[0] === 'string' ? { key: args[0], type: args[1] } : { key: args[0].key, type: args[0].type };
 

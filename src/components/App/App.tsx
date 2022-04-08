@@ -9,6 +9,8 @@ import s from './App.module.scss';
 export const App: FC = () => {
   return (
     <>
+      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+      {/* @ts-ignore */}
       <Router>
         <div className={s.main}>
           <Switch>
