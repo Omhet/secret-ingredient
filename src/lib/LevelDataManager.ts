@@ -4,18 +4,21 @@ import { MarkupManager } from './MarkupManager';
 
 const LEVELS_DATA = [
   {
-    fileName: 'techno-120',
+    name: 'It just begins...',
   },
   {
-    fileName: 'big-room',
+    name: 'Getting hot',
   },
 ];
 
-const LEVELS = LEVELS_DATA.map(({ fileName }, index) => {
+const LEVELS = LEVELS_DATA.map(({ name }, index) => {
+  const number = index + 1;
+
   return {
-    number: index + 1,
-    musicUrl: `music/${fileName}.mp3`,
-    midiUrl: `midi/${fileName}.mid`,
+    name,
+    number,
+    musicUrl: `music/${number}.mp3`,
+    midiUrl: `midi/${number}.mid`,
   };
 });
 
