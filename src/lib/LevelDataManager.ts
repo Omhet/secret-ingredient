@@ -6,6 +6,9 @@ const LEVELS_DATA = [
   {
     fileName: 'techno-120',
   },
+  {
+    fileName: 'big-room',
+  },
 ];
 
 const LEVELS = LEVELS_DATA.map(({ fileName }, index) => {
@@ -31,6 +34,10 @@ class LevelDataManager {
       audio,
       markup,
     };
+  }
+
+  playLevelMusic(levelNumber: number) {
+    this.audioManager.playLevelTrack(levelNumber);
   }
 
   getAllLevels() {

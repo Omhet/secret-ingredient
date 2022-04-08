@@ -43,13 +43,15 @@ loadGame.use(async () => {
   const { markup } = await levelDataManager.loadLevelData(currentLevelNumber);
 
   setMarkup(markup);
-  setBlastCount(markup.notes.length * 1.25);
+  setBlastCount(Math.round(markup.notes.length * 1.25));
 
   setIsLoading(false);
 });
 
 startGame.watch(() => {
+  const { currentLevelNumber } = levelsStore.getState();
   setGameStatus(GameStatus.InProgress);
+  levelDataManager.playLevelMusic(currentLevelNumber);
 });
 
 // Blast
