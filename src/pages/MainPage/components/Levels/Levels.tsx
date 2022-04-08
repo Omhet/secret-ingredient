@@ -1,4 +1,4 @@
-import { getLevelsData } from '@data/levels';
+import { levelDataManager } from '@lib/LevelDataManager';
 import { startLevel } from '@store/levels';
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -6,7 +6,7 @@ import s from './Levels.module.scss';
 
 export interface LevelsProps {}
 
-const levelsData = getLevelsData();
+const levels = levelDataManager.getAllLevels();
 
 export const Levels: FC<LevelsProps> = ({}) => {
   const history = useHistory();
@@ -18,7 +18,7 @@ export const Levels: FC<LevelsProps> = ({}) => {
 
   return (
     <div className={s.main}>
-      {levelsData.map(({ number }) => (
+      {levels.map(({ number }) => (
         <div className={s.level} key={number}>
           <span>Level #{number}</span>
           <button onClick={() => handlePlayClick(number)}>Play</button>

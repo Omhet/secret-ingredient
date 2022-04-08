@@ -5,6 +5,7 @@ import { useStore } from 'effector-react';
 import { hotkey } from './keys';
 
 type GameStore = {
+  isLoading: boolean;
   status: GameStatus;
   missCount: number;
   hitCount: number;
@@ -16,6 +17,7 @@ type GameStore = {
 };
 
 export const gameStore = createStore<GameStore>({
+  isLoading: true,
   status: GameStatus.NotStarted,
   notes: [],
   markup: {} as Markup,
@@ -49,14 +51,12 @@ export const loadGame = createEffect<void, void, void>();
 
 export const useGame = () => {
   const state = useStore(gameStore);
-  const isLoading = useStore(loadGame.pending);
 
   return {
     isGameStarted: state.status === GameStatus.InProgress,
     isGameEnd: state.status === GameStatus.End,
     hasBlasts: state.blastCount > 0,
     notesInitialCount: state.markup?.notes?.length,
-    isLoading,
     ...state,
   };
 };

@@ -1,8 +1,8 @@
 import { GameStatus } from '@app-types/game';
-import { getLevelData } from '@data/levels';
 import { levelsStore } from '@store/levels';
 import { openGameEndModal } from '@store/modals';
 import { guard } from 'effector';
+import { levelDataManager } from '../../lib/LevelDataManager';
 import {
   blast,
   decreaseBlastCount,
@@ -22,7 +22,7 @@ import {
   spaceDown,
   startGame,
 } from './index';
-import { checkHit, fetchMarkup } from './utils';
+import { checkHit } from './utils';
 
 gameStore
   .on(setIsLoading, (state, isLoading) => ({ ...state, isLoading }))
@@ -37,12 +37,15 @@ gameStore
   .on(decreaseBlastCount, (state) => ({ ...state, blastCount: state.blastCount > 0 ? state.blastCount - 1 : 0 }));
 
 loadGame.use(async () => {
-  const { currentLevelNumber } = levelsStore.getState();
-  const { midiUrl } = getLevelData(currentLevelNumber);
+  setIsLoading(true);
 
-  const markup = await fetchMarkup(midiUrl);
+  const { currentLevelNumber } = levelsStore.getState();
+  const { markup } = await levelDataManager.loadLevelData(currentLevelNumber);
+
   setMarkup(markup);
   setBlastCount(markup.notes.length * 1.25);
+
+  setIsLoading(false);
 });
 
 startGame.watch(() => {

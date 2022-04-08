@@ -19,6 +19,7 @@
       "@components/*": ["components/*"],
       "@containers/*": ["containers/*"],
       "@data/*": ["data/*"],
+      "@lib/*": ["lib/*"],
       "@pages/*": ["pages/*"],
       "@hooks/*": ["hooks/*"],
       "@icons/*": ["icons/*"],
