@@ -16,7 +16,7 @@ type GameStore = {
   notes: NotesType;
 };
 
-export const gameStore = createStore<GameStore>({
+export const gameStoreInitial = {
   isLoading: true,
   status: GameStatus.NotStarted,
   notes: [],
@@ -26,7 +26,9 @@ export const gameStore = createStore<GameStore>({
   blastCount: Infinity,
   touchedHeartCount: 0,
   zonePosition: {} as Position,
-});
+};
+
+export const gameStore = createStore<GameStore>(gameStoreInitial);
 
 export const blastCountStore = gameStore.map((state) => state.blastCount);
 export const gameStatusStore = gameStore.map((state) => state.status);
@@ -41,13 +43,14 @@ export const increaseMissCount = createEvent();
 export const increaseHitCount = createEvent();
 export const increaseTouchedHeartCount = createEvent();
 export const decreaseBlastCount = createEvent();
+export const resetGameData = createEvent();
 
 export const startGame = createEvent();
 export const noteTouchedHeart = createEvent<number>();
 export const spaceDown = hotkey({ key: ' ', type: 'keydown' });
 export const blast = createEvent();
 
-export const loadGame = createEffect<void, void, void>();
+export const loadGame = createEffect<number, void, void>();
 
 export const useGame = () => {
   const state = useStore(gameStore);

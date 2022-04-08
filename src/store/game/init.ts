@@ -8,12 +8,14 @@ import {
   decreaseBlastCount,
   gameStatusStore,
   gameStore,
+  gameStoreInitial,
   increaseHitCount,
   increaseMissCount,
   increaseTouchedHeartCount,
   loadGame,
   noteTouchedHeart,
   removeNote,
+  resetGameData,
   setBlastCount,
   setGameStatus,
   setIsLoading,
@@ -34,13 +36,15 @@ gameStore
   .on(increaseMissCount, (state) => ({ ...state, missCount: state.missCount + 1 }))
   .on(increaseHitCount, (state) => ({ ...state, hitCount: state.hitCount + 1 }))
   .on(increaseTouchedHeartCount, (state) => ({ ...state, touchedHeartCount: state.touchedHeartCount + 1 }))
-  .on(decreaseBlastCount, (state) => ({ ...state, blastCount: state.blastCount > 0 ? state.blastCount - 1 : 0 }));
+  .on(decreaseBlastCount, (state) => ({ ...state, blastCount: state.blastCount > 0 ? state.blastCount - 1 : 0 }))
+  .on(resetGameData, () => ({ ...gameStoreInitial }));
 
-loadGame.use(async () => {
+loadGame.use(async (levelNumber: number) => {
   setIsLoading(true);
 
-  const { currentLevelNumber } = levelsStore.getState();
-  const { markup } = await levelDataManager.loadLevelData(currentLevelNumber);
+  resetGameData();
+
+  const { markup } = await levelDataManager.loadLevelData(levelNumber);
 
   setMarkup(markup);
   setBlastCount(Math.round(markup.notes.length * 1.25));

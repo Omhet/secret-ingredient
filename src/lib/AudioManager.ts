@@ -8,7 +8,6 @@ export class AudioManager {
       const index = levelNumber - 1;
 
       const url = this.urls[index];
-      console.log(url);
 
       if (!url) {
         reject(Error('No audio url for this level'));

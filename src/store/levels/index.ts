@@ -3,10 +3,12 @@ import { useStore } from 'effector-react';
 
 type LevelsStore = {
   currentLevelNumber: number;
+  restartCounter: number;
 };
 
 export const levelsStore = createStore<LevelsStore>({
   currentLevelNumber: 1,
+  restartCounter: 0,
 });
 
 export const useLevels = () => {
@@ -15,5 +17,6 @@ export const useLevels = () => {
   return state;
 };
 
-export const setCurrentLevelNumber = createEvent<number>();
 export const startLevel = createEvent<number>();
+export const restartCurrentLevel = createEvent();
+export const startNextLevel = createEvent();
