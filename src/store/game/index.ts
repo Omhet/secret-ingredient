@@ -46,6 +46,7 @@ export const decreaseBlastCount = createEvent();
 export const resetGameData = createEvent();
 
 export const startGame = createEvent();
+export const endGame = createEvent();
 export const noteTouchedHeart = createEvent<number>();
 export const spaceDown = hotkey({ key: ' ', type: 'keydown' });
 export const blast = createEvent();

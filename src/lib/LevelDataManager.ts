@@ -23,6 +23,8 @@ const LEVELS = LEVELS_DATA.map(({ name }, index) => {
 });
 
 class LevelDataManager {
+  currentLevel = 1;
+
   constructor(public audioManager: AudioManager, public markupManager: MarkupManager) {}
 
   async loadLevelData(levelNumber: number) {
@@ -40,7 +42,12 @@ class LevelDataManager {
   }
 
   playLevelMusic(levelNumber: number) {
+    this.currentLevel = levelNumber;
     this.audioManager.playLevelTrack(levelNumber);
+  }
+
+  stopLevelMusic() {
+    this.audioManager.stopLevelTrack(this.currentLevel);
   }
 
   getAllLevels() {

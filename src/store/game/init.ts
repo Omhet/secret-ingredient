@@ -6,6 +6,7 @@ import { levelDataManager } from '../../lib/LevelDataManager';
 import {
   blast,
   decreaseBlastCount,
+  endGame,
   gameStatusStore,
   gameStore,
   gameStoreInitial,
@@ -85,16 +86,22 @@ noteTouchedHeart.watch((note) => {
   increaseTouchedHeartCount();
 });
 
-// End game
+// Set end game status
 guard({
   source: gameStore,
   filter: ({ status, blastCount, notes }) =>
     status === GameStatus.InProgress && (blastCount === 0 || notes.length === 0),
   target: setGameStatus.prepend(() => GameStatus.End),
 });
-// Open end game modal
+// Call end game
 guard({
   source: gameStatusStore,
   filter: (status) => status === GameStatus.End,
-  target: openGameEndModal,
+  target: endGame,
+});
+
+// Do end game stuff
+endGame.watch(() => {
+  openGameEndModal();
+  levelDataManager.stopLevelMusic();
 });
