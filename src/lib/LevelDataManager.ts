@@ -5,18 +5,25 @@ import { MarkupManager } from './MarkupManager';
 const LEVELS_DATA = [
   {
     name: 'It just begins...',
+    unlockScore: 0,
   },
   {
     name: 'Getting hot',
+    unlockScore: 1,
   },
 ];
 
-const LEVELS = LEVELS_DATA.map(({ name }, index) => {
+const LEVELS_FROM_STORAGE = JSON.parse(localStorage.getItem('levels') ?? '[]');
+
+const LEVELS = LEVELS_DATA.map(({ name, unlockScore }, index) => {
   const number = index + 1;
+  const score = LEVELS_FROM_STORAGE[index]?.score ?? 0;
 
   return {
     name,
     number,
+    score,
+    unlockScore,
     musicUrl: `music/${number}.mp3`,
     midiUrl: `midi/${number}.mid`,
   };
