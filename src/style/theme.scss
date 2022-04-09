@@ -1,9 +1,10 @@
-.light-theme {
-  --text-color: #333;
-  --back-color: #fcfcfc;
-}
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&family=Inter:wght@100;300;500;700;900&display=swap');
 
-.dark-theme {
-  --text-color: #fcfcfc;
-  --back-color: #333;
+:root {
+  --text-color: #fbfdff;
+  --back-color: #2a2b2a;
+  --accent1-color: #18afe0;
+  --accent2-color: #e36f5b;
+  --header-font: 'IBM Plex Sans', sans-serif;
+  --regular-font: 'Inter', sans-serif;
 }
