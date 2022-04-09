@@ -50,3 +50,17 @@ export const fetchMarkup = async (url: string) => {
     notes: track.notes.map((note) => note.time * bps + 0.5),
   };
 };
+
+export const getScore = (hitCount: number, notesCount: number) => {
+  const hitPercent = (hitCount / notesCount) * 100;
+
+  if (hitPercent <= 30) {
+    return 0;
+  } else if (hitPercent <= 50) {
+    return 1;
+  } else if (hitPercent <= 80) {
+    return 2;
+  }
+
+  return 3;
+};

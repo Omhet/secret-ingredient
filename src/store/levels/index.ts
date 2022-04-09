@@ -30,6 +30,12 @@ export const levelsListStore = combine(levelsStore, statsStore, (levelsState, st
   });
 });
 
+const currentLevelNumberStore = levelsStore.map(({ currentLevelNumber }) => currentLevelNumber);
+
+export const currentLevelStore = combine(currentLevelNumberStore, levelsListStore, (currentLevelNumber, levelsList) => {
+  return levelsList[currentLevelNumber - 1];
+});
+
 export const useLevels = () => {
   const levels = useStore(levelsStore);
   const levelsList = useStore(levelsListStore);
@@ -40,6 +46,13 @@ export const useLevels = () => {
   };
 };
 
+export const useCurrentLevel = () => {
+  const state = useStore(currentLevelStore);
+
+  return state;
+};
+
 export const startLevel = createEvent<number>();
 export const restartCurrentLevel = createEvent();
 export const startNextLevel = createEvent();
+export const setCurrentLevelScore = createEvent<number>();

@@ -1,5 +1,5 @@
 import { GameStatus } from '@app-types/game';
-import { levelsStore } from '@store/levels';
+import { levelsStore, setCurrentLevelScore } from '@store/levels';
 import { openGameEndModal } from '@store/modals';
 import { guard } from 'effector';
 import { levelDataManager } from '../../lib/LevelDataManager';
@@ -25,7 +25,7 @@ import {
   spaceDown,
   startGame,
 } from './index';
-import { checkHit } from './utils';
+import { checkHit, getScore } from './utils';
 
 gameStore
   .on(setIsLoading, (state, isLoading) => ({ ...state, isLoading }))
@@ -102,6 +102,11 @@ guard({
 
 // Do end game stuff
 endGame.watch(() => {
+  const { hitCount, markup } = gameStore.getState();
+
+  const score = getScore(hitCount, markup.notes.length);
+  setCurrentLevelScore(score);
+
   openGameEndModal();
   levelDataManager.stopLevelMusic();
 });
