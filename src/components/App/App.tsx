@@ -25,11 +25,8 @@ export const App: FC = () => {
             </Route>
           </Switch>
         </div>
+        <Modals />
       </Router>
-      <Modals />
     </>
   );
 };
-function createBrowserHistory() {
-  throw new Error('Function not implemented.');
-}

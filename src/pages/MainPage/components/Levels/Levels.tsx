@@ -16,9 +16,10 @@ export const Levels: FC<LevelsProps> = ({}) => {
 
   return (
     <div className={s.main}>
-      {levels.map(({ number, isOpen }) => (
+      {levels.map(({ number, isOpen, score }) => (
         <div className={s.level} key={number}>
-          <span>Level #{number}</span>
+          <div>Level #{number}</div>
+          <div>{score} / 3</div>
           <button disabled={!isOpen} onClick={() => handlePlayClick(number)}>
             Play
           </button>

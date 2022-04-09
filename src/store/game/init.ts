@@ -1,5 +1,5 @@
 import { GameStatus } from '@app-types/game';
-import { levelsStore, setCurrentLevelScore } from '@store/levels';
+import { currentLevelStore, levelsStore, rewriteCurrentLevelScore, setCurrentLevelScore } from '@store/levels';
 import { openGameEndModal } from '@store/modals';
 import { guard } from 'effector';
 import { levelDataManager } from '../../lib/LevelDataManager';
@@ -103,9 +103,13 @@ guard({
 // Do end game stuff
 endGame.watch(() => {
   const { hitCount, markup } = gameStore.getState();
+  const { score: oldScore } = currentLevelStore.getState();
 
-  const score = getScore(hitCount, markup.notes.length);
-  setCurrentLevelScore(score);
+  const newScore = getScore(hitCount, markup.notes.length);
+  setCurrentLevelScore(newScore);
+  if (newScore > oldScore) {
+    rewriteCurrentLevelScore(newScore);
+  }
 
   openGameEndModal();
   levelDataManager.stopLevelMusic();
