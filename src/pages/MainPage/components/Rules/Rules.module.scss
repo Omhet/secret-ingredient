@@ -1,0 +1,25 @@
+.rulesContainer {
+  height: calc(100vh - 58rem);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 30%);
+  justify-content: center;
+  align-items: center;
+  gap: 32rem;
+  outline: 1rem solid var(--text-color);
+}
+.ruleItem {
+  height: fit-content;
+  padding: 12rem;
+  outline: 1rem solid var(--accent1-color);
+}
+.descriptionContainer {
+  margin-left: 32rem;
+}
+.description {
+  font-size: 18rem;
+  font-weight: 300;
+}
+.image {
+  max-width: 70%;
+  max-height: 70%;
+}

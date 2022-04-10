@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   overflow-y: auto;
+  outline: 1rem solid var(--text-color);
 }
 .storyItem {
   width: 100%;

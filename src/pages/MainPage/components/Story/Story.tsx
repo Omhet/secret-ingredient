@@ -27,6 +27,9 @@ export const Story: FC = () => {
           quam.
         </span>
       </div>
+      {
+        // TODO сделать эту кнопку видимой только у секции с историей
+      }
       <button className={s.nextPageBtn}>Next page</button>
     </section>
   );
