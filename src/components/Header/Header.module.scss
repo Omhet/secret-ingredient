@@ -4,7 +4,9 @@
   justify-content: space-between;
   align-items: center;
   position: sticky;
+  top: 0;
   font-size: 12rem;
+  background-color: var(--back-color);
 }
 .logo {
   font-size: 16rem;
