@@ -1,12 +1,16 @@
-.main {
-  display: grid;
+.levelsContainer {
+  height: calc(100vh - 58rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48rem;
+  outline: 1rem solid var(--text-color);
 }
 
-.level {
+.levelColumn {
   display: flex;
-  gap: 8px;
   flex-direction: column;
-  border: 1px solid black;
-  border-radius: 8px;
-  padding: 12px 24px;
+  gap: 48rem;
+  justify-content: center;
+  align-items: center;
 }

@@ -14,6 +14,8 @@ export const MainPage: FC = () => {
       <Hero />
       <Story />
       <Rules />
+      <Levels />
+      {/* <Titles/> */}
     </main>
   );
 };

@@ -5,35 +5,47 @@ export type RulesProps = {};
 
 export const Rules: FC = () => {
   return (
-    <section className={s.rulesContainer}>
-      <div className={s.ruleItem}>
-        <img className={s.image} src="/pics/cat.jpg" />
-        <div className={s.descriptionContainer}>
-          <span className={s.description}>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</span>
-        </div>
-      </div>
-      <div className={s.ruleItem}>
-        <img className={s.image} src="/pics/cat.jpg" />
-        <div className={s.descriptionContainer}>
-          <span className={s.description}>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</span>
-        </div>
-      </div>
-      <div className={s.ruleItem}>
-        <img className={s.image} src="/pics/cat.jpg" />
-        <div className={s.descriptionContainer}>
-          <span className={s.description}>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</span>
-        </div>
-      </div>
-      <div className={s.ruleItem}>
-        <img className={s.image} src="/pics/cat.jpg" />
-        <div className={s.descriptionContainer}>
-          <span className={s.description}>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</span>
-        </div>
-      </div>
-      <div className={s.ruleItem}>
-        <img className={s.image} src="/pics/cat.jpg" />
-        <div className={s.descriptionContainer}>
-          <span className={s.description}>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</span>
+    <section className={s.rulesSection}>
+      <div className={s.content}>
+        <h2 className={s.rulesTitle}>How to play</h2>
+        <div className={s.rulesContainer}>
+          <div className={s.ruleItem}>
+            <img className={s.image} src="/pics/cat.jpg" />
+            <div className={s.descriptionContainer}>
+              <span className={s.description}>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</span>
+            </div>
+          </div>
+          <div className={s.ruleItem}>
+            <img className={s.image} src="/pics/cat.jpg" />
+            <div className={s.descriptionContainer}>
+              <span className={s.description}>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</span>
+            </div>
+          </div>
+          <div className={s.ruleItem}>
+            <img className={s.image} src="/pics/cat.jpg" />
+            <div className={s.descriptionContainer}>
+              <span className={s.description}>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</span>
+            </div>
+          </div>
+          <div className={s.ruleItem}>
+            <img className={s.image} src="/pics/cat.jpg" />
+            <div className={s.descriptionContainer}>
+              <span className={s.description}>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</span>
+            </div>
+          </div>
+          <div className={s.ruleItem}>
+            <img className={s.image} src="/pics/cat.jpg" />
+            <div className={s.descriptionContainer}>
+              <span className={s.description}>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</span>
+            </div>
+          </div>
+          <div className={s.ruleItem}>
+            <span>
+              OK, clear,
+              <br /> let's play!
+            </span>
+            <button className={s.levelsBtn}>See levels</button>
+          </div>
         </div>
       </div>
     </section>
