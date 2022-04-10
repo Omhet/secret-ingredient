@@ -1,0 +1,45 @@
+.headerContainer {
+  padding: 12rem 250rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  font-size: 12rem;
+}
+.logo {
+  font-size: 16rem;
+  font-weight: 500;
+  font-family: var(--header-font);
+  color: var(--accent1-color);
+  cursor: default;
+}
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 48rem;
+}
+.playBtn {
+  padding: 4rem 24rem;
+  font-size: 16rem;
+  font-weight: 500;
+  font-family: var(--header-font);
+  background-color: var(--accent2-color);
+  border-radius: 12rem;
+}
+.navContainer {
+  display: flex;
+  gap: 48rem;
+  & > * {
+    cursor: pointer;
+  }
+}
+.score {
+  padding: 4rem 8rem;
+  font-size: 16rem;
+  font-weight: 500;
+  font-family: var(--header-font);
+  color: var(--accent1-color);
+  border: 1rem solid var(--accent1-color);
+  border-radius: 12rem;
+  cursor: default;
+}

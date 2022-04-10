@@ -1,0 +1,49 @@
+.main {
+  height: calc(100vh - 58rem);
+  padding-left: 250rem;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+.heroContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24rem;
+}
+.primaryText {
+  font-size: 96rem;
+  font-weight: 900;
+  font-family: var(--header-font);
+}
+.secondaryText {
+  font-size: 32rem;
+  font-weight: 300;
+  font-family: var(--header-font);
+}
+.buttonsContainer {
+  margin-top: 48rem;
+  display: flex;
+  gap: 48rem;
+}
+.accentBtn {
+  padding: 12rem 48rem;
+  font-size: 32rem;
+  font-weight: 600;
+  font-family: var(--header-font);
+  background-color: var(--accent2-color);
+  border-radius: 24rem;
+}
+.secondaryBtn {
+  padding: 12rem 48rem;
+  font-size: 32rem;
+  font-weight: 600;
+  font-family: var(--header-font);
+  border: 1rem solid var(--accent2-color);
+  border-radius: 24rem;
+}
+.imgContainer {
+  max-width: 50%;
+  max-height: 100%;
+  margin-left: -80rem;
+  flex: 1 1 auto;
+}

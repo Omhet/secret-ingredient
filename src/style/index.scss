@@ -1,21 +1,28 @@
 @import url('./theme.scss');
+@import url('./reset.scss');
 
+html {
+  font-size: 1px;
+}
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-    'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--regular-font);
   color: var(--text-color);
   background: var(--back-color);
 }
-
+// класс для заморозки скролла при открытии модалки
+.frozenScroll {
+  overflow: hidden;
+}
+@media (max-width: 1024px) {
+  html {
+    font-size: 0.24155vw;
+  }
+}
 svg {
   width: 16px;
   height: 16px;
   fill: var(--text-color);
 }
-
 #modal-root {
   position: absolute;
   top: 0;
