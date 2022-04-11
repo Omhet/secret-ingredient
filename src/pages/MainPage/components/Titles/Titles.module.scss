@@ -8,10 +8,10 @@
 }
 .aboutAuthor {
   width: 30%;
-  visibility: hidden;
+  filter: grayscale(1);
 }
 .visible {
-  visibility: visible;
+  filter: grayscale(0);
 }
 .authorDescription {
   font-size: 18rem;
