@@ -38,7 +38,7 @@
 }
 .imgContainer {
   max-width: 50%;
-  max-height: 100%;
+  max-height: calc(100vh - 58rem);
   margin-left: -80rem;
   flex: 1 1 auto;
 }
