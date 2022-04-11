@@ -1,0 +1,44 @@
+.titlesSection {
+  height: calc(100vh - 58rem);
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  outline: 1rem solid var(--text-color);
+}
+.aboutAuthor {
+  width: 30%;
+  filter: grayscale(1);
+}
+.visible {
+  filter: grayscale(0);
+}
+.authorDescription {
+  font-size: 18rem;
+  font-weight: 300;
+}
+.titles {
+  display: grid;
+  grid-template-columns: repeat(2, fit-content(200rem));
+  gap: 24rem;
+}
+.titleName {
+  font-size: 24rem;
+  font-weight: 700;
+  font-family: var(--header-font);
+}
+.author {
+  font-size: 24rem;
+  font-weight: 300;
+  font-family: var(--header-font);
+  &:hover,
+  &:focus {
+    color: var(--accent1-color);
+  }
+}
+.imgContainer {
+  max-width: 50%;
+  max-height: calc(100vh - 58rem);
+  margin-left: -80rem;
+  flex: 1 1 auto;
+}
