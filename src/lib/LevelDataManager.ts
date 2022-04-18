@@ -7,24 +7,28 @@ const LEVELS_DATA = [
   {
     name: 'Japan',
     unlockScore: 0,
+    ingredientColors: ['#4B2507'],
   },
   {
     name: 'Mexico',
     unlockScore: 1,
+    ingredientColors: ['#FF4D00'],
   },
   {
     name: 'Russia',
     unlockScore: 3,
+    ingredientColors: ['#FFF5E9', '#5C9E69'],
   },
   {
     name: 'Grandma',
     unlockScore: 6,
+    ingredientColors: ['#C55350', '#DE9D81'],
   },
 ];
 
 const LEVELS_FROM_STORAGE = JSON.parse(localStorage.getItem('levels') ?? '[]');
 
-const LEVELS = LEVELS_DATA.map(({ name, unlockScore }, index) => {
+const LEVELS = LEVELS_DATA.map(({ name, unlockScore, ingredientColors }, index) => {
   const number = index + 1;
   const score = LEVELS_FROM_STORAGE[index]?.score ?? 0;
 
@@ -44,21 +48,37 @@ const LEVELS = LEVELS_DATA.map(({ name, unlockScore }, index) => {
     number,
     score,
     unlockScore,
+    ingredientColors,
     musicUrl: `music/${number}.mp3`,
     midiUrl: `midi/${number}.mid`,
     imgUrls,
   };
 });
 
+type LevelType = {
+  name: string;
+  score: number;
+  unlockScore: number;
+  number: number;
+  ingredientColors: string[];
+  audio: HTMLAudioElement;
+  markup: Markup;
+  images: LevelImages;
+};
+
 class LevelDataManager {
   currentLevel = 1;
-  levels: { audio: HTMLAudioElement; markup: Markup; images: LevelImages }[] = [];
+  levels: LevelType[] = [];
 
   constructor(
     public audioManager: AudioManager,
     public markupManager: MarkupManager,
     public imagesManager: ImagesManager
-  ) {}
+  ) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.levels = [...LEVELS];
+  }
 
   async loadLevelData(levelNumber: number) {
     this.currentLevel = levelNumber;
@@ -76,7 +96,12 @@ class LevelDataManager {
       images,
     };
 
-    this.levels[levelNumber - 1] = data;
+    const index = levelNumber - 1;
+
+    this.levels[levelNumber - 1] = {
+      ...LEVELS[index],
+      ...data,
+    };
 
     return data;
   }
@@ -90,7 +115,7 @@ class LevelDataManager {
   }
 
   getAllLevels() {
-    return LEVELS;
+    return this.levels;
   }
 
   getCurrentLevelData() {
