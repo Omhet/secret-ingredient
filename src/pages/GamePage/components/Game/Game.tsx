@@ -1,5 +1,6 @@
 import { startGame, useGame } from '@store/game';
 import React, { FC } from 'react';
+import { Background } from './components/Background/Background';
 import { Notes } from './components/Notes/Notes';
 import { Zone } from './components/Zone/Zone';
 import s from './Game.module.scss';
@@ -17,6 +18,7 @@ export const Game: FC = () => {
 
   return (
     <>
+      <Background />
       {!isGameStarted && (
         <button onClick={start} className={s.playBtn}>
           Play

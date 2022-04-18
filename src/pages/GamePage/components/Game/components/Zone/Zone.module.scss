@@ -1,7 +1,7 @@
 .root {
   display: flex;
   position: relative;
-  margin-top: 70%;
+  z-index: 1;
 }
 
 .heart {

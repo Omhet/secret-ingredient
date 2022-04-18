@@ -43,6 +43,7 @@ const LEVELS = LEVELS_DATA.map(({ name, unlockScore }, index) => {
 
 class LevelDataManager {
   currentLevel = 1;
+  levels: { audio: HTMLAudioElement; markup: Markup; images: LevelImages }[] = [];
 
   constructor(
     public audioManager: AudioManager,
@@ -51,6 +52,8 @@ class LevelDataManager {
   ) {}
 
   async loadLevelData(levelNumber: number) {
+    this.currentLevel = levelNumber;
+
     const requests: [Promise<HTMLAudioElement>, Promise<Markup>, Promise<LevelImages>] = [
       this.audioManager.loadLevelTrack(levelNumber),
       this.markupManager.loadLevelMarkup(levelNumber),
@@ -58,17 +61,19 @@ class LevelDataManager {
     ];
 
     const [audio, markup, images] = await Promise.all(requests);
-
-    return {
+    const data = {
       audio,
       markup,
       images,
     };
+
+    this.levels[levelNumber - 1] = data;
+
+    return data;
   }
 
-  playLevelMusic(levelNumber: number) {
-    this.currentLevel = levelNumber;
-    this.audioManager.playLevelTrack(levelNumber);
+  playLevelMusic() {
+    this.audioManager.playLevelTrack(this.currentLevel);
   }
 
   stopLevelMusic() {
@@ -77,6 +82,10 @@ class LevelDataManager {
 
   getAllLevels() {
     return LEVELS;
+  }
+
+  getCurrentLevelData() {
+    return this.levels[this.currentLevel - 1];
   }
 }
 

@@ -1,5 +1,5 @@
 import { GameStatus } from '@app-types/game';
-import { currentLevelStore, levelsStore, rewriteCurrentLevelScore, setCurrentLevelScore } from '@store/levels';
+import { currentLevelStore, rewriteCurrentLevelScore, setCurrentLevelScore } from '@store/levels';
 import { openGameEndModal } from '@store/modals';
 import { guard } from 'effector';
 import { levelDataManager } from '../../lib/LevelDataManager';
@@ -54,9 +54,8 @@ loadGame.use(async (levelNumber: number) => {
 });
 
 startGame.watch(() => {
-  const { currentLevelNumber } = levelsStore.getState();
   setGameStatus(GameStatus.InProgress);
-  levelDataManager.playLevelMusic(currentLevelNumber);
+  levelDataManager.playLevelMusic();
 });
 
 // Blast

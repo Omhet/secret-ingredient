@@ -20,6 +20,9 @@ export const Zone: FC = () => {
 
   return (
     <div className={s.root}>
+      <div className={s.fence} style={{ width: HALF_BEAT_SIZE * 5, height: HALF_BEAT_SIZE * 5 }}>
+        <div className={s.fenceInner} style={{ width: HALF_BEAT_SIZE * 3.2, height: HALF_BEAT_SIZE * 3.2 }} />
+      </div>
       <motion.div
         data-id="zone"
         ref={ref}
@@ -35,9 +38,6 @@ export const Zone: FC = () => {
         style={{ width: HALF_BEAT_SIZE, height: HALF_BEAT_SIZE }}
         className={s.heart}
       />
-      <div className={s.fence} style={{ width: HALF_BEAT_SIZE * 5, height: HALF_BEAT_SIZE * 5 }}>
-        <div className={s.fenceInner} style={{ width: HALF_BEAT_SIZE * 3.2, height: HALF_BEAT_SIZE * 3.2 }} />
-      </div>
     </div>
   );
 };
