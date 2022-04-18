@@ -11,6 +11,7 @@ export interface NoteProps {
   beatDuration: number;
   beat: number;
   size: number;
+  image: string;
   onAnimationComplete: (beat: number) => void;
 }
 
@@ -22,6 +23,7 @@ export const Note: FC<NoteProps> = ({
   translateDuration,
   translateDelay,
   beatDuration,
+  image,
   onAnimationComplete,
 }) => {
   return (
@@ -61,7 +63,7 @@ export const Note: FC<NoteProps> = ({
           repeat: Infinity,
           repeatType: 'mirror',
         }}
-        style={{ height: size, width: size }}
+        style={{ height: size, width: size, backgroundImage: `url("${image}")` }}
         className={s.body}
       />
     </motion.div>
