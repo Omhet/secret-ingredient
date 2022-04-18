@@ -2,6 +2,7 @@ import { GameStatus } from '@app-types/game';
 import { currentLevelStore, rewriteCurrentLevelScore, setCurrentLevelScore } from '@store/levels';
 import { openGameEndModal } from '@store/modals';
 import { guard } from 'effector';
+import party from 'party-js';
 import { levelDataManager } from '../../lib/LevelDataManager';
 import {
   blast,
@@ -68,6 +69,7 @@ guard({
 blast.watch(() => {
   const { zonePosition } = gameStore.getState();
 
+  party.confetti(new party.Circle(zonePosition.x, zonePosition.y, 180));
   decreaseBlastCount();
 
   const beat = checkHit(zonePosition);
