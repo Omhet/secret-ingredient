@@ -12,6 +12,14 @@ const LEVELS_DATA = [
     name: 'Mexico',
     unlockScore: 1,
   },
+  {
+    name: 'Russia',
+    unlockScore: 3,
+  },
+  {
+    name: 'Grandma',
+    unlockScore: 6,
+  },
 ];
 
 const LEVELS_FROM_STORAGE = JSON.parse(localStorage.getItem('levels') ?? '[]');
@@ -28,6 +36,7 @@ const LEVELS = LEVELS_DATA.map(({ name, unlockScore }, index) => {
     },
     food: [`${imgPath}/food/1.png`, `${imgPath}/food/2.png`, `${imgPath}/food/3.png`],
     master: `${imgPath}/master.png`,
+    ingredient: `${imgPath}/ingredient.png`,
   };
 
   return {
