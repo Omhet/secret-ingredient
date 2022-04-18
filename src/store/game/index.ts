@@ -4,6 +4,11 @@ import { createEffect, createEvent, createStore } from 'effector';
 import { useStore } from 'effector-react';
 import { keyEvent } from './keys';
 
+type ZoneType = {
+  position: Position;
+  size: number;
+};
+
 type GameStore = {
   isLoading: boolean;
   status: GameStatus;
@@ -11,7 +16,7 @@ type GameStore = {
   hitCount: number;
   touchedHeartCount: number;
   blastCount: number;
-  zonePosition: Position;
+  zone: ZoneType;
   markup: Markup;
   notes: NotesType;
 };
@@ -25,7 +30,7 @@ export const gameStoreInitial = {
   hitCount: 0,
   blastCount: Infinity,
   touchedHeartCount: 0,
-  zonePosition: {} as Position,
+  zone: {} as ZoneType,
 };
 
 export const gameStore = createStore<GameStore>(gameStoreInitial);
@@ -37,7 +42,7 @@ export const setIsLoading = createEvent<boolean>();
 export const setGameStatus = createEvent<GameStatus>();
 export const setMarkup = createEvent<Markup>();
 export const setBlastCount = createEvent<number>();
-export const setZonePosition = createEvent<Position>();
+export const setZone = createEvent<ZoneType>();
 export const removeNote = createEvent<number>();
 export const increaseMissCount = createEvent();
 export const increaseHitCount = createEvent();

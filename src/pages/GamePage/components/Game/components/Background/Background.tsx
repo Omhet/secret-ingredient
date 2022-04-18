@@ -1,4 +1,4 @@
-import { levelDataManager } from '@lib/LevelDataManager';
+import { levelDataManager } from '@lib/levels/LevelDataManager';
 import React, { FC } from 'react';
 import s from './Background.module.scss';
 

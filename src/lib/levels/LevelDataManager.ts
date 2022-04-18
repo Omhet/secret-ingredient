@@ -7,7 +7,7 @@ const LEVELS_DATA = [
   {
     name: 'Japan',
     unlockScore: 0,
-    ingredientColors: ['#4B2507'],
+    ingredientColors: ['#4B2507', '#C1956B'],
   },
   {
     name: 'Mexico',

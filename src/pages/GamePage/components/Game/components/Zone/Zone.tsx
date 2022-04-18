@@ -1,4 +1,4 @@
-import { setZonePosition, useGame } from '@store/game';
+import { setZone, useGame } from '@store/game';
 import { motion } from 'framer-motion';
 import React, { FC, useEffect, useRef } from 'react';
 import { HALF_BEAT_SIZE } from '../../constants';
@@ -12,8 +12,8 @@ export const Zone: FC = () => {
   useEffect(() => {
     setTimeout(() => {
       if (ref.current) {
-        const { x, y } = ref.current.getBoundingClientRect();
-        setZonePosition({ x, y });
+        const { x, y, width } = ref.current.getBoundingClientRect();
+        setZone({ position: { x, y }, size: width });
       }
     }, 0);
   }, [ref.current]);

@@ -1,5 +1,6 @@
 import { GameStatus } from '@app-types/game';
 import { levelDataManager } from '@lib/levels/LevelDataManager';
+import { ingredientBlast } from '@lib/particles';
 import { currentLevelStore, rewriteCurrentLevelScore, setCurrentLevelScore } from '@store/levels';
 import { openGameEndModal } from '@store/modals';
 import { guard } from 'effector';
@@ -23,7 +24,7 @@ import {
   setGameStatus,
   setIsLoading,
   setMarkup,
-  setZonePosition,
+  setZone,
   startGame,
 } from './index';
 import { checkHit, getScore } from './utils';
@@ -33,7 +34,7 @@ gameStore
   .on(setGameStatus, (state, status) => ({ ...state, status }))
   .on(setBlastCount, (state, blastCount) => ({ ...state, blastCount }))
   .on(setMarkup, (state, markup) => ({ ...state, markup, notes: markup.notes }))
-  .on(setZonePosition, (state, zonePosition) => ({ ...state, zonePosition }))
+  .on(setZone, (state, zonePosition) => ({ ...state, zone: zonePosition }))
   .on(removeNote, (state, noteToDelete) => ({ ...state, notes: state.notes.filter((note) => note !== noteToDelete) }))
   .on(increaseMissCount, (state) => ({ ...state, missCount: state.missCount + 1 }))
   .on(increaseHitCount, (state) => ({ ...state, hitCount: state.hitCount + 1 }))
@@ -67,12 +68,18 @@ guard({
   target: blast,
 });
 blast.watch(() => {
-  const { zonePosition } = gameStore.getState();
+  const {
+    zone: { position, size },
+  } = gameStore.getState();
 
-  party.confetti(new party.Circle(zonePosition.x, zonePosition.y, 180));
+  const colors = levelDataManager.getCurrentLevelData().ingredientColors;
+  ingredientBlast(new party.Circle(position.x, position.y - size, size * 2), { colors });
+  ingredientBlast(new party.Circle(position.x - size, position.y, size * 2), { colors });
+  ingredientBlast(new party.Circle(position.x + size, position.y, size * 2), { colors });
+
   decreaseBlastCount();
 
-  const beat = checkHit(zonePosition);
+  const beat = checkHit(position);
   if (beat !== undefined) {
     removeNote(beat);
     increaseHitCount();

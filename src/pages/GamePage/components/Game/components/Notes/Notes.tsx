@@ -1,4 +1,4 @@
-import { levelDataManager } from '@lib/LevelDataManager';
+import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { noteTouchedHeart, useGame } from '@store/game';
 import { AnimatePresence } from 'framer-motion';
 import React, { FC, useCallback, useState } from 'react';
@@ -9,15 +9,15 @@ import { Note } from './Note/Note';
 const LATENCY_COMPENSATION = 0.05;
 
 export const Notes: FC = () => {
-  const { notes, markup, zonePosition } = useGame();
+  const { notes, markup, zone } = useGame();
   const { food: noteImages } = levelDataManager.getCurrentLevelData().images;
 
   const [notesData] = useState(() => {
     const map: Record<number, any> = {};
     notes.forEach((note) => {
       const angle = getRandomAngle() * (Math.PI / 180);
-      const targetX = HALF_BEAT_SIZE * Math.cos(angle) + zonePosition.x;
-      const targetY = HALF_BEAT_SIZE * Math.sin(angle) + zonePosition.y;
+      const targetX = HALF_BEAT_SIZE * Math.cos(angle) + zone.position.x;
+      const targetY = HALF_BEAT_SIZE * Math.sin(angle) + zone.position.y;
 
       const dist = BEAT_SIZE * 5.5;
       const initX = dist * Math.cos(angle) + targetX;

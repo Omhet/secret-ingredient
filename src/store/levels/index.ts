@@ -1,4 +1,4 @@
-import { levelDataManager } from '@lib/LevelDataManager';
+import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { combine, createEvent, createStore } from 'effector';
 import { useStore } from 'effector-react';
 
