@@ -1,9 +1,9 @@
 import { GameStatus } from '@app-types/game';
+import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { currentLevelStore, rewriteCurrentLevelScore, setCurrentLevelScore } from '@store/levels';
 import { openGameEndModal } from '@store/modals';
 import { guard } from 'effector';
 import party from 'party-js';
-import { levelDataManager } from '../../lib/LevelDataManager';
 import {
   blast,
   blastKey,
