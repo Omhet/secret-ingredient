@@ -2,7 +2,7 @@ import { GameStatus, Position } from '@app-types/game';
 import { Markup, NotesType } from '@app-types/music';
 import { createEffect, createEvent, createStore } from 'effector';
 import { useStore } from 'effector-react';
-import { hotkey } from './keys';
+import { keyEvent } from './keys';
 
 type GameStore = {
   isLoading: boolean;
@@ -48,7 +48,7 @@ export const resetGameData = createEvent();
 export const startGame = createEvent();
 export const endGame = createEvent();
 export const noteTouchedHeart = createEvent<number>();
-export const spaceDown = hotkey({ key: ' ', type: 'keydown' });
+export const blastKey = keyEvent();
 export const blast = createEvent();
 
 export const loadGame = createEffect<number, void, void>();

@@ -5,6 +5,7 @@ import { guard } from 'effector';
 import { levelDataManager } from '../../lib/LevelDataManager';
 import {
   blast,
+  blastKey,
   decreaseBlastCount,
   endGame,
   gameStatusStore,
@@ -22,7 +23,6 @@ import {
   setIsLoading,
   setMarkup,
   setZonePosition,
-  spaceDown,
   startGame,
 } from './index';
 import { checkHit, getScore } from './utils';
@@ -61,7 +61,7 @@ startGame.watch(() => {
 // Blast
 guard({
   source: gameStore,
-  clock: spaceDown,
+  clock: blastKey,
   filter: ({ status, blastCount }) => status === GameStatus.InProgress && blastCount > 0,
   target: blast,
 });
