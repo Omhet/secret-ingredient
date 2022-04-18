@@ -73,15 +73,14 @@ blast.watch(() => {
   } = gameStore.getState();
 
   const colors = levelDataManager.getCurrentLevelData().ingredientColors;
-  ingredientBlast(new party.Circle(position.x, position.y - size, size * 2), { colors });
-  ingredientBlast(new party.Circle(position.x - size, position.y, size * 2), { colors });
-  ingredientBlast(new party.Circle(position.x + size, position.y, size * 2), { colors });
+  ingredientBlast(new party.Circle(position.x, position.y, size * 3), { colors });
 
   decreaseBlastCount();
 
-  const beat = checkHit(position);
-  if (beat !== undefined) {
-    removeNote(beat);
+  const hit = checkHit(position);
+  if (hit !== undefined) {
+    ingredientBlast(new party.Circle(hit.rect.x, hit.rect.y, size), { colors, size: 0.5 });
+    removeNote(hit.beat);
     increaseHitCount();
   } else {
     increaseMissCount();

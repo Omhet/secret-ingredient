@@ -5,9 +5,12 @@ export const checkHit = (zonePosition: Position) => {
   const notes = Array.from(document.querySelectorAll<HTMLDivElement>('[data-id="note"]'));
 
   for (const note of notes) {
-    const beat = checkNoteHit(note, zonePosition);
-    if (beat !== undefined) {
-      return beat;
+    const hit = checkNoteHit(note, zonePosition);
+    if (hit !== undefined) {
+      return {
+        beat: hit.beat,
+        rect: hit.rect,
+      };
     }
   }
 
@@ -25,7 +28,10 @@ export const checkNoteHit = (note: HTMLDivElement, zonePosition: Position) => {
   const percent = (diff / size) * 100;
 
   if (percent >= HIT_PERCENT_BOTTOM && percent <= 100 - HIT_PERCENT_TOP) {
-    return Number(note.dataset.beat);
+    return {
+      beat: Number(note.dataset.beat),
+      rect: noteRect,
+    };
   }
 };
 
