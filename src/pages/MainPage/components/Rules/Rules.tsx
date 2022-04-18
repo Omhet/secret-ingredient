@@ -42,7 +42,7 @@ export const Rules: FC = () => {
           <div className={s.ruleItem}>
             <span>
               OK, clear,
-              <br /> let's play!
+              <br /> let&apos;s play!
             </span>
             <button className={s.levelsBtn}>See levels</button>
           </div>
