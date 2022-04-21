@@ -18,22 +18,10 @@ export const pixiGame = (app: Application) => {
     food.push(foodSprite);
   }
 
-  const zone = new Container();
+  const zone = createZone(beatSize);
+  app.stage.addChild(zone);
   zone.position.x = app.screen.width / 2;
   zone.position.y = app.screen.height;
-  const zoneInner = Sprite.from('/pics/zone_inner.png');
-  const zoneInnerSize = beatSize;
-  zoneInner.width = zoneInnerSize;
-  zoneInner.height = zoneInnerSize;
-  zoneInner.anchor.set(0.5);
-  const zoneOuter = Sprite.from('/pics/zone_outer.png');
-  const zoneOuterSize = beatSize * 2;
-  zoneOuter.width = zoneOuterSize;
-  zoneOuter.height = zoneOuterSize;
-  zoneOuter.anchor.set(0.5);
-  zone.addChild(zoneOuter);
-  zone.addChild(zoneInner);
-  app.stage.addChild(zone);
 
   app.ticker.add((delta) => {
     for (let i = 0; i < food.length; i++) {
@@ -49,4 +37,23 @@ function createFoodSprite(texture: Texture, size: number) {
   sprite.height = size;
 
   return sprite;
+}
+
+function createZone(size: number) {
+  const zone = new Container();
+
+  const zoneInner = Sprite.from('/pics/zone_inner.png');
+  const zoneInnerSize = size;
+  zoneInner.width = zoneInnerSize;
+  zoneInner.height = zoneInnerSize;
+  zoneInner.anchor.set(0.5);
+  const zoneOuter = Sprite.from('/pics/zone_outer.png');
+  const zoneOuterSize = size * 2;
+  zoneOuter.width = zoneOuterSize;
+  zoneOuter.height = zoneOuterSize;
+  zoneOuter.anchor.set(0.5);
+  zone.addChild(zoneOuter);
+  zone.addChild(zoneInner);
+
+  return zone;
 }
