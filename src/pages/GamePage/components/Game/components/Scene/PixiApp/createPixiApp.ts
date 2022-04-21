@@ -7,6 +7,7 @@ export const createPixiApp = () => {
     height: innerHeight,
     resolution: window.devicePixelRatio || 1,
     backgroundAlpha: 0,
+    antialias: true,
   });
 
   pixiGame(app);
