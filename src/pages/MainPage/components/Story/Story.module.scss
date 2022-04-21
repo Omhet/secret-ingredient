@@ -5,7 +5,6 @@
   display: flex;
   align-items: center;
   overflow-y: auto;
-  outline: 1rem solid var(--text-color);
 }
 .storyItem {
   width: 100%;
@@ -17,11 +16,31 @@
   flex-shrink: 0;
   overflow: hidden;
 }
+.storyItem2 {
+  justify-content: flex-end;
+  gap: 48rem;
+}
+.storyItem3 {
+  justify-content: center;
+}
 .description {
   max-width: 35%;
   font-size: 24rem;
 }
 .description1 {
+  align-self: flex-start;
+}
+.description2 {
+  max-width: 45%;
+  align-self: center;
+}
+.description3 {
+  margin-bottom: 96rem;
+  align-self: flex-end;
+}
+.description4 {
+  max-width: 45%;
+  margin-top: 80rem;
   align-self: flex-start;
 }
 .alignRight {
@@ -48,4 +67,11 @@
 }
 .img1 {
   margin-right: -96rem;
+}
+.img2,
+.img3 {
+  max-width: 45%;
+}
+.img4 {
+  margin-left: -96rem;
 }
