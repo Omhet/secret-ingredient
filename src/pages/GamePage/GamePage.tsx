@@ -3,7 +3,6 @@ import { useLevels } from '@store/levels';
 import { closeModal } from '@store/modals';
 import React, { FC, useEffect } from 'react';
 import { loadGame, useGame } from '../../store/game/index';
-import { Header } from './components/Header/Header';
 import s from './GamePage.module.scss';
 
 export const GamePage: FC = () => {
@@ -15,16 +14,5 @@ export const GamePage: FC = () => {
     loadGame(currentLevelNumber);
   }, [currentLevelNumber, restartCounter]);
 
-  return (
-    <div className={s.main}>
-      {isLoading ? (
-        'Loading...'
-      ) : (
-        <>
-          <Header />
-          <Game />
-        </>
-      )}
-    </div>
-  );
+  return <div className={s.main}>{isLoading ? 'Loading...' : <Game />}</div>;
 };

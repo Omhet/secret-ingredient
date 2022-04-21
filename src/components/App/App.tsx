@@ -1,6 +1,5 @@
 import { Modals } from '@components/Modals/Modals';
 import { GamePage } from '@pages/GamePage/GamePage';
-import { Header } from '@components/Header/Header';
 import { MainPage } from '@pages/MainPage/MainPage';
 import { NotFoundPage } from '@pages/NotFoundPage/NotFoundPage';
 import React, { FC } from 'react';
@@ -13,7 +12,6 @@ export const App: FC = () => {
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
       {/* @ts-ignore */}
       <Router>
-        <Header />
         <div className={s.main}>
           <Switch>
             <Route exact path="/">

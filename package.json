@@ -27,6 +27,7 @@
     "effector-react": "^22.0.6",
     "framer-motion": "^6.2.8",
     "party-js": "^2.1.2",
+    "pixi.js": "^6.3.0",
     "react": "17.0.0",
     "react-dom": "17.0.0",
     "react-router-dom": "5.2.0",

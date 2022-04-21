@@ -11,17 +11,17 @@ const LEVELS_DATA = [
   },
   {
     name: 'Mexico',
-    unlockScore: 1,
+    unlockScore: 0,
     ingredientColors: ['#FF4D00'],
   },
   {
     name: 'Russia',
-    unlockScore: 3,
+    unlockScore: 0,
     ingredientColors: ['#FFF5E9', '#5C9E69'],
   },
   {
     name: 'Grandma',
-    unlockScore: 6,
+    unlockScore: 0,
     ingredientColors: ['#C55350', '#DE9D81'],
   },
 ];
