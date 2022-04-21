@@ -6,7 +6,7 @@ export type StoryProps = {};
 
 export const Story: FC = () => {
   return (
-    <section className={s.storyContainer}>
+    <section id="story" className={s.storyContainer}>
       <div className={classnames(s.storyItem, s.paddingRight)}>
         <div className={s.imgContainer}>
           <img className={s.image} src="pics/story.jpg" />
@@ -40,7 +40,7 @@ export const Story: FC = () => {
       {
         // TODO сделать эту кнопку видимой только у секции с историей
       }
-      <button className={s.nextPageBtn}>Next page</button>
+      {/* <button className={s.nextPageBtn}>Next page</button> */}
     </section>
   );
 };

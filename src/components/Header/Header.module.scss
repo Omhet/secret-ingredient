@@ -10,6 +10,10 @@
   z-index: 2;
   outline: 1rem solid var(--text-color);
 }
+.logoImg {
+  width: 32rem;
+  height: 32rem;
+}
 .logo {
   font-size: 16rem;
   font-weight: 500;
@@ -23,27 +27,31 @@
   gap: 48rem;
 }
 .playBtn {
-  padding: 4rem 24rem;
+  padding: 8rem 24rem;
   font-size: 16rem;
-  font-weight: 500;
-  font-family: var(--header-font);
+  font-weight: 900;
   background-color: var(--accent2-color);
   border-radius: 12rem;
 }
 .navContainer {
   display: flex;
   gap: 48rem;
-  & > * {
-    cursor: pointer;
-  }
+}
+.navItem {
+  font-size: 14rem;
+  font-weight: 600;
+  cursor: pointer;
 }
 .score {
   padding: 4rem 8rem;
+  display: flex;
+  align-items: center;
+  gap: 8rem;
   font-size: 16rem;
   font-weight: 500;
   font-family: var(--header-font);
-  color: var(--accent1-color);
-  border: 1rem solid var(--accent1-color);
+  //color: var(--accent1-color);
+  border: 2rem solid var(--accent1-color);
   border-radius: 12rem;
   cursor: default;
 }

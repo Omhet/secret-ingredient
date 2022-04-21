@@ -5,7 +5,7 @@ export type RulesProps = {};
 
 export const Rules: FC = () => {
   return (
-    <section className={s.rulesSection}>
+    <section id="rules" className={s.rulesSection}>
       <div className={s.content}>
         <h2 className={s.rulesTitle}>How to play</h2>
         <div className={s.rulesContainer}>

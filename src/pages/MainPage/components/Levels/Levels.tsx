@@ -16,7 +16,7 @@ export const Levels: FC<LevelsProps> = ({}) => {
   };
 
   return (
-    <section className={s.levelsContainer}>
+    <section id="levels" className={s.levelsContainer}>
       <div className={s.levelColumn}>
         <Level
           title={`Level ${levels[0].number}`}

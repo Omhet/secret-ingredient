@@ -7,10 +7,9 @@ export const Hero: FC = () => {
   return (
     <section className={s.main}>
       <div className={s.heroContainer}>
-        <span className={s.primaryText}>Big text in two huge lines</span>
+        <span className={s.primaryText}>Feeling sad because your meal tastes raw?</span>
         <span className={s.secondaryText}>
-          Smaller text about this game is a little bit longer Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Tenetur molestiae
+          Let's find the secret ingredient to help you to become the greatest chef ever!
         </span>
         <div className={s.buttonsContainer}>
           <button className={s.accentBtn}>Play game</button>
@@ -18,7 +17,7 @@ export const Hero: FC = () => {
         </div>
       </div>
       <div className={s.imgContainer}>
-        <img className={s.image} src="pics/rocket.png" />
+        <img className={s.image} src="pics/heroCat.png" />
       </div>
     </section>
   );

@@ -9,7 +9,7 @@ export const Titles: FC = () => {
   const [isVladimirVisible, setIsVladimirVisible] = useState<boolean>(false);
 
   return (
-    <section className={s.titlesSection}>
+    <section id="titles" className={s.titlesSection}>
       <div className={classnames(s.aboutAuthor, { [s.visible]: isDariaVisible })}>
         <img src="/pics/story.jpg" />
         <span className={s.authorDescription}>

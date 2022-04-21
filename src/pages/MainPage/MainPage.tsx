@@ -6,6 +6,7 @@ import { Rules } from './components/Rules/Rules';
 import { Story } from './components/Story/Story';
 import { Titles } from './components/Titles/Titles';
 import s from './MainPage.module.scss';
+import { Header } from '@components/Header/Header';
 
 export type MainPageProps = {};
 
