@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { levelDataManager } from '@lib/levels/LevelDataManager';
-import keyboard from 'pixi-keyboard/src/main';
 import { Application, Container, Sprite, Texture } from 'pixi.js';
-// import Keyboard from 'pixi.js-keyboard';
+import KeyboardManager from './input/KeyboardManager';
+import MouseManager from './input/MouseManager';
 import { CreateFoodItemProps, Food } from './types';
 import { checkHit } from './util';
 
 export const pixiGame = (app: Application) => {
-  const keyboardManager = new keyboard.KeyboardManager();
+  const keyboardManager = new KeyboardManager();
   keyboardManager.enable();
+  const mouseManager = new MouseManager();
+  mouseManager.enable();
 
   const {
     images,
@@ -31,17 +33,33 @@ export const pixiGame = (app: Application) => {
   levelDataManager.playLevelMusic();
 
   function handleTap() {
+    console.log('tap');
+
     const foodItem = checkHit({ x: zone.x, y: zone.y }, food);
     if (foodItem) {
-      foodItem.alive = false;
-      foodItem.sprite.visible = false;
+      console.log('hit', foodItem.beat);
+      app.stage.removeChild(foodItem.sprite);
+      food = food.filter((item) => item.beat !== foodItem.beat);
     }
   }
-  keyboardManager.on('down', handleTap);
+
+  keyboardManager.on('pressed', handleTap);
+  mouseManager.on('down', handleTap);
+  // document.addEventListener(
+  //   'click',
+  //   (evt) => {
+  //     evt.preventDefault();
+  //     handleTap();
+  //   },
+  //   true
+  // );
 
   // Game Loop
-  app.ticker.add((delta) => {
-    const foodDist = (beatSize * bps) / app.ticker.FPS;
+  app.ticker.add(gameLoop);
+
+  function gameLoop() {
+    keyboardManager.update();
+    mouseManager.update();
 
     const currentBeat = bps * music.currentTime;
 
@@ -55,19 +73,19 @@ export const pixiGame = (app: Application) => {
     }
 
     // Move food
-    food = food.filter((foodItem) => {
+    const foodDist = (beatSize * bps) / app.ticker.FPS;
+    for (let i = 0; i < food.length; i++) {
+      const foodItem = food[i];
       foodItem.sprite.y += foodDist;
+    }
 
-      if (!foodItem.alive || foodItem.sprite.y > app.screen.height) {
-        foodItem.sprite.destroy();
-        return false;
-      }
-
-      return true;
-    });
-
-    keyboardManager.update(delta);
-  });
+    // const foodItem = checkHit({ x: zone.x, y: zone.y }, food);
+    // if (foodItem) {
+    //   console.log('hit', foodItem.beat);
+    //   app.stage.removeChild(foodItem.sprite);
+    //   food = food.filter((item) => item.beat !== foodItem.beat);
+    // }
+  }
 
   function spawnFood(beat: number) {
     const foodSprite = createFoodSprite({
