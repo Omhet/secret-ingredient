@@ -20,8 +20,8 @@ export const Story: FC = () => {
       <div className={classnames(s.storyItem, s.storyItem2)}>
         <span className={classnames(s.description, s.description2)}>
           So he decided to become a great chef as his grandma was, and even went to special chefs school, because he
-          thought it wasn't enough to study at home. He was so excited after the graduation! He felt like now he was
-          finally ready to rock and shine.
+          thought it wasn&apos;t enough to study at home. He was so excited after the graduation! He felt like now he
+          was finally ready to rock and shine.
         </span>
         <div className={classnames(s.imgContainer, s.img2)}>
           <img className={s.image} src="pics/illustration2.png" />
@@ -41,7 +41,7 @@ export const Story: FC = () => {
         <span className={classnames(s.description, s.description4)}>
           Fortunately, he had no habit of despair! He brainstormed a little bit and made up with a plan. So was going to
           travel all over the world and visit the best local chefs to learn their secrets. <br /> That was the plan. And
-          let's find out together what happened next.
+          let&apos;s find out together what happened next.
         </span>
         <div className={classnames(s.imgContainer, s.img4)}>
           <img className={s.image} src="pics/illustration4.png" />

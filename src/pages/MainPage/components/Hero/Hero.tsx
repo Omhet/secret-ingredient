@@ -9,7 +9,7 @@ export const Hero: FC = () => {
       <div className={s.heroContainer}>
         <span className={s.primaryText}>Feeling sad because your meal tastes raw?</span>
         <span className={s.secondaryText}>
-          Let's find the secret ingredient to help you to become the greatest chef ever!
+          Let&apos;s find the secret ingredient to help you to become the greatest chef ever!
         </span>
         <div className={s.buttonsContainer}>
           <button className={s.accentBtn}>Play game</button>
