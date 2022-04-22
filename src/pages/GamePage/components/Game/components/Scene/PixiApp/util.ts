@@ -15,9 +15,9 @@ export const checkHit = (zonePosition: Position, food: Food) => {
 };
 
 const HIT_PERCENT_BOTTOM = 0;
-const HIT_PERCENT_TOP = -20;
+const HIT_PERCENT_TOP = 0;
 export const checkFoodHit = (foodItem: FoodItem, zonePosition: Position) => {
-  const size = foodItem.sprite.height * 2;
+  const size = foodItem.sprite.height;
   const diff = Math.sqrt(
     Math.pow(zonePosition.x - foodItem.sprite.x, 2) + Math.pow(zonePosition.y - foodItem.sprite.y, 2)
   );
