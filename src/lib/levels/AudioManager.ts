@@ -34,6 +34,17 @@ export class AudioManager {
     });
   }
 
+  getLevelTrack(levelNumber: number) {
+    const index = levelNumber - 1;
+    const audio = this.tracks[index];
+
+    if (!audio) {
+      throw Error('No audio for this level');
+    }
+
+    return audio;
+  }
+
   playLevelTrack(levelNumber: number) {
     const index = levelNumber - 1;
 

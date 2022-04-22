@@ -106,6 +106,10 @@ class LevelDataManager {
     return data;
   }
 
+  getLevelMusic() {
+    return this.audioManager.getLevelTrack(this.currentLevel);
+  }
+
   playLevelMusic() {
     this.audioManager.playLevelTrack(this.currentLevel);
   }
