@@ -16,66 +16,40 @@ export const Levels: FC<LevelsProps> = ({}) => {
   };
 
   return (
-    <section className={s.levelsContainer}>
-      <div className={s.levelColumn}>
+    <section id="levels" className={s.sectionContainer}>
+      <h2 className={s.levelsTitle}>Levels</h2>
+      <div className={s.levelsContainer}>
         <Level
-          title={`Level ${levels[0].number}`}
-          imgSrc="/pics/cat.jpg"
+          title="Japanese meditation"
+          imgSrc="/pics/japanCard.png"
           levelNumber={levels[0].number}
           score={levels[0].score}
           isOpen={levels[0].isOpen}
           onClick={() => handlePlayClick(levels[0].number)}
         />
-      </div>
-      <div className={s.levelColumn}>
         <Level
-          title={`Level ${levels[1].number}`}
-          imgSrc="/pics/cat.jpg"
-          levelNumber={levels[1].number}
-          score={levels[1].score}
-          isOpen={levels[1].isOpen}
-          onClick={() => handlePlayClick(levels[1].number)}
+          title="Wild wild west"
+          imgSrc="/pics/mexicaCard.png"
+          levelNumber={2}
+          score={0}
+          isOpen={false}
+          onClick={() => handlePlayClick(2)}
         />
-        <Level isEmptyCard={true} />
-      </div>
-      <div className={s.levelColumn}>
-        <Level isEmptyCard={true} />
         <Level
-          title={`Level 3`}
-          imgSrc="/pics/cat.jpg"
+          title="Somewhere in Eastern Europe"
+          imgSrc="/pics/russiaCard.png"
           levelNumber={3}
           score={0}
           isOpen={false}
           onClick={() => handlePlayClick(3)}
         />
         <Level
-          title={`Level 4`}
-          imgSrc="/pics/cat.jpg"
+          title="The greatest secret"
+          imgSrc="/pics/grandmaCard.png"
           levelNumber={4}
           score={0}
           isOpen={false}
           onClick={() => handlePlayClick(4)}
-        />
-      </div>
-      <div className={s.levelColumn}>
-        <Level isEmptyCard={true} />
-        <Level
-          title={`Level 5`}
-          imgSrc="/pics/cat.jpg"
-          levelNumber={5}
-          score={0}
-          isOpen={false}
-          onClick={() => handlePlayClick(5)}
-        />
-      </div>
-      <div className={s.levelColumn}>
-        <Level
-          title={`Level 6`}
-          imgSrc="/pics/cat.jpg"
-          levelNumber={6}
-          score={0}
-          isOpen={false}
-          onClick={() => handlePlayClick(6)}
         />
       </div>
     </section>

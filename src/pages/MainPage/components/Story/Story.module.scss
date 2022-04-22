@@ -1,50 +1,95 @@
-.storyContainer {
-  height: calc(100vh - 58rem);
-  margin: auto;
-  position: relative;
+.storyItem1,
+.storyItem4 {
+  width: 100%;
+  height: 100%;
+  padding: 32rem;
   display: flex;
   align-items: center;
-  overflow-y: auto;
-  outline: 1rem solid var(--text-color);
-}
-.storyItem {
-  width: 100%;
-  display: flex;
-  gap: 64rem;
+  gap: 24rem;
   flex-shrink: 0;
+  overflow: hidden;
 }
-.paddingLeft {
+.storyItem2 {
+  width: 100%;
+  height: 100%;
+  padding: 32rem 32rem 32rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.storyItem3 {
+  width: 100%;
+  height: 100%;
+  padding: 32rem 0 32rem 32rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.storyItem5 {
+  width: 100%;
+  height: 100%;
+  padding: 32rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.description1 {
+  max-width: 35%;
+  font-size: 24rem;
+  align-self: flex-start;
+  text-align: right;
+}
+.description2 {
+  max-width: 45%;
   padding-left: 250rem;
+  font-size: 24rem;
+  align-self: center;
 }
-.paddingRight {
+.description3 {
+  max-width: 45%;
   padding-right: 250rem;
+  margin-bottom: 96rem;
+  font-size: 24rem;
+  align-self: flex-end;
+  text-align: right;
 }
-.description {
-  max-width: 50%;
-  font-size: 32rem;
+.description4 {
+  max-width: 45%;
+  margin-top: 80rem;
+  font-size: 24rem;
+  align-self: flex-start;
+}
+.description5 {
+  margin-bottom: 32rem;
+  font-size: 24rem;
   font-weight: 600;
-  font-family: var(--header-font);
 }
 .alignRight {
   text-align: right;
 }
-.nextPageBtn {
-  padding: 12rem 24rem;
-  position: fixed;
-  bottom: 32rem;
-  right: 32rem;
-  font-size: 16rem;
-  font-weight: 300;
-  color: var(--accent1-color);
-  background-color: var(--back-color);
-  border: 1rem solid var(--accent1-color);
-  border-radius: 16rem;
-}
 .imgContainer {
-  max-width: 50%;
   max-height: calc(100vh - 58rem);
-  flex: 1 1 auto;
+
   & > img {
     max-height: calc(100vh - 58rem);
   }
+}
+.img1 {
+  margin-right: -96rem;
+}
+.img2,
+.img3 {
+  max-width: 45%;
+}
+.img4 {
+  margin-left: -96rem;
 }
