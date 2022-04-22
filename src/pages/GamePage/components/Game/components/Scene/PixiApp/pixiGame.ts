@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { Application, Container, Sprite, Texture } from 'pixi.js';
 
@@ -13,7 +14,7 @@ export const pixiGame = (app: Application) => {
   const unitSize = beatSize / 2;
 
   const foodTextures = images.food.map((img) => Texture.from(img));
-  const food: Array<ReturnType<typeof createFoodSprite>> = [];
+  let food: Array<ReturnType<typeof createFoodSprite>> = [];
 
   const zone = createZone(beatSize);
   app.stage.addChild(zone);
@@ -22,13 +23,11 @@ export const pixiGame = (app: Application) => {
 
   levelDataManager.playLevelMusic();
   app.ticker.add(() => {
-    // const fps = 1000 / app.ticker.deltaMS;
-    // console.log(fps, app.ticker.FPS);
-
     const foodDist = (beatSize * bps) / app.ticker.FPS;
 
     const currentBeat = bps * music.currentTime;
 
+    // Spawn food on time
     for (let i = 0; i < notes.length; i++) {
       const note = notes[i];
       if (note.beat <= currentBeat && !note.isSpawned) {
@@ -37,10 +36,17 @@ export const pixiGame = (app: Application) => {
       }
     }
 
-    for (let i = 0; i < food.length; i++) {
-      const foodSprite = food[i];
+    // Move food
+    food = food.filter((foodSprite) => {
       foodSprite.y += foodDist;
-    }
+
+      if (foodSprite.y > app.screen.height) {
+        foodSprite.destroy({ texture: false, baseTexture: false });
+        return false;
+      }
+
+      return true;
+    });
   });
 
   function spawnFood() {
