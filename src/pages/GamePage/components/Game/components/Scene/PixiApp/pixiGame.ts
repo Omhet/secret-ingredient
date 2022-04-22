@@ -76,7 +76,9 @@ export const pixiGame = (app: Application) => {
       foodItem.sprite.x += foodDist * foodItem.vx;
       foodItem.sprite.y += foodDist * foodItem.vy;
 
-      foodItem.sprite.scale.set(getScaledBeatAnimationValue(beatAnimationValue, 0.1, 0.12));
+      foodItem.sprite.scale.set(getScaledBeatAnimationValue(beatAnimationValue, 0.08, 0.09));
+
+      foodItem.sprite.angle += elapsed / 20000;
     }
   }
 
@@ -115,6 +117,7 @@ function createFoodSprite({ texture, size, x, y }: CreateFoodItemProps) {
   sprite.y = y;
   sprite.width = size;
   sprite.height = size;
+  sprite.angle = Math.random() * 360;
 
   return sprite;
 }
