@@ -1,16 +1,26 @@
-.levelsContainer {
+.sectionContainer {
   height: calc(100vh - 58rem);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 48rem;
-  outline: 1rem solid var(--text-color);
-}
-
-.levelColumn {
+  padding: 32rem;
   display: flex;
   flex-direction: column;
-  gap: 48rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32rem;
+}
+
+.levelsTitle {
+  height: fit-content;
+  padding-left: 218rem;
+  font-size: 48rem;
+  font-weight: 900;
+  font-family: var(--header-font);
+  white-space: nowrap;
+}
+.levelsContainer {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
   align-items: center;
+  gap: 48rem;
 }

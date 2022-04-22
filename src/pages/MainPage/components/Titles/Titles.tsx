@@ -1,8 +1,6 @@
-import classnames from 'classnames';
+import { Arrow } from '@icons/Arrow';
 import React, { FC, useState } from 'react';
 import s from './Titles.module.scss';
-
-export type TitlesProps = {};
 
 export const Titles: FC = () => {
   const [isDariaVisible, setIsDariaVisible] = useState<boolean>(false);
@@ -10,80 +8,111 @@ export const Titles: FC = () => {
 
   return (
     <section id="titles" className={s.titlesSection}>
-      <div className={classnames(s.aboutAuthor, { [s.visible]: isDariaVisible })}>
-        <img src="/pics/story.jpg" />
-        <span className={s.authorDescription}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem neque, repellendus distinctio cum enim
-          totam id esse iusto? Laudantium hic neque soluta libero adipisci quaerat cupiditate ipsam excepturi cumque
-          omnis.
-        </span>
-      </div>
       <div className={s.titles}>
         <span className={s.titleName}>Design</span>
         <div className={s.titleAuthors}>
-          <span
+          <a
             onMouseOver={() => setIsDariaVisible(true)}
             onMouseOut={() => setIsDariaVisible(false)}
             className={s.author}
+            href="https://airadavometra.space/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Daria
-          </span>
+          </a>
           ,{' '}
-          <span
+          <a
             onMouseOver={() => setIsVladimirVisible(true)}
             onMouseOut={() => setIsVladimirVisible(false)}
             className={s.author}
+            href="https://vlivanov.space/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Vladimir
-          </span>
+          </a>
         </div>
         <span className={s.titleName}>Development</span>
         <div className={s.titleAuthors}>
-          <span
+          <a
             onMouseOver={() => setIsDariaVisible(true)}
             onMouseOut={() => setIsDariaVisible(false)}
             className={s.author}
+            href="https://airadavometra.space/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Daria
-          </span>
+          </a>
           ,{' '}
-          <span
+          <a
             onMouseOver={() => setIsVladimirVisible(true)}
             onMouseOut={() => setIsVladimirVisible(false)}
             className={s.author}
+            href="https://vlivanov.space/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Vladimir
-          </span>
+          </a>
         </div>
         <span className={s.titleName}>Music</span>
         <div className={s.titleAuthors}>
-          <span
+          <a
             onMouseOver={() => setIsVladimirVisible(true)}
             onMouseOut={() => setIsVladimirVisible(false)}
             className={s.author}
+            href="https://vlivanov.space/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Vladimir
-          </span>
+          </a>
         </div>
         <span className={s.titleName}>Illustrations</span>
         <div className={s.titleAuthors}>
-          <span
+          <a
             onMouseOver={() => setIsDariaVisible(true)}
             onMouseOut={() => setIsDariaVisible(false)}
             className={s.author}
+            href="https://airadavometra.space/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Daria
-          </span>
+          </a>
         </div>
       </div>
-      <div className={classnames(s.aboutAuthor, { [s.visible]: isVladimirVisible })}>
-        <img src="/pics/story.jpg" />
-        <span className={s.authorDescription}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem neque, repellendus distinctio cum enim
-          totam id esse iusto? Laudantium hic neque soluta libero adipisci quaerat cupiditate ipsam excepturi cumque
-          omnis.
-        </span>
-      </div>
+      {!isDariaVisible && !isVladimirVisible && (
+        <div className={s.emptyContainer}>
+          <Arrow className={s.arrow} />
+          <div className={s.titleContainer}>
+            <span className={s.title}>Authors</span>
+            <span className={s.note}>Hover over our names to see more info</span>
+          </div>
+        </div>
+      )}
+      {isDariaVisible && (
+        <div className={s.aboutAuthor}>
+          <img src="/pics/Dasha.png" />
+          <span className={s.authorDescription}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem neque, repellendus distinctio cum enim
+            totam id esse iusto? Laudantium hic neque soluta libero adipisci quaerat cupiditate ipsam excepturi cumque
+            omnis.
+          </span>
+        </div>
+      )}
+      {isVladimirVisible && (
+        <div className={s.aboutAuthor}>
+          <img src="/pics/Vova.png" />
+          <span className={s.authorDescription}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem neque, repellendus distinctio cum enim
+            totam id esse iusto? Laudantium hic neque soluta libero adipisci quaerat cupiditate ipsam excepturi cumque
+            omnis.
+          </span>
+        </div>
+      )}
     </section>
   );
 };

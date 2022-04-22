@@ -1,12 +1,5 @@
-.storyContainer {
-  height: calc(100vh - 58rem);
-  margin: auto;
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow-y: auto;
-}
-.storyItem {
+.storyItem1,
+.storyItem4 {
   width: 100%;
   height: 100%;
   padding: 32rem;
@@ -17,46 +10,71 @@
   overflow: hidden;
 }
 .storyItem2 {
-  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  padding: 32rem 32rem 32rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 48rem;
+  flex-shrink: 0;
+  overflow: hidden;
 }
 .storyItem3 {
-  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 32rem 0 32rem 32rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24rem;
+  flex-shrink: 0;
+  overflow: hidden;
 }
-.description {
-  max-width: 35%;
-  font-size: 24rem;
+.storyItem5 {
+  width: 100%;
+  height: 100%;
+  padding: 32rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24rem;
+  flex-shrink: 0;
+  overflow: hidden;
 }
 .description1 {
+  max-width: 35%;
+  font-size: 24rem;
   align-self: flex-start;
+  text-align: right;
 }
 .description2 {
   max-width: 45%;
+  padding-left: 250rem;
+  font-size: 24rem;
   align-self: center;
 }
 .description3 {
+  max-width: 45%;
+  padding-right: 250rem;
   margin-bottom: 96rem;
+  font-size: 24rem;
   align-self: flex-end;
+  text-align: right;
 }
 .description4 {
   max-width: 45%;
   margin-top: 80rem;
+  font-size: 24rem;
   align-self: flex-start;
+}
+.description5 {
+  margin-bottom: 32rem;
+  font-size: 24rem;
+  font-weight: 600;
 }
 .alignRight {
   text-align: right;
-}
-.nextPageBtn {
-  padding: 12rem 24rem;
-  position: fixed;
-  bottom: 32rem;
-  right: 32rem;
-  font-size: 16rem;
-  font-weight: 300;
-  color: var(--accent1-color);
-  background-color: var(--back-color);
-  border: 1rem solid var(--accent1-color);
-  border-radius: 16rem;
 }
 .imgContainer {
   max-height: calc(100vh - 58rem);
