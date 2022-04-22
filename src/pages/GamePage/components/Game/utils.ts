@@ -3,7 +3,7 @@ export const getRandomArrayItem = <T>(arr: T[]) => {
   return arr[index];
 };
 
-const ANGLES = [225, 270, 315];
+const ANGLES = [225, 240, 270, 300, 315];
 export const getRandomAngle = () => {
   return getRandomArrayItem(ANGLES);
 };
