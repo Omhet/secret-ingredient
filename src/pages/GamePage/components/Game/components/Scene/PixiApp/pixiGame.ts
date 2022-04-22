@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { Application, Sprite, Texture } from 'pixi.js';
+import { getRandomAngle } from '../../../utils';
 import KeyboardManager from './input/KeyboardManager';
 import MouseManager from './input/MouseManager';
 import { CreateFoodItemProps, Food } from './types';
@@ -65,43 +66,53 @@ export const pixiGame = (app: Application) => {
     const foodDist = (beatSize * bps) / app.ticker.FPS;
     for (let i = 0; i < food.length; i++) {
       const foodItem = food[i];
-      foodItem.sprite.y += foodDist;
+      foodItem.sprite.x += foodDist * foodItem.vx;
+      foodItem.sprite.y += foodDist * foodItem.vy;
     }
   }
 
   function spawnFood(beat: number) {
-    // const angle = getRandomAngle() * (Math.PI / 180);
+    const angle = getRandomAngle() * (Math.PI / 180);
+    const dist = beatSize * 4;
+    const x = dist * Math.cos(angle) + zone.x;
+    const y = dist * Math.sin(angle) + zone.y;
+
+    const dx = zone.x - x;
+    const dy = zone.y - y;
+    const d = Math.sqrt(dx * dx + dy * dy);
+    const vx = dx / d;
+    const vy = dy / d;
 
     const foodSprite = createFoodSprite({
       texture: foodTextures[0],
       size: unitSize,
-      x: app.screen.width / 2,
-      y: -unitSize,
-      beat,
+      x,
+      y,
     });
-    app.stage.addChild(foodSprite.sprite);
-    food.push(foodSprite);
+    app.stage.addChild(foodSprite);
+    food.push({
+      sprite: foodSprite,
+      beat,
+      vx,
+      vy,
+    });
   }
 };
 
-function createFoodSprite({ texture, size, x, y, beat }: CreateFoodItemProps) {
+function createFoodSprite({ texture, size, x, y }: CreateFoodItemProps) {
   const sprite = Sprite.from(texture);
-  sprite.anchor.set(0.5, 0);
+  sprite.anchor.set(0.5);
   sprite.x = x;
   sprite.y = y;
   sprite.width = size;
   sprite.height = size;
 
-  return {
-    sprite,
-    beat,
-    alive: true,
-  };
+  return sprite;
 }
 
 function createZone(size: number) {
   const zone = Sprite.from('/pics/zone_outer.png');
-  const zoneSize = size * 1.2;
+  const zoneSize = size;
   zone.width = zoneSize;
   zone.height = zoneSize;
   zone.anchor.set(0.5);
