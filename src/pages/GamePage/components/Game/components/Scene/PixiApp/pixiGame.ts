@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { Application, Container, Sprite, Texture } from 'pixi.js';
+import { CreateFoodItemProps, Food } from './types';
+import { checkHit } from './util';
 
 export const pixiGame = (app: Application) => {
   const {
@@ -14,7 +16,7 @@ export const pixiGame = (app: Application) => {
   const unitSize = beatSize / 2;
 
   const foodTextures = images.food.map((img) => Texture.from(img));
-  let food: Array<ReturnType<typeof createFoodSprite>> = [];
+  let food: Food = [];
 
   const zone = createZone(beatSize);
   app.stage.addChild(zone);
@@ -31,17 +33,17 @@ export const pixiGame = (app: Application) => {
     for (let i = 0; i < notes.length; i++) {
       const note = notes[i];
       if (note.beat <= currentBeat && !note.isSpawned) {
-        spawnFood();
+        spawnFood(note.beat);
         note.isSpawned = true;
       }
     }
 
     // Move food
-    food = food.filter((foodSprite) => {
-      foodSprite.y += foodDist;
+    food = food.filter((foodItem) => {
+      foodItem.sprite.y += foodDist;
 
-      if (foodSprite.y > app.screen.height) {
-        foodSprite.destroy({ texture: false, baseTexture: false });
+      if (!foodItem.alive || foodItem.sprite.y > app.screen.height) {
+        // foodItem.sprite.destroy();
         return false;
       }
 
@@ -49,30 +51,31 @@ export const pixiGame = (app: Application) => {
     });
   });
 
-  function spawnFood() {
+  function spawnFood(beat: number) {
     const foodSprite = createFoodSprite({
       texture: foodTextures[0],
       size: unitSize,
       x: app.screen.width / 2,
       y: -unitSize,
+      beat,
     });
-    app.stage.addChild(foodSprite);
+    app.stage.addChild(foodSprite.sprite);
     food.push(foodSprite);
   }
 
   document.addEventListener('click', handleTap);
+  document.addEventListener('keydown', handleTap);
   function handleTap() {
-    // TODO
+    const foodItem = checkHit({ x: zone.x, y: zone.y }, food);
+    if (foodItem) {
+      foodItem.alive = false;
+      foodItem.sprite.alpha = 0;
+      console.log('HIT');
+    }
   }
 };
 
-type FoodSprite = {
-  texture: Texture;
-  size: number;
-  x: number;
-  y: number;
-};
-function createFoodSprite({ texture, size, x, y }: FoodSprite) {
+function createFoodSprite({ texture, size, x, y, beat }: CreateFoodItemProps) {
   const sprite = Sprite.from(texture);
   sprite.anchor.set(0.5, 0);
   sprite.x = x;
@@ -80,7 +83,11 @@ function createFoodSprite({ texture, size, x, y }: FoodSprite) {
   sprite.width = size;
   sprite.height = size;
 
-  return sprite;
+  return {
+    sprite,
+    beat,
+    alive: true,
+  };
 }
 
 function createZone(size: number) {
