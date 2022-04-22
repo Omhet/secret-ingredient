@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { Application, Sprite, Texture } from 'pixi.js';
-import { getRandomAngle } from '../../../utils';
+import { getRandomAngle, getRandomArrayItem } from '../../../utils';
 import KeyboardManager from './input/KeyboardManager';
 import MouseManager from './input/MouseManager';
 import { CreateFoodItemProps, Food } from './types';
@@ -93,7 +93,7 @@ export const pixiGame = (app: Application) => {
     const vy = dy / d;
 
     const foodSprite = createFoodSprite({
-      texture: foodTextures[0],
+      texture: getRandomArrayItem(foodTextures),
       size: unitSize,
       x,
       y,
