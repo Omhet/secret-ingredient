@@ -31,7 +31,7 @@ export class MarkupManager {
       bps,
       spb,
       barDuration,
-      notes: track.notes.map((note) => note.time * bps + 12),
+      notes: track.notes.map((note) => note.time * bps + 8),
     };
   }
 }

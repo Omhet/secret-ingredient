@@ -84,7 +84,7 @@ export const pixiGame = (app: Application) => {
 
   function spawnFood(beat: number) {
     const angle = getRandomAngle() * (Math.PI / 180);
-    const dist = beatSize * 4;
+    const dist = beatSize * 8;
     const x = dist * Math.cos(angle) + zone.x;
     const y = dist * Math.sin(angle) + zone.y;
 
