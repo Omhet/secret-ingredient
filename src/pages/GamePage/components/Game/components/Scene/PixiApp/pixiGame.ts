@@ -47,7 +47,10 @@ export const pixiGame = (app: Application) => {
   // Game Loop
   app.ticker.add(gameLoop);
 
+  let elapsed = 0.0;
   function gameLoop() {
+    elapsed += app.ticker.elapsedMS;
+
     keyboardManager.update();
     mouseManager.update();
 
@@ -62,12 +65,18 @@ export const pixiGame = (app: Application) => {
       }
     }
 
+    const beatAnimationValue = getBeatAnimationValue(elapsed, bps);
+
+    zone.scale.set(getScaledBeatAnimationValue(beatAnimationValue, 1, 1.2));
+
     // Move food
     const foodDist = (beatSize * bps) / app.ticker.FPS;
     for (let i = 0; i < food.length; i++) {
       const foodItem = food[i];
       foodItem.sprite.x += foodDist * foodItem.vx;
       foodItem.sprite.y += foodDist * foodItem.vy;
+
+      foodItem.sprite.scale.set(getScaledBeatAnimationValue(beatAnimationValue, 0.1, 0.12));
     }
   }
 
@@ -118,4 +127,12 @@ function createZone(size: number) {
   zone.anchor.set(0.5);
 
   return zone;
+}
+
+function getBeatAnimationValue(elapsed: number, bps: number) {
+  return Math.abs(Math.sin((elapsed / 1000) * (Math.PI / 2) * bps));
+}
+
+function getScaledBeatAnimationValue(animValue: number, min = 1, max = 1) {
+  return animValue * (max - min) + min;
 }
