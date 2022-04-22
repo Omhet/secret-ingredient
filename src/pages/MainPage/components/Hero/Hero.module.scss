@@ -1,6 +1,6 @@
 .main {
   height: calc(100vh - 58rem);
-  padding-left: 250rem;
+  padding-left: clamp(12rem, 15vw, 250rem);
   margin: auto;
   display: flex;
   align-items: center;
@@ -30,6 +30,7 @@
   font-weight: 800;
   background-color: var(--accent2-color);
   border-radius: 24rem;
+  white-space: nowrap;
 }
 .secondaryBtn {
   padding: 12rem 48rem;
@@ -37,6 +38,7 @@
   font-weight: 500;
   border: 3rem solid var(--accent2-color);
   border-radius: 24rem;
+  white-space: nowrap;
 }
 .imgContainer {
   max-width: 50%;

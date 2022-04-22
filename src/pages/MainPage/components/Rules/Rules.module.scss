@@ -1,6 +1,6 @@
 .rulesSection {
   height: calc(100vh - 58rem);
-  padding: 32rem 250rem;
+  padding: 32rem clamp(12rem, 15vw, 250rem);
   display: flex;
   flex-direction: column;
   align-items: flex-start;

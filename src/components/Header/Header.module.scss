@@ -1,5 +1,5 @@
 .headerContainer {
-  padding: 12rem 250rem;
+  padding: 12rem clamp(12rem, 15vw, 250rem);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,15 +37,19 @@
   gap: 48rem;
 }
 .navItem {
+  width: fit-content;
   font-size: 14rem;
   font-weight: 600;
+  white-space: nowrap;
   cursor: pointer;
 }
 .score {
+  width: fit-content;
   padding: 4rem 8rem;
   display: flex;
   align-items: center;
   gap: 8rem;
+  flex-shrink: 0;
   font-size: 16rem;
   font-weight: 500;
   font-family: var(--header-font);
@@ -53,4 +57,8 @@
   border: 2rem solid var(--accent1-color);
   border-radius: 12rem;
   cursor: default;
+  & > span {
+    width: fit-content;
+    white-space: nowrap;
+  }
 }

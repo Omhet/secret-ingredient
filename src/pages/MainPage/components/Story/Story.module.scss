@@ -50,13 +50,13 @@
 }
 .description2 {
   max-width: 45%;
-  padding-left: 250rem;
+  padding-left: clamp(12rem, 15vw, 250rem);
   font-size: 24rem;
   align-self: center;
 }
 .description3 {
   max-width: 45%;
-  padding-right: 250rem;
+  padding-right: clamp(12rem, 15vw, 250rem);
   margin-bottom: 96rem;
   font-size: 24rem;
   align-self: flex-end;

@@ -1,5 +1,6 @@
 .levelCard {
-  height: 70%;
+  width: 300rem;
+  height: 450rem;
   padding: 32rem;
   display: flex;
   flex-direction: column;
@@ -17,7 +18,8 @@
 }
 .infoContainer {
   width: 90%;
-  height: 70%;
+  height: 80%;
+  padding: 12rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
