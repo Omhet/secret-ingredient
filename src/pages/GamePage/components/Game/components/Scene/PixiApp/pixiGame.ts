@@ -12,7 +12,6 @@ export const pixiGame = (app: Application) => {
 
   document.addEventListener('click', handleTap);
   function handleTap() {
-    console.log('tap');
     const foodSprite = createFoodSprite(foodTextures[0], unitSize);
     app.stage.addChild(foodSprite);
     food.push(foodSprite);
@@ -22,6 +21,8 @@ export const pixiGame = (app: Application) => {
   app.stage.addChild(zone);
   zone.position.x = app.screen.width / 2;
   zone.position.y = app.screen.height;
+
+  levelDataManager.playLevelMusic();
 
   app.ticker.add((delta) => {
     for (let i = 0; i < food.length; i++) {

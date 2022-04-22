@@ -7,7 +7,6 @@ import { guard } from 'effector';
 import party from 'party-js';
 import {
   blast,
-  blastKey,
   decreaseBlastCount,
   endGame,
   gameStatusStore,
@@ -57,16 +56,15 @@ loadGame.use(async (levelNumber: number) => {
 
 startGame.watch(() => {
   setGameStatus(GameStatus.InProgress);
-  levelDataManager.playLevelMusic();
 });
 
 // Blast
-guard({
-  source: gameStore,
-  clock: blastKey,
-  filter: ({ status, blastCount }) => status === GameStatus.InProgress && blastCount > 0,
-  target: blast,
-});
+// guard({
+//   source: gameStore,
+//   clock: blastKey,
+//   filter: ({ status, blastCount }) => status === GameStatus.InProgress && blastCount > 0,
+//   target: blast,
+// });
 blast.watch(() => {
   const {
     zone: { position, size },

@@ -2,6 +2,7 @@ import { startGame, useGame } from '@store/game';
 import React, { FC } from 'react';
 import { Background } from './components/Background/Background';
 import { Scene } from './components/Scene/Scene';
+import s from './Game.module.scss';
 
 export const Game: FC = () => {
   const { isGameStarted, isGameEnd } = useGame();
@@ -17,7 +18,12 @@ export const Game: FC = () => {
   return (
     <>
       <Background />
-      <Scene />
+      {!isGameStarted && (
+        <button onClick={start} className={s.playBtn}>
+          Play
+        </button>
+      )}
+      {isGameStarted && <Scene />}
     </>
   );
 };
