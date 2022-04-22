@@ -1,4 +1,3 @@
-import { Header } from '@components/Header/Header';
 import React, { FC } from 'react';
 import { Hero } from './components/Hero/Hero';
 import { Levels } from './components/Levels/Levels';
