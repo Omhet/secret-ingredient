@@ -1,5 +1,5 @@
 .titlesSection {
-  height: calc(100vh - 58rem);
+  min-height: calc(100vh - 58rem);
   padding: 32rem 32rem 32rem clamp(12rem, 15vw, 250rem);
   display: flex;
   align-items: center;
@@ -45,8 +45,8 @@
   align-items: center;
 }
 .arrow {
-  width: clamp(12rem, 15vw, 250rem);
-  height: clamp(12rem, 15vw, 250rem);
+  width: clamp(100rem, 15vw, 250rem);
+  height: clamp(100rem, 15vw, 250rem);
   transform: rotate(210deg);
   fill: none;
 }
@@ -54,8 +54,14 @@
   font-size: 64rem;
   font-family: var(--header-font);
   color: var(--accent1-color);
+  @media (max-width: 1024px) {
+    font-size: 48rem;
+  }
 }
 .note {
   font-size: 16rem;
   font-weight: 300;
+  @media (max-width: 1024px) {
+    font-size: 12rem;
+  }
 }

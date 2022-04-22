@@ -1,11 +1,13 @@
 .sectionContainer {
-  height: calc(100vh - 58rem);
+  min-height: calc(100vh - 58rem);
   padding: 32rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
   gap: 32rem;
+  @media (max-width: 1024px) {
+    height: 100%;
+  }
 }
 
 .levelsTitle {
@@ -19,6 +21,7 @@
 .levelsContainer {
   width: 100%;
   height: 100%;
+  margin: auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, 300rem);
   justify-content: center;
