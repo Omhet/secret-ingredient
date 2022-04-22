@@ -15,7 +15,7 @@ export const checkHit = (zonePosition: Position, food: Food) => {
 };
 
 const HIT_PERCENT_BOTTOM = 0;
-const HIT_PERCENT_TOP = 0;
+const HIT_PERCENT_TOP = -20;
 export const checkFoodHit = (foodItem: FoodItem, zonePosition: Position) => {
   const size = foodItem.sprite.height * 2;
   const diff = Math.sqrt(
@@ -23,8 +23,6 @@ export const checkFoodHit = (foodItem: FoodItem, zonePosition: Position) => {
   );
 
   const percent = (diff / size) * 100;
-  //   console.log(foodItem.beat, diff);
-
   if (percent >= HIT_PERCENT_BOTTOM && percent <= 100 - HIT_PERCENT_TOP) {
     return foodItem;
   }

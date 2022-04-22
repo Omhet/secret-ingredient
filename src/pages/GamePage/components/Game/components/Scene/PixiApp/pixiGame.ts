@@ -1,10 +1,15 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { levelDataManager } from '@lib/levels/LevelDataManager';
+import keyboard from 'pixi-keyboard/src/main';
 import { Application, Container, Sprite, Texture } from 'pixi.js';
+// import Keyboard from 'pixi.js-keyboard';
 import { CreateFoodItemProps, Food } from './types';
 import { checkHit } from './util';
 
 export const pixiGame = (app: Application) => {
+  const keyboardManager = new keyboard.KeyboardManager();
+  keyboardManager.enable();
+
   const {
     images,
     markup: { bps, notes: markupNotes },
@@ -24,7 +29,18 @@ export const pixiGame = (app: Application) => {
   zone.position.y = app.screen.height;
 
   levelDataManager.playLevelMusic();
-  app.ticker.add(() => {
+
+  function handleTap() {
+    const foodItem = checkHit({ x: zone.x, y: zone.y }, food);
+    if (foodItem) {
+      foodItem.alive = false;
+      foodItem.sprite.visible = false;
+    }
+  }
+  keyboardManager.on('down', handleTap);
+
+  // Game Loop
+  app.ticker.add((delta) => {
     const foodDist = (beatSize * bps) / app.ticker.FPS;
 
     const currentBeat = bps * music.currentTime;
@@ -43,12 +59,14 @@ export const pixiGame = (app: Application) => {
       foodItem.sprite.y += foodDist;
 
       if (!foodItem.alive || foodItem.sprite.y > app.screen.height) {
-        // foodItem.sprite.destroy();
+        foodItem.sprite.destroy();
         return false;
       }
 
       return true;
     });
+
+    keyboardManager.update(delta);
   });
 
   function spawnFood(beat: number) {
@@ -61,17 +79,6 @@ export const pixiGame = (app: Application) => {
     });
     app.stage.addChild(foodSprite.sprite);
     food.push(foodSprite);
-  }
-
-  document.addEventListener('click', handleTap);
-  document.addEventListener('keydown', handleTap);
-  function handleTap() {
-    const foodItem = checkHit({ x: zone.x, y: zone.y }, food);
-    if (foodItem) {
-      foodItem.alive = false;
-      foodItem.sprite.alpha = 0;
-      console.log('HIT');
-    }
   }
 };
 

@@ -3662,6 +3662,11 @@ node-releases@^2.0.2:
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.2.tgz#7139fe71e2f4f11b47d4d2986aaf8c48699e0c01"
   integrity sha512-XxYDdcQ6eKqp/YjI+tb2C5WM2LgjnZrfYg4vgQt49EK268b6gYCHsBLrK2qvJo4FmCtqmKezb0WZFK4fkrZNsg==
 
+nom-events@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/nom-events/-/nom-events-1.0.3.tgz#d3deb90d79662d9f9ea231aa54bf0b85050faf14"
+  integrity sha512-eufHqCE9RgyoHUj2GF9XFwgFNS07vFXhTz8uqK+LAkXQdXD7vyYDPOLtik0VDIacBT4nEdKyoBMj4ZkTCy1xtA==
+
 normalize-package-data@^2.3.2, normalize-package-data@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/normalize-package-data/-/normalize-package-data-2.5.0.tgz#e66db1838b200c1dfc233225d12cb36520e234a8"
@@ -4034,6 +4039,25 @@ pify@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-3.0.0.tgz#e5a4acd2c101fdf3d9a4d07f0dbc4db49dd28176"
   integrity sha1-5aSs0sEB/fPZpNB/DbxNtJ3SgXY=
+
+pixi-keyboard@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/pixi-keyboard/-/pixi-keyboard-1.0.0.tgz#731a48526590768f2ca1baa1a4fe49c718d9f404"
+  integrity sha512-rHlytfpNcDHgZKoISEjvLAPreInY1So4PV8qv0Edtt0vFVHQ5HxvnFy0p3a5662Vaf+RKi6ZnGN8Aw9fT/jBGA==
+
+pixi.js-keyboard@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/pixi.js-keyboard/-/pixi.js-keyboard-1.1.6.tgz#de7497ee3edc2c3fc5826998b236ffbe11c9df9e"
+  integrity sha512-jG70Z2tik13RLOggX4gmaL3VrEresBV9bn/MgbOFAszeS47CBZ+D7b3MRJG8GUHWrHZ4CavFGV/pCp4Pt/MA5g==
+  dependencies:
+    nom-events "^1.0.3"
+
+pixi.js-mouse@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/pixi.js-mouse/-/pixi.js-mouse-1.1.6.tgz#465b93dc0459cb81a206311d2f0f809810c38143"
+  integrity sha512-2CjHaAEMnG8+ijjV9YL1rdQuebqpT6byAfpTOVQTyBtC5MrMY7lu5YPiqzxIofEWpn7G964BmKDIM7m1hEP29Q==
+  dependencies:
+    nom-events "^1.0.3"
 
 pixi.js@^6.3.0:
   version "6.3.0"
