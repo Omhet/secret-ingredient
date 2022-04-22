@@ -30,26 +30,26 @@ export const Levels: FC<LevelsProps> = ({}) => {
         <Level
           title="Wild wild west"
           imgSrc="/pics/mexicaCard.png"
-          levelNumber={2}
-          score={0}
-          isOpen={false}
-          onClick={() => handlePlayClick(2)}
+          levelNumber={levels[1].number}
+          score={levels[1].score}
+          isOpen={levels[1].isOpen}
+          onClick={() => handlePlayClick(levels[1].number)}
         />
         <Level
           title="Somewhere in Eastern Europe"
           imgSrc="/pics/russiaCard.png"
-          levelNumber={3}
-          score={0}
-          isOpen={false}
-          onClick={() => handlePlayClick(3)}
+          levelNumber={levels[2].number}
+          score={levels[2].score}
+          isOpen={levels[2].isOpen}
+          onClick={() => handlePlayClick(levels[2].number)}
         />
         <Level
           title="The greatest secret"
           imgSrc="/pics/grandmaCard.png"
-          levelNumber={4}
-          score={0}
-          isOpen={false}
-          onClick={() => handlePlayClick(4)}
+          levelNumber={levels[3].number}
+          score={levels[3].score}
+          isOpen={levels[3].isOpen}
+          onClick={() => handlePlayClick(levels[3].number)}
         />
       </div>
     </section>
