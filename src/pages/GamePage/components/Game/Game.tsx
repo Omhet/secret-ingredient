@@ -6,15 +6,11 @@ import { Scene } from './components/Scene/Scene';
 import s from './Game.module.scss';
 
 export const Game: FC = () => {
-  const { isGameStarted, isGameEnd } = useGame();
+  const { isGameStarted } = useGame();
 
   const start = () => {
     startGame();
   };
-
-  if (isGameEnd) {
-    return null;
-  }
 
   return (
     <>
@@ -25,7 +21,7 @@ export const Game: FC = () => {
         </button>
       )}
       {isGameStarted && <Scene />}
-      <Header />
+      {isGameStarted && <Header />}
     </>
   );
 };

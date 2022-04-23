@@ -8,3 +8,13 @@
   gap: 8px;
   font-size: 24px;
 }
+
+.blastCountBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 100%;
+  transform-origin: center top;
+  transition: transform 0.2s;
+}
