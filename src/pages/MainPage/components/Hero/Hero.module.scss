@@ -9,6 +9,7 @@
     height: calc(100vh - 72rem);
     flex-direction: column;
     align-items: flex-start;
+    justify-content: space-evenly;
   }
   @media (max-width: 480px) {
     padding: 24rem;

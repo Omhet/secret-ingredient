@@ -31,12 +31,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
 }
 .ruleItem {
   width: 25%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 }
 .description {
   font-size: 18rem;
@@ -51,6 +57,14 @@
   font-weight: 800;
   background-color: var(--accent2-color);
   border-radius: 16rem;
+  @media (max-width: 1024px) {
+    padding: 12rem 32rem;
+    font-size: 24rem;
+  }
+  @media (max-width: 480px) {
+    padding: 12rem 24rem;
+    font-size: 18rem;
+  }
 }
 .playSection {
   margin-bottom: 32rem;
@@ -58,4 +72,12 @@
   display: flex;
   align-items: center;
   gap: 32rem;
+  @media (max-width: 1024px) {
+    font-size: 24rem;
+  }
+  @media (max-width: 480px) {
+    margin: 0;
+    flex-direction: column;
+    font-size: 18rem;
+  }
 }
