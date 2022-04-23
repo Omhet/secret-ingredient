@@ -2,7 +2,7 @@
 import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { decreaseBlastCount, decreaseNoteCount, increaseHitCount } from '@store/game';
 import { Application, Sprite, Texture } from 'pixi.js';
-import { getRandomAngle, getRandomArrayItem } from '../../../utils';
+import { createNotRepeatingRandomArrayItemFn, getRandomAngle, getRandomArrayItem } from '../../../utils';
 import KeyboardManager from './input/KeyboardManager';
 import MouseManager from './input/MouseManager';
 import { CreateFoodItemProps, Food, FoodItem } from './types';
@@ -98,10 +98,10 @@ export const pixiGame = (app: Application) => {
   function createZone() {
     const zoneImg = levelDataManager.getCurrentLevelData().images.zone;
     zoneImg.width /= 5;
-    zoneImg.height /= 8;
+    zoneImg.height /= 6;
     const tableImg = levelDataManager.getCurrentLevelData().images.table;
-    tableImg.width /= 7;
-    tableImg.height /= 7;
+    tableImg.width /= 6;
+    tableImg.height /= 6;
 
     const zone = Sprite.from(zoneImg);
     zone.anchor.set(0.5, 1);
@@ -122,14 +122,27 @@ export const pixiGame = (app: Application) => {
     return zone;
   }
 
+  const zoneRect = zone.getBounds();
+  const zoneWidth = zoneRect.width;
+  const zoneHeight = zoneRect.height;
+  const getRandomTargetX = createNotRepeatingRandomArrayItemFn([
+    zoneRect.left + zoneWidth * 0.2,
+    zoneRect.left + zoneWidth * 0.45,
+    zoneRect.left + zoneWidth * 0.8,
+  ]);
+  const targetY = zoneRect.top + zoneHeight * 0.1;
+
   function spawnFood(beat: number) {
     const angle = getRandomAngle() * (Math.PI / 180);
     const dist = beatSize * 8;
-    const x = dist * Math.cos(angle) + zone.x;
-    const y = dist * Math.sin(angle) + zone.y;
 
-    const dx = zone.x - x;
-    const dy = zone.y - y;
+    const targetX = getRandomTargetX();
+
+    const x = dist * Math.cos(angle) + targetX;
+    const y = dist * Math.sin(angle) + targetY;
+
+    const dx = targetX - x;
+    const dy = targetY - y;
     const d = Math.sqrt(dx * dx + dy * dy);
     const vx = dx / d;
     const vy = dy / d;
