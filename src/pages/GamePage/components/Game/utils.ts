@@ -26,7 +26,10 @@ export const createNotRepeatingRandomArrayItemFn = <T>(arr: T[]) => {
   };
 };
 
-const ANGLES = [225, 240, 270, 300, 315];
+const IS_VERTICAL = innerHeight > innerWidth;
+const VERTICAL_ANGLES = [260, 270, 280];
+const HORIZONTAL_ANGLES = [225, 240, 270, 300, 315];
+const ANGLES = IS_VERTICAL ? VERTICAL_ANGLES : HORIZONTAL_ANGLES;
 export const getRandomAngle = () => {
   return getRandomArrayItem(ANGLES);
 };
