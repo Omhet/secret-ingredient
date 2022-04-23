@@ -1,12 +1,9 @@
 import { GameStatus } from '@app-types/game';
 import { levelDataManager } from '@lib/levels/LevelDataManager';
-import { ingredientBlast } from '@lib/particles';
 import { currentLevelStore, rewriteCurrentLevelScore, setCurrentLevelScore } from '@store/levels';
 import { openGameEndModal } from '@store/modals';
 import { guard } from 'effector';
-import party from 'party-js';
 import {
-  blast,
   decreaseBlastCount,
   decreaseNoteCount,
   endGame,
@@ -14,31 +11,22 @@ import {
   gameStore,
   gameStoreInitial,
   increaseHitCount,
-  increaseMissCount,
-  increaseTouchedHeartCount,
   loadGame,
-  noteTouchedHeart,
-  removeNote,
   resetGameData,
   setBlastCount,
   setGameStatus,
   setIsLoading,
-  setMarkup,
-  setZone,
+  setNoteCount,
   startGame,
 } from './index';
-import { checkHit, getScore } from './utils';
+import { getScore } from './utils';
 
 gameStore
   .on(setIsLoading, (state, isLoading) => ({ ...state, isLoading }))
   .on(setGameStatus, (state, status) => ({ ...state, status }))
   .on(setBlastCount, (state, blastCount) => ({ ...state, blastCount }))
-  .on(setMarkup, (state, markup) => ({ ...state, markup, notes: markup.notes, noteCount: markup.notes.length }))
-  .on(setZone, (state, zonePosition) => ({ ...state, zone: zonePosition }))
-  .on(removeNote, (state, noteToDelete) => ({ ...state, notes: state.notes.filter((note) => note !== noteToDelete) }))
-  .on(increaseMissCount, (state) => ({ ...state, missCount: state.missCount + 1 }))
+  .on(setNoteCount, (state, noteCount) => ({ ...state, noteCount }))
   .on(increaseHitCount, (state) => ({ ...state, hitCount: state.hitCount + 1 }))
-  .on(increaseTouchedHeartCount, (state) => ({ ...state, touchedHeartCount: state.touchedHeartCount + 1 }))
   .on(decreaseBlastCount, (state) => ({ ...state, blastCount: state.blastCount > 0 ? state.blastCount - 1 : 0 }))
   .on(decreaseNoteCount, (state) => ({ ...state, noteCount: state.noteCount > 0 ? state.noteCount - 1 : 0 }))
   .on(resetGameData, () => ({ ...gameStoreInitial }));
@@ -50,7 +38,7 @@ loadGame.use(async (levelNumber: number) => {
 
   const { markup } = await levelDataManager.loadLevelData(levelNumber);
 
-  setMarkup(markup);
+  setNoteCount(markup.notes.length);
   setBlastCount(Math.round(markup.notes.length * 1.25));
 
   setIsLoading(false);
@@ -58,39 +46,6 @@ loadGame.use(async (levelNumber: number) => {
 
 startGame.watch(() => {
   setGameStatus(GameStatus.InProgress);
-});
-
-// Blast
-// guard({
-//   source: gameStore,
-//   clock: blastKey,
-//   filter: ({ status, blastCount }) => status === GameStatus.InProgress && blastCount > 0,
-//   target: blast,
-// });
-blast.watch(() => {
-  const {
-    zone: { position, size },
-  } = gameStore.getState();
-
-  const colors = levelDataManager.getCurrentLevelData().ingredientColors;
-  ingredientBlast(new party.Circle(position.x, position.y, size * 3), { colors });
-
-  decreaseBlastCount();
-
-  const hit = checkHit(position);
-  if (hit !== undefined) {
-    ingredientBlast(new party.Circle(hit.rect.x, hit.rect.y, size), { colors, size: 0.5 });
-    removeNote(hit.beat);
-    increaseHitCount();
-  } else {
-    increaseMissCount();
-  }
-});
-
-// Touch heart
-noteTouchedHeart.watch((note) => {
-  removeNote(note);
-  increaseTouchedHeartCount();
 });
 
 // Set end game status
@@ -109,10 +64,11 @@ guard({
 
 // Do end game stuff
 endGame.watch(() => {
-  const { hitCount, markup } = gameStore.getState();
+  const { hitCount } = gameStore.getState();
   const { score: oldScore } = currentLevelStore.getState();
+  const levelNoteCount = levelDataManager.getCurrentLevelData().markup.notes.length;
 
-  const newScore = getScore(hitCount, markup.notes.length);
+  const newScore = getScore(hitCount, levelNoteCount);
   setCurrentLevelScore(newScore);
   if (newScore > oldScore) {
     rewriteCurrentLevelScore(newScore);

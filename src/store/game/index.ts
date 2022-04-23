@@ -1,24 +1,14 @@
-import { GameStatus, Position } from '@app-types/game';
-import { Markup, NotesType } from '@app-types/music';
+import { GameStatus } from '@app-types/game';
+import { NotesType } from '@app-types/music';
 import { createEffect, createEvent, createStore } from 'effector';
 import { useStore } from 'effector-react';
-import { keyEvent } from './keys';
-
-type ZoneType = {
-  position: Position;
-  size: number;
-};
 
 type GameStore = {
   isLoading: boolean;
   status: GameStatus;
-  missCount: number;
   hitCount: number;
-  touchedHeartCount: number;
   blastCount: number;
   noteCount: number;
-  zone: ZoneType;
-  markup: Markup;
   notes: NotesType;
 };
 
@@ -26,13 +16,9 @@ export const gameStoreInitial = {
   isLoading: true,
   status: GameStatus.NotStarted,
   notes: [],
-  markup: {} as Markup,
-  missCount: 0,
   hitCount: 0,
   noteCount: Infinity,
   blastCount: Infinity,
-  touchedHeartCount: 0,
-  zone: {} as ZoneType,
 };
 
 export const gameStore = createStore<GameStore>(gameStoreInitial);
@@ -42,22 +28,16 @@ export const gameStatusStore = gameStore.map((state) => state.status);
 
 export const setIsLoading = createEvent<boolean>();
 export const setGameStatus = createEvent<GameStatus>();
-export const setMarkup = createEvent<Markup>();
+export const setNoteCount = createEvent<number>();
 export const setBlastCount = createEvent<number>();
-export const setZone = createEvent<ZoneType>();
 export const removeNote = createEvent<number>();
 export const decreaseNoteCount = createEvent();
-export const increaseMissCount = createEvent();
 export const increaseHitCount = createEvent();
-export const increaseTouchedHeartCount = createEvent();
 export const decreaseBlastCount = createEvent();
 export const resetGameData = createEvent();
 
 export const startGame = createEvent();
 export const endGame = createEvent();
-export const noteTouchedHeart = createEvent<number>();
-export const blastKey = keyEvent();
-export const blast = createEvent();
 
 export const loadGame = createEffect<number, void, void>();
 
@@ -67,8 +47,6 @@ export const useGame = () => {
   return {
     isGameStarted: state.status === GameStatus.InProgress,
     isGameEnd: state.status === GameStatus.End,
-    hasBlasts: state.blastCount > 0,
-    notesInitialCount: state.markup?.notes?.length,
     ...state,
   };
 };
