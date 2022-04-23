@@ -1,6 +1,6 @@
 .sectionContainer {
   min-height: calc(100vh - 58rem);
-  padding: 32rem 32rem 32rem 0;
+  padding: 32rem 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -30,9 +30,11 @@
 }
 .levelsContainer {
   width: 100%;
+  max-width: 1350rem;
   height: 100%;
-  padding-left: 32rem;
   margin: auto;
+  align-self: center;
+  justify-self: center;
   display: grid;
   grid-template-columns: repeat(auto-fill, 300rem);
   justify-content: center;
