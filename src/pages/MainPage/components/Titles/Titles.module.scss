@@ -19,6 +19,9 @@
   grid-template-columns: repeat(2, fit-content(200rem));
   gap: 24rem;
   align-items: baseline;
+  & > * {
+    width: fit-content;
+  }
 }
 .titleName {
   font-size: 18rem;
