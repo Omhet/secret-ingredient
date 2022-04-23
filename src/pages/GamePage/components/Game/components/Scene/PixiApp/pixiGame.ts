@@ -38,7 +38,6 @@ export const pixiGame = (app: Application) => {
     images.particles.map((img) => img.src)
   );
   particlesEmitter.autoUpdate = true;
-  particlesContainer.position.set(300, 300);
   app.stage.addChild(particlesContainer);
 
   levelDataManager.playLevelMusic();
@@ -49,13 +48,17 @@ export const pixiGame = (app: Application) => {
     decreaseNoteCount();
   }
 
+  function emitParticles(x: number, y: number) {
+    particlesEmitter.emit = true;
+    particlesContainer.position.set(x, y);
+    particlesEmitter.resetPositionTracking();
+  }
+
   // Tap
   function handleTap() {
-    particlesEmitter.emit = true;
-    particlesEmitter.resetPositionTracking();
-
     const foodItem = checkHit(zone, food, app.screen.height);
     if (foodItem) {
+      emitParticles(foodItem.sprite.x, foodItem.sprite.y);
       removeFoodItem(foodItem);
       increaseHitCount();
     }
