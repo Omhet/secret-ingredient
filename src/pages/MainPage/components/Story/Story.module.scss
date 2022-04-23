@@ -50,13 +50,13 @@
 }
 .description2 {
   max-width: 45%;
-  padding-left: 250rem;
+  padding-left: clamp(12rem, 15vw, 250rem);
   font-size: 24rem;
   align-self: center;
 }
 .description3 {
   max-width: 45%;
-  padding-right: 250rem;
+  padding-right: clamp(12rem, 15vw, 250rem);
   margin-bottom: 96rem;
   font-size: 24rem;
   align-self: flex-end;
@@ -92,4 +92,60 @@
 }
 .img4 {
   margin-left: -96rem;
+}
+
+@media (max-width: 1024px) {
+  .img1,
+  .img2,
+  .img3,
+  .img4,
+  .img5 {
+    margin: 0;
+  }
+  .storyItem1,
+  .storyItem2,
+  .storyItem3,
+  .storyItem4,
+  .storyItem5 {
+    padding: 32rem;
+  }
+  .description1,
+  .description2,
+  .description3,
+  .description4,
+  .description5 {
+    padding: 0;
+    font-size: 18rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .storyItem1,
+  .storyItem2,
+  .storyItem3,
+  .storyItem4,
+  .storyItem5 {
+    padding: 24rem;
+
+    &:first-child {
+      margin-top: 96rem;
+    }
+    &:not(:last-child) {
+      flex-direction: column-reverse;
+    }
+  }
+  .description1,
+  .description2,
+  .description3,
+  .description4,
+  .description5,
+  .img1,
+  .img2,
+  .img3,
+  .img4,
+  .img5 {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+  }
 }

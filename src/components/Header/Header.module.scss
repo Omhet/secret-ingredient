@@ -1,5 +1,5 @@
 .headerContainer {
-  padding: 12rem 250rem;
+  padding: 12rem clamp(12rem, 15vw, 250rem);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,6 +8,9 @@
   font-size: 12rem;
   background-color: var(--back-color);
   z-index: 2;
+  @media (max-width: 480px) {
+    padding: 12rem 24rem;
+  }
 }
 .logoImg {
   width: 32rem;
@@ -30,27 +33,35 @@
   font-size: 16rem;
   font-weight: 900;
   background-color: var(--accent2-color);
-  border-radius: 12rem;
+  border-radius: 16rem;
 }
 .navContainer {
   display: flex;
   gap: 48rem;
 }
 .navItem {
+  width: fit-content;
   font-size: 14rem;
   font-weight: 600;
+  white-space: nowrap;
   cursor: pointer;
 }
 .score {
+  width: fit-content;
   padding: 4rem 8rem;
   display: flex;
   align-items: center;
   gap: 8rem;
+  flex-shrink: 0;
   font-size: 16rem;
   font-weight: 500;
   font-family: var(--header-font);
   //color: var(--accent1-color);
   border: 2rem solid var(--accent1-color);
-  border-radius: 12rem;
+  border-radius: 16rem;
   cursor: default;
+  & > span {
+    width: fit-content;
+    white-space: nowrap;
+  }
 }

@@ -1,11 +1,15 @@
 .rulesSection {
-  height: calc(100vh - 58rem);
-  padding: 32rem 250rem;
+  min-height: calc(100vh - 58rem);
+  padding: 32rem clamp(12rem, 15vw, 250rem);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
   gap: 32rem;
+
+  @media (max-width: 480px) {
+    padding: 24rem;
+  }
 }
 .rulesTitle {
   height: fit-content;
@@ -13,6 +17,13 @@
   font-weight: 900;
   font-family: var(--header-font);
   white-space: nowrap;
+  @media (max-width: 1024px) {
+    font-size: 32rem;
+  }
+  @media (max-width: 480px) {
+    padding: 0;
+    font-size: 24rem;
+  }
 }
 .rulesContainer {
   width: 100%;
@@ -20,26 +31,40 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
 }
 .ruleItem {
   width: 25%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 }
 .description {
   font-size: 18rem;
   font-weight: 300;
 }
 .image {
-  border-radius: 18rem;
+  border-radius: 16rem;
 }
 .levelsBtn {
   padding: 12rem 48rem;
   font-size: 24rem;
   font-weight: 800;
   background-color: var(--accent2-color);
-  border-radius: 24rem;
+  border-radius: 16rem;
+  @media (max-width: 1024px) {
+    padding: 12rem 32rem;
+    font-size: 24rem;
+  }
+  @media (max-width: 480px) {
+    padding: 12rem 24rem;
+    font-size: 18rem;
+  }
 }
 .playSection {
   margin-bottom: 32rem;
@@ -47,4 +72,12 @@
   display: flex;
   align-items: center;
   gap: 32rem;
+  @media (max-width: 1024px) {
+    font-size: 24rem;
+  }
+  @media (max-width: 480px) {
+    margin: 0;
+    flex-direction: column;
+    font-size: 18rem;
+  }
 }
