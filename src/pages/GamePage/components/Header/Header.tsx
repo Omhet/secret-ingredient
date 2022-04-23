@@ -14,12 +14,11 @@ export const Header: FC = () => {
 
   return (
     <>
-      <div className={s.blastCountBar} style={{ backgroundColor: ingredientColor }}>
-        <div
-          className={s.blastCountBar}
-          style={{ backgroundColor: ingredientColor, transform: `scaleX(${barScale})` }}
-        ></div>
-      </div>
+      <div className={s.blastCountBar} style={{ backgroundColor: ingredientColor }}></div>
+      <div
+        className={s.blastCountBarInner}
+        style={{ backgroundColor: ingredientColor, transform: `scaleX(${barScale})` }}
+      ></div>
       <div className={s.root}>
         <div>
           Hits: {hitCount} / {levelNoteCount}
