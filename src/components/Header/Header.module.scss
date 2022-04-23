@@ -22,6 +22,9 @@
   font-family: var(--header-font);
   color: var(--accent1-color);
   cursor: default;
+  @media (max-width: 1024px) {
+    display: none;
+  }
 }
 .headerContent {
   display: flex;
@@ -63,5 +66,26 @@
   & > span {
     width: fit-content;
     white-space: nowrap;
+  }
+}
+.menuBtn {
+  width: 32rem;
+  height: 32rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .headerContent {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .playBtn {
+    order: 2;
+  }
+  .score {
+    order: 1;
+  }
+  .menuBtn {
+    order: 3;
   }
 }
