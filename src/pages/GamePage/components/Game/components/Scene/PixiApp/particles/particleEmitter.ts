@@ -53,13 +53,6 @@ const getConfig = (images: string[]): EmitterConfigV3 => ({
         },
       },
     },
-    // {
-    //   type: 'moveSpeedStatic',
-    //   config: {
-    //     min: 500,
-    //     max: 700,
-    //   },
-    // },
     {
       type: 'scaleStatic',
       config: {
@@ -87,14 +80,6 @@ const getConfig = (images: string[]): EmitterConfigV3 => ({
       type: 'spawnPoint',
       config: {},
     },
-    // {
-    //   type: 'spawnBurst',
-    //   config: {
-    //     spacing: 90,
-    //     start: 0,
-    //     distance: 40,
-    //   },
-    // },
   ],
 });
 

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { levelDataManager } from '@lib/levels/LevelDataManager';
+import { Emitter } from '@pixi/particle-emitter';
 import { decreaseBlastCount, decreaseNoteCount, increaseHitCount } from '@store/game';
 import { Application, ParticleContainer, Sprite, Texture } from 'pixi.js';
 import { createNotRepeatingRandomArrayItemFn, getRandomAngle, getRandomArrayItem } from '../../../utils';
@@ -31,11 +32,41 @@ export const pixiGame = (app: Application) => {
   let food: Food = [];
 
   const { zone, table } = createZone();
+  const zoneRect = zone.getBounds();
 
-  const particlesContainer = new ParticleContainer();
-  const particlesEmitter = createParticlesEmitter(particlesContainer, [images.particles[0].src]);
-  particlesEmitter.autoUpdate = true;
-  app.stage.addChild(particlesContainer);
+  function createParticleContainer() {
+    const particlesContainer = new ParticleContainer();
+    const particlesEmitter = createParticlesEmitter(particlesContainer, [images.particles[0].src]);
+    particlesEmitter.autoUpdate = true;
+    app.stage.addChild(particlesContainer);
+
+    return {
+      particlesContainer,
+      particlesEmitter,
+    };
+  }
+
+  function createTableParticleContainer({ isLeft }: { isLeft: boolean }) {
+    const { particlesEmitter, particlesContainer } = createParticleContainer();
+    const x = isLeft
+      ? zoneRect.left - (zoneRect.width / 2 + zoneRect.width * 0.4)
+      : zoneRect.right + (zoneRect.width / 2 + zoneRect.width * 0.4);
+    const y = zoneRect.bottom - zoneRect.height * 0.2;
+    const angle = isLeft ? 45 : -45;
+
+    particlesContainer.position.set(x, y);
+    particlesContainer.angle = angle;
+
+    particlesEmitter.minLifetime = 1;
+    particlesEmitter.maxLifetime = 1;
+    particlesEmitter.frequency *= 2;
+
+    return { particlesEmitter, particlesContainer };
+  }
+
+  const { particlesEmitter: foodParticlesEmitter } = createParticleContainer();
+  const { particlesEmitter: tableLeftParticlesEmitter } = createTableParticleContainer({ isLeft: true });
+  const { particlesEmitter: tableRightParticlesEmitter } = createTableParticleContainer({ isLeft: false });
 
   levelDataManager.playLevelMusic();
 
@@ -45,26 +76,32 @@ export const pixiGame = (app: Application) => {
     decreaseNoteCount();
   }
 
-  function emitParticles(x: number, y: number) {
-    particlesEmitter.emit = true;
-    particlesContainer.position.set(x, y);
-    // particlesEmitter.resetPositionTracking();
+  function emitParticles(emitter: Emitter, x?: number, y?: number) {
+    emitter.emit = true;
+
+    if (x === undefined || y === undefined) {
+      return;
+    }
+    emitter.updateOwnerPos(x, y);
+    emitter.resetPositionTracking();
   }
 
   // Tap
   function handleTap() {
-    // emitParticles(app.screen.width / 2, app.screen.height / 2);
-
     const foodItem = checkHit(zone, food, app.screen.height);
-    // emitParticles(zone.x - zone.width * 0.2, zone.y);
-    // emitParticles(zone.x, zone.y);
-    // emitParticles(zone.x + zone.width * 0.2, zone.y);
 
     if (foodItem) {
-      emitParticles(foodItem.sprite.x, foodItem.sprite.y);
+      emitParticles(
+        foodParticlesEmitter,
+        foodItem.sprite.x,
+        Math.max(foodItem.sprite.y + foodItem.sprite.height * 0.2, zoneRect.top + zoneRect.height * 0.1)
+      );
       removeFoodItem(foodItem);
       increaseHitCount();
     }
+
+    emitParticles(tableLeftParticlesEmitter);
+    emitParticles(tableRightParticlesEmitter);
 
     decreaseBlastCount();
   }
@@ -147,7 +184,6 @@ export const pixiGame = (app: Application) => {
     return { zone, table };
   }
 
-  const zoneRect = zone.getBounds();
   const zoneWidth = zoneRect.width;
   const zoneHeight = zoneRect.height;
   const getRandomTargetX = createNotRepeatingRandomArrayItemFn([
