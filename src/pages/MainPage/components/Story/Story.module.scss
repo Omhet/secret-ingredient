@@ -93,3 +93,59 @@
 .img4 {
   margin-left: -96rem;
 }
+
+@media (max-width: 1024px) {
+  .img1,
+  .img2,
+  .img3,
+  .img4,
+  .img5 {
+    margin: 0;
+  }
+  .storyItem1,
+  .storyItem2,
+  .storyItem3,
+  .storyItem4,
+  .storyItem5 {
+    padding: 32rem;
+  }
+  .description1,
+  .description2,
+  .description3,
+  .description4,
+  .description5 {
+    padding: 0;
+    font-size: 18rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .storyItem1,
+  .storyItem2,
+  .storyItem3,
+  .storyItem4,
+  .storyItem5 {
+    padding: 24rem;
+
+    &:first-child {
+      margin-top: 96rem;
+    }
+    &:not(:last-child) {
+      flex-direction: column-reverse;
+    }
+  }
+  .description1,
+  .description2,
+  .description3,
+  .description4,
+  .description5,
+  .img1,
+  .img2,
+  .img3,
+  .img4,
+  .img5 {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+}

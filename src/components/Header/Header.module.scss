@@ -33,7 +33,7 @@
   font-size: 16rem;
   font-weight: 900;
   background-color: var(--accent2-color);
-  border-radius: 12rem;
+  border-radius: 16rem;
 }
 .navContainer {
   display: flex;
@@ -58,7 +58,7 @@
   font-family: var(--header-font);
   //color: var(--accent1-color);
   border: 2rem solid var(--accent1-color);
-  border-radius: 12rem;
+  border-radius: 16rem;
   cursor: default;
   & > span {
     width: fit-content;
