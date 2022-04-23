@@ -24,13 +24,12 @@ export const pixiGame = (app: Application) => {
   const beatSize = app.screen.height / 4;
   const unitSize = beatSize / 2;
 
-  const foodTextures = images.food.map((img) => Texture.from(img));
+  const foodTextures = images.food.map((img) => {
+    return Texture.from(img);
+  });
   let food: Food = [];
 
-  const zone = createZone(unitSize);
-  app.stage.addChild(zone);
-  zone.position.x = app.screen.width / 2;
-  zone.position.y = app.screen.height - unitSize;
+  const zone = createZone();
 
   levelDataManager.playLevelMusic();
 
@@ -77,7 +76,7 @@ export const pixiGame = (app: Application) => {
 
     const beatAnimationValue = getBeatAnimationValue(elapsed, bps);
 
-    zone.scale.set(getScaledBeatAnimationValue(beatAnimationValue, 1, 1.2));
+    // zone.scale.set(getScaledBeatAnimationValue(beatAnimationValue, 1, 1.2));
 
     // Move food
     const foodDist = (beatSize * bps) / app.ticker.FPS;
@@ -94,6 +93,33 @@ export const pixiGame = (app: Application) => {
         removeFoodItem(foodItem);
       }
     }
+  }
+
+  function createZone() {
+    const zoneImg = levelDataManager.getCurrentLevelData().images.zone;
+    zoneImg.width /= 5;
+    zoneImg.height /= 8;
+    const tableImg = levelDataManager.getCurrentLevelData().images.table;
+    tableImg.width /= 7;
+    tableImg.height /= 7;
+
+    const zone = Sprite.from(zoneImg);
+    zone.anchor.set(0.5, 1);
+    const table = Sprite.from(tableImg);
+    table.anchor.set(0.5, 1);
+
+    const x = app.screen.width / 2;
+    const y = app.screen.height + zoneImg.height * 0.2;
+
+    zone.position.x = x;
+    zone.position.y = y;
+    table.position.x = x;
+    table.position.y = y;
+
+    app.stage.addChild(zone);
+    app.stage.addChild(table);
+
+    return zone;
   }
 
   function spawnFood(beat: number) {
@@ -139,16 +165,6 @@ function createFoodSprite({ texture, size, x, y }: CreateFoodItemProps) {
   sprite.angle = Math.random() * 360;
 
   return sprite;
-}
-
-function createZone(size: number) {
-  const zone = Sprite.from('/pics/zone_outer.png');
-  const zoneSize = size;
-  zone.width = zoneSize;
-  zone.height = zoneSize;
-  zone.anchor.set(0.5);
-
-  return zone;
 }
 
 function getBeatAnimationValue(elapsed: number, bps: number) {

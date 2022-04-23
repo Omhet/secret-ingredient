@@ -41,6 +41,8 @@ const LEVELS = LEVELS_DATA.map(({ name, unlockScore, ingredientColors }, index) 
     food: [`${imgPath}/food/1.png`, `${imgPath}/food/2.png`, `${imgPath}/food/3.png`],
     master: `${imgPath}/master.png`,
     ingredient: `${imgPath}/ingredient.png`,
+    table: `${imgPath}/table.png`,
+    zone: '/pics/zone.png',
   };
 
   return {
