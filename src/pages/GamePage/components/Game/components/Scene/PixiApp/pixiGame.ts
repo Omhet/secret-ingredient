@@ -56,6 +56,11 @@ export const pixiGame = (app: Application) => {
   // Game Loop
   app.ticker.add(gameLoop);
 
+  const minZoneScale = 3;
+  const maxZoneScale = 3.06;
+  const minFoodScale = 0.18;
+  const maxFoodScale = 0.21;
+
   let elapsed = 0.0;
   function gameLoop() {
     elapsed += app.ticker.elapsedMS;
@@ -76,8 +81,8 @@ export const pixiGame = (app: Application) => {
 
     const beatAnimationValue = getBeatAnimationValue(elapsed, bps);
 
-    table.scale.set(getScaledBeatAnimationValue(beatAnimationValue, 1, 1.02));
-    zone.scale.set(getScaledBeatAnimationValue(beatAnimationValue, 1, 1.02));
+    table.scale.set(getScaledBeatAnimationValue(beatAnimationValue, minZoneScale, maxZoneScale));
+    zone.scale.set(getScaledBeatAnimationValue(beatAnimationValue, minZoneScale, maxZoneScale));
 
     // Move food
     const foodDist = (beatSize * bps) / app.ticker.FPS;
@@ -86,7 +91,7 @@ export const pixiGame = (app: Application) => {
       foodItem.sprite.x += foodDist * foodItem.vx;
       foodItem.sprite.y += foodDist * foodItem.vy;
 
-      foodItem.sprite.scale.set(getScaledBeatAnimationValue(beatAnimationValue, 0.06, 0.07));
+      foodItem.sprite.scale.set(getScaledBeatAnimationValue(beatAnimationValue, minFoodScale, maxFoodScale));
 
       foodItem.sprite.angle += elapsed / 20000;
 

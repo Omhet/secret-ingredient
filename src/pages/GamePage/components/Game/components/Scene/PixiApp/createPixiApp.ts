@@ -3,9 +3,9 @@ import { pixiGame } from './pixiGame';
 
 export const createPixiApp = () => {
   const app = new Application({
-    width: innerWidth,
-    height: innerHeight,
-    resolution: window.devicePixelRatio || 1,
+    width: innerWidth * 3,
+    height: innerHeight * 3,
+    resolution: 1,
     backgroundAlpha: 0,
   });
 
