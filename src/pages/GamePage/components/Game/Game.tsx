@@ -1,5 +1,6 @@
 import { startGame, useGame } from '@store/game';
 import React, { FC } from 'react';
+import { Header } from '../Header/Header';
 import { Background } from './components/Background/Background';
 import { Scene } from './components/Scene/Scene';
 import s from './Game.module.scss';
@@ -24,6 +25,7 @@ export const Game: FC = () => {
         </button>
       )}
       {isGameStarted && <Scene />}
+      <Header />
     </>
   );
 };

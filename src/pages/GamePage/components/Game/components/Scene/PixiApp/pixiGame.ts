@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { levelDataManager } from '@lib/levels/LevelDataManager';
+import { decreaseBlastCount, decreaseNoteCount, increaseHitCount } from '@store/game';
 import { Application, Sprite, Texture } from 'pixi.js';
 import { getRandomAngle, getRandomArrayItem } from '../../../utils';
 import KeyboardManager from './input/KeyboardManager';
 import MouseManager from './input/MouseManager';
-import { CreateFoodItemProps, Food } from './types';
+import { CreateFoodItemProps, Food, FoodItem } from './types';
 import { checkHit } from './util';
 
 export const pixiGame = (app: Application) => {
@@ -33,12 +34,21 @@ export const pixiGame = (app: Application) => {
 
   levelDataManager.playLevelMusic();
 
+  function removeFoodItem(foodItem: FoodItem) {
+    app.stage.removeChild(foodItem.sprite);
+    food = food.filter((item) => item.beat !== foodItem.beat);
+    decreaseNoteCount();
+  }
+
+  // Tap
   function handleTap() {
     const foodItem = checkHit({ x: zone.x, y: zone.y }, food);
     if (foodItem) {
-      app.stage.removeChild(foodItem.sprite);
-      food = food.filter((item) => item.beat !== foodItem.beat);
+      removeFoodItem(foodItem);
+      increaseHitCount();
     }
+
+    decreaseBlastCount();
   }
 
   keyboardManager.on('pressed', handleTap);
@@ -79,6 +89,10 @@ export const pixiGame = (app: Application) => {
       foodItem.sprite.scale.set(getScaledBeatAnimationValue(beatAnimationValue, 0.06, 0.07));
 
       foodItem.sprite.angle += elapsed / 20000;
+
+      if (foodItem.sprite.y > app.screen.height) {
+        removeFoodItem(foodItem);
+      }
     }
   }
 
@@ -108,6 +122,11 @@ export const pixiGame = (app: Application) => {
       vy,
     });
   }
+
+  return {
+    mouseManager,
+    keyboardManager,
+  };
 };
 
 function createFoodSprite({ texture, size, x, y }: CreateFoodItemProps) {

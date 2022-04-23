@@ -16,6 +16,7 @@ type GameStore = {
   hitCount: number;
   touchedHeartCount: number;
   blastCount: number;
+  noteCount: number;
   zone: ZoneType;
   markup: Markup;
   notes: NotesType;
@@ -28,6 +29,7 @@ export const gameStoreInitial = {
   markup: {} as Markup,
   missCount: 0,
   hitCount: 0,
+  noteCount: Infinity,
   blastCount: Infinity,
   touchedHeartCount: 0,
   zone: {} as ZoneType,
@@ -44,6 +46,7 @@ export const setMarkup = createEvent<Markup>();
 export const setBlastCount = createEvent<number>();
 export const setZone = createEvent<ZoneType>();
 export const removeNote = createEvent<number>();
+export const decreaseNoteCount = createEvent();
 export const increaseMissCount = createEvent();
 export const increaseHitCount = createEvent();
 export const increaseTouchedHeartCount = createEvent();

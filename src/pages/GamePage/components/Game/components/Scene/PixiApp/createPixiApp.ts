@@ -9,7 +9,10 @@ export const createPixiApp = () => {
     backgroundAlpha: 0,
   });
 
-  pixiGame(app);
+  const game = pixiGame(app);
 
-  return app;
+  return {
+    app,
+    game,
+  };
 };

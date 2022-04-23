@@ -11,12 +11,14 @@ export const Scene: FC<SceneProps> = ({}) => {
       return;
     }
 
-    const app = createPixiApp();
+    const { app, game } = createPixiApp();
 
     ref.current.appendChild(app.view);
     app.start();
 
     return () => {
+      game.keyboardManager.disable();
+      game.mouseManager.disable();
       app.destroy(true, true);
     };
   }, []);

@@ -8,6 +8,7 @@ import party from 'party-js';
 import {
   blast,
   decreaseBlastCount,
+  decreaseNoteCount,
   endGame,
   gameStatusStore,
   gameStore,
@@ -32,13 +33,14 @@ gameStore
   .on(setIsLoading, (state, isLoading) => ({ ...state, isLoading }))
   .on(setGameStatus, (state, status) => ({ ...state, status }))
   .on(setBlastCount, (state, blastCount) => ({ ...state, blastCount }))
-  .on(setMarkup, (state, markup) => ({ ...state, markup, notes: markup.notes }))
+  .on(setMarkup, (state, markup) => ({ ...state, markup, notes: markup.notes, noteCount: markup.notes.length }))
   .on(setZone, (state, zonePosition) => ({ ...state, zone: zonePosition }))
   .on(removeNote, (state, noteToDelete) => ({ ...state, notes: state.notes.filter((note) => note !== noteToDelete) }))
   .on(increaseMissCount, (state) => ({ ...state, missCount: state.missCount + 1 }))
   .on(increaseHitCount, (state) => ({ ...state, hitCount: state.hitCount + 1 }))
   .on(increaseTouchedHeartCount, (state) => ({ ...state, touchedHeartCount: state.touchedHeartCount + 1 }))
   .on(decreaseBlastCount, (state) => ({ ...state, blastCount: state.blastCount > 0 ? state.blastCount - 1 : 0 }))
+  .on(decreaseNoteCount, (state) => ({ ...state, noteCount: state.noteCount > 0 ? state.noteCount - 1 : 0 }))
   .on(resetGameData, () => ({ ...gameStoreInitial }));
 
 loadGame.use(async (levelNumber: number) => {
@@ -94,8 +96,8 @@ noteTouchedHeart.watch((note) => {
 // Set end game status
 guard({
   source: gameStore,
-  filter: ({ status, blastCount, notes }) =>
-    status === GameStatus.InProgress && (blastCount === 0 || notes.length === 0),
+  filter: ({ status, blastCount, noteCount }) =>
+    status === GameStatus.InProgress && (blastCount === 0 || noteCount === 0),
   target: setGameStatus.prepend(() => GameStatus.End),
 });
 // Call end game

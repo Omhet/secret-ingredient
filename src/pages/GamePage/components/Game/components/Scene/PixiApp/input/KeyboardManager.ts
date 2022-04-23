@@ -10,9 +10,13 @@ export default class KeyboardManager extends PIXI.utils.EventEmitter {
 
   private hotKeys: HotKey[] = [];
   private preventDefaultKeys: boolean[] = [];
+  onDownCallback: (evt: any) => void;
+  onUpCallback: (evt: any) => void;
 
   constructor() {
     super();
+    this.onDownCallback = this._onKeyDown.bind(this);
+    this.onUpCallback = this._onKeyUp.bind(this);
   }
 
   enable() {
@@ -23,8 +27,8 @@ export default class KeyboardManager extends PIXI.utils.EventEmitter {
   }
 
   _enableEvents() {
-    window.addEventListener('keydown', this._onKeyDown.bind(this), true);
-    window.addEventListener('keyup', this._onKeyUp.bind(this), true);
+    window.addEventListener('keydown', this.onDownCallback, true);
+    window.addEventListener('keyup', this.onUpCallback, true);
   }
 
   disable() {
@@ -35,8 +39,8 @@ export default class KeyboardManager extends PIXI.utils.EventEmitter {
   }
 
   _disableEvents() {
-    window.removeEventListener('keydown', this._onKeyDown, true);
-    window.removeEventListener('keyup', this._onKeyUp, true);
+    window.removeEventListener('keydown', this.onDownCallback, true);
+    window.removeEventListener('keyup', this.onUpCallback, true);
   }
 
   setPreventDefault(key: any, value = true) {
