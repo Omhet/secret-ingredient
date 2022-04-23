@@ -41,7 +41,7 @@ export const pixiGame = (app: Application) => {
 
   // Tap
   function handleTap() {
-    const foodItem = checkHit({ x: zone.x, y: zone.y }, food);
+    const foodItem = checkHit(zone, food, app.screen.height);
     if (foodItem) {
       removeFoodItem(foodItem);
       increaseHitCount();

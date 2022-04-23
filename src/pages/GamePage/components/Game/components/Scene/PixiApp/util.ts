@@ -1,10 +1,10 @@
-import { Position } from '@app-types/game';
+import { Sprite } from 'pixi.js';
 import { Food, FoodItem } from './types';
 
-export const checkHit = (zonePosition: Position, food: Food) => {
+export const checkHit = (zone: Sprite, food: Food, worldHeight: number) => {
   for (const foodItem of food) {
     if (foodItem) {
-      const hitFoodItem = checkFoodHit(foodItem, zonePosition);
+      const hitFoodItem = checkFoodHit(foodItem, zone, worldHeight);
       if (hitFoodItem !== undefined) {
         return hitFoodItem;
       }
@@ -14,16 +14,11 @@ export const checkHit = (zonePosition: Position, food: Food) => {
   return undefined;
 };
 
-const HIT_PERCENT_BOTTOM = 0;
-const HIT_PERCENT_TOP = 0;
-export const checkFoodHit = (foodItem: FoodItem, zonePosition: Position) => {
-  const size = foodItem.sprite.height;
-  const diff = Math.sqrt(
-    Math.pow(zonePosition.x - foodItem.sprite.x, 2) + Math.pow(zonePosition.y - foodItem.sprite.y, 2)
-  );
+export const checkFoodHit = (foodItem: FoodItem, zone: Sprite, worldHeight: number) => {
+  const foodItemRect = foodItem.sprite.getBounds();
+  const zoneRect = zone.getBounds();
 
-  const percent = (diff / size) * 100;
-  if (percent >= HIT_PERCENT_BOTTOM && percent <= 100 - HIT_PERCENT_TOP) {
+  if (foodItemRect.bottom > zoneRect.top && foodItemRect.top < worldHeight) {
     return foodItem;
   }
 };
