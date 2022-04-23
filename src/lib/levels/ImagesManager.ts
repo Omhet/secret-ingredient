@@ -4,6 +4,7 @@ type LevelImageTypes<T> = {
     horizontal: T;
   };
   food: T[];
+  particles: T[];
   master: T;
   ingredient: T;
   table: T;
@@ -26,8 +27,17 @@ export class ImagesManager {
       throw Error('No images url for this level');
     }
 
-    const { back, food, master, ingredient, table, zone } = levelImageUrl;
-    const [backHorizImg, backVertImg, foodImgs, masterImg, ingredientImg, tableImg, zoneImg] = await Promise.all([
+    const { back, food, master, ingredient, table, zone, particles } = levelImageUrl;
+    const [
+      backHorizImg,
+      backVertImg,
+      foodImgs,
+      masterImg,
+      ingredientImg,
+      tableImg,
+      zoneImg,
+      particlesImgs,
+    ] = await Promise.all([
       this.loadImage(back.horizontal),
       this.loadImage(back.vertical),
       this.loadImages(food),
@@ -35,6 +45,7 @@ export class ImagesManager {
       this.loadImage(ingredient),
       this.loadImage(table),
       this.loadImage(zone),
+      this.loadImages(particles),
     ]);
 
     return {
@@ -43,6 +54,7 @@ export class ImagesManager {
         vertical: backVertImg,
       },
       food: foodImgs,
+      particles: particlesImgs,
       master: masterImg,
       ingredient: ingredientImg,
       table: tableImg,

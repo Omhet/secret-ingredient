@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { decreaseBlastCount, decreaseNoteCount, increaseHitCount } from '@store/game';
-import { Application, Sprite, Texture } from 'pixi.js';
+import { Application, ParticleContainer, Sprite, Texture } from 'pixi.js';
 import { createNotRepeatingRandomArrayItemFn, getRandomAngle, getRandomArrayItem } from '../../../utils';
 import KeyboardManager from './input/KeyboardManager';
 import MouseManager from './input/MouseManager';
+import { createParticlesEmitter } from './particles/particleEmitter';
 import { CreateFoodItemProps, Food, FoodItem } from './types';
 import { checkHit } from './util';
 
@@ -31,6 +32,15 @@ export const pixiGame = (app: Application) => {
 
   const { zone, table } = createZone();
 
+  const particlesContainer = new ParticleContainer();
+  const particlesEmitter = createParticlesEmitter(
+    particlesContainer,
+    images.particles.map((img) => img.src)
+  );
+  particlesEmitter.autoUpdate = true;
+  particlesContainer.position.set(300, 300);
+  app.stage.addChild(particlesContainer);
+
   levelDataManager.playLevelMusic();
 
   function removeFoodItem(foodItem: FoodItem) {
@@ -41,6 +51,9 @@ export const pixiGame = (app: Application) => {
 
   // Tap
   function handleTap() {
+    particlesEmitter.emit = true;
+    particlesEmitter.resetPositionTracking();
+
     const foodItem = checkHit(zone, food, app.screen.height);
     if (foodItem) {
       removeFoodItem(foodItem);

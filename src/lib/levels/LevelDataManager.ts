@@ -39,6 +39,7 @@ const LEVELS = LEVELS_DATA.map(({ name, unlockScore, ingredientColors }, index) 
       vertical: `${imgPath}/back_v.jpg`,
     },
     food: [`${imgPath}/food/1.png`, `${imgPath}/food/2.png`, `${imgPath}/food/3.png`],
+    particles: [`${imgPath}/particles/1.png`, `${imgPath}/particles/2.png`],
     master: `${imgPath}/master.png`,
     ingredient: `${imgPath}/ingredient.png`,
     table: `${imgPath}/table.png`,
