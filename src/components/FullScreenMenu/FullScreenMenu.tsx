@@ -27,7 +27,7 @@ export const FullScreenMenu: FC<FullScreenMenuProps> = ({ isOpen, navigation, on
       </button>
       <nav className={s.menu}>
         {navigation.map(({ id, title }) => (
-          <a key={id} href={id} className={s.link}>
+          <a key={id} href={id} className={s.link} onClick={onCloseMenu}>
             {title}
           </a>
         ))}
