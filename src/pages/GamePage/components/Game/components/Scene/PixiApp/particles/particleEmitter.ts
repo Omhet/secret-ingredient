@@ -3,12 +3,12 @@ import { ParticleContainer } from 'pixi.js';
 
 const getConfig = (images: string[]): EmitterConfigV3 => ({
   lifetime: {
-    min: 0.4,
-    max: 0.7,
+    min: 1,
+    max: 2,
   },
-  frequency: 0.001,
-  emitterLifetime: 0.2,
-  maxParticles: 200,
+  frequency: 0.008,
+  emitterLifetime: 0.3,
+  maxParticles: 500,
   addAtBack: true,
   pos: {
     x: 0,
@@ -22,15 +22,15 @@ const getConfig = (images: string[]): EmitterConfigV3 => ({
           list: [
             {
               time: 0,
-              value: 0,
-            },
-            {
-              time: 0.5,
               value: 1,
             },
             {
+              time: 0.5,
+              value: 0.5,
+            },
+            {
               time: 1,
-              value: 0,
+              value: 0.2,
             },
           ],
         },
@@ -47,28 +47,24 @@ const getConfig = (images: string[]): EmitterConfigV3 => ({
             },
             {
               time: 1,
-              value: 500,
+              value: 100,
             },
           ],
         },
       },
     },
+    // {
+    //   type: 'moveSpeedStatic',
+    //   config: {
+    //     min: 500,
+    //     max: 700,
+    //   },
+    // },
     {
-      type: 'scale',
+      type: 'scaleStatic',
       config: {
-        scale: {
-          list: [
-            {
-              time: 0,
-              value: 0.1,
-            },
-            {
-              time: 1,
-              value: 1.2,
-            },
-          ],
-        },
-        minMult: 1,
+        min: 1,
+        max: 2,
       },
     },
     {
@@ -76,8 +72,8 @@ const getConfig = (images: string[]): EmitterConfigV3 => ({
       config: {
         accel: 0,
         minSpeed: 0,
-        maxSpeed: 200,
-        minStart: 0,
+        maxSpeed: 10,
+        minStart: 180,
         maxStart: 360,
       },
     },
@@ -87,6 +83,18 @@ const getConfig = (images: string[]): EmitterConfigV3 => ({
         textures: images,
       },
     },
+    {
+      type: 'spawnPoint',
+      config: {},
+    },
+    // {
+    //   type: 'spawnBurst',
+    //   config: {
+    //     spacing: 90,
+    //     start: 0,
+    //     distance: 40,
+    //   },
+    // },
   ],
 });
 

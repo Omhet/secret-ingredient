@@ -33,10 +33,7 @@ export const pixiGame = (app: Application) => {
   const { zone, table } = createZone();
 
   const particlesContainer = new ParticleContainer();
-  const particlesEmitter = createParticlesEmitter(
-    particlesContainer,
-    images.particles.map((img) => img.src)
-  );
+  const particlesEmitter = createParticlesEmitter(particlesContainer, [images.particles[0].src]);
   particlesEmitter.autoUpdate = true;
   app.stage.addChild(particlesContainer);
 
@@ -51,12 +48,18 @@ export const pixiGame = (app: Application) => {
   function emitParticles(x: number, y: number) {
     particlesEmitter.emit = true;
     particlesContainer.position.set(x, y);
-    particlesEmitter.resetPositionTracking();
+    // particlesEmitter.resetPositionTracking();
   }
 
   // Tap
   function handleTap() {
+    // emitParticles(app.screen.width / 2, app.screen.height / 2);
+
     const foodItem = checkHit(zone, food, app.screen.height);
+    // emitParticles(zone.x - zone.width * 0.2, zone.y);
+    // emitParticles(zone.x, zone.y);
+    // emitParticles(zone.x + zone.width * 0.2, zone.y);
+
     if (foodItem) {
       emitParticles(foodItem.sprite.x, foodItem.sprite.y);
       removeFoodItem(foodItem);
