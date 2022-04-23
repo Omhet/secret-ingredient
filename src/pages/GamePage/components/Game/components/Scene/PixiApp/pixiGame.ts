@@ -10,6 +10,8 @@ import { createParticlesEmitter } from './particles/particleEmitter';
 import { CreateFoodItemProps, Food, FoodItem } from './types';
 import { checkHit } from './util';
 
+const IS_VERTICAL = innerHeight > innerWidth;
+
 export const pixiGame = (app: Application) => {
   const keyboardManager = new KeyboardManager();
   keyboardManager.enable();
@@ -48,10 +50,15 @@ export const pixiGame = (app: Application) => {
 
   function createTableParticleContainer({ isLeft }: { isLeft: boolean }) {
     const { particlesEmitter, particlesContainer } = createParticleContainer();
-    const x = isLeft
-      ? zoneRect.left - (zoneRect.width / 2 + zoneRect.width * 0.4)
-      : zoneRect.right + (zoneRect.width / 2 + zoneRect.width * 0.4);
-    const y = zoneRect.bottom - zoneRect.height * 0.2;
+
+    const xOffset = zoneRect.width * 0.4;
+    let x = isLeft ? zoneRect.left - (zoneRect.width / 2 + xOffset) : zoneRect.right + (zoneRect.width / 2 + xOffset);
+    let y = zoneRect.bottom - zoneRect.height * 0.2;
+    if (IS_VERTICAL) {
+      x = isLeft ? 0 : app.screen.width;
+      y = app.screen.height;
+    }
+
     const angle = isLeft ? 45 : -45;
 
     particlesContainer.position.set(x, y);
