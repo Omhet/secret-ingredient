@@ -32,6 +32,7 @@
   width: 100%;
   max-width: 1350rem;
   height: 100%;
+  padding: 0 32rem;
   margin: auto;
   align-self: center;
   justify-self: center;
@@ -40,4 +41,7 @@
   justify-content: center;
   align-items: center;
   gap: 48rem;
+  @media (max-width: 480px) {
+    padding: 0 24rem;
+  }
 }
