@@ -29,7 +29,7 @@ export const pixiGame = (app: Application) => {
   });
   let food: Food = [];
 
-  const zone = createZone();
+  const { zone, table } = createZone();
 
   levelDataManager.playLevelMusic();
 
@@ -76,7 +76,8 @@ export const pixiGame = (app: Application) => {
 
     const beatAnimationValue = getBeatAnimationValue(elapsed, bps);
 
-    // zone.scale.set(getScaledBeatAnimationValue(beatAnimationValue, 1, 1.2));
+    table.scale.set(getScaledBeatAnimationValue(beatAnimationValue, 1, 1.02));
+    zone.scale.set(getScaledBeatAnimationValue(beatAnimationValue, 1, 1.02));
 
     // Move food
     const foodDist = (beatSize * bps) / app.ticker.FPS;
@@ -119,7 +120,7 @@ export const pixiGame = (app: Application) => {
     app.stage.addChild(zone);
     app.stage.addChild(table);
 
-    return zone;
+    return { zone, table };
   }
 
   const zoneRect = zone.getBounds();
