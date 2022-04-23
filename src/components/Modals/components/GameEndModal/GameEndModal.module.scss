@@ -1,13 +1,143 @@
 .root {
-  background: white;
-  min-width: 600px;
-  height: 50%;
+  max-width: 70%;
+  max-height: 70%;
+  padding: 32rem;
   margin: auto;
-  border: 1px solid black;
-  border-radius: 16rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  font-size: 42px;
+  justify-content: space-between;
+  gap: 48rem;
+  font-size: 24rem;
+  background-color: #fffdf988;
+  border-radius: 16rem;
+  @media (max-width: 1024px) {
+    max-width: 90%;
+    max-height: 90%;
+    font-size: 18rem;
+    gap: 32rem;
+  }
+  @media (max-width: 480px) {
+    width: 90%;
+    padding: 24rem;
+    gap: 24rem;
+  }
+}
+.scoreContainer {
+  display: flex;
+  align-items: center;
+  gap: 12rem;
+  font-size: 32rem;
+  font-family: var(--header-font);
+  @media (max-width: 1024px) {
+    font-size: 24rem;
+  }
+  @media (max-width: 480px) {
+    font-size: 18rem;
+  }
+}
+.scoreImg {
+  width: 48rem;
+  height: 48rem;
+  @media (max-width: 1024px) {
+    width: 32rem;
+    height: 32rem;
+  }
+  @media (max-width: 480px) {
+    width: 24rem;
+    height: 24rem;
+  }
+}
+.masterContainer {
+  width: fit-content;
+  height: fit-content;
+  max-height: 60%;
+  display: flex;
+  gap: 32rem;
+  @media (max-width: 1024px) {
+    max-height: 50%;
+    flex-direction: column;
+    align-items: center;
+    gap: 24rem;
+  }
+}
+.masterWords {
+  width: fit-content;
+  height: fit-content;
+  padding: 48rem;
+  position: relative;
+  background-color: var(--back-color);
+  border-radius: 100%;
+  @media (max-width: 1024px) {
+    padding: 32rem;
+  }
+  @media (max-width: 480px) {
+    padding: 24rem;
+  }
+}
+.master {
+  width: fit-content;
+  max-height: 100%;
+  @media (max-width: 480px) {
+    max-height: 50%;
+  }
+}
+.buttonsContainer {
+  display: flex;
+  gap: 36rem;
+  flex-wrap: wrap;
+  @media (max-width: 1024px) {
+    gap: 24rem;
+  }
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
+}
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rem;
+}
+.restartBtn {
+  padding: 12rem 32rem;
+  font-weight: 500;
+  background-color: var(--back-color);
+  border: 3rem solid var(--accent2-color);
+  border-radius: 16rem;
+  white-space: nowrap;
+  @media (max-width: 1024px) {
+    padding: 12rem 24rem;
+  }
+}
+.nextBtn {
+  padding: 12rem 32rem;
+  font-weight: 800;
+  background-color: var(--accent2-color);
+  border-radius: 16rem;
+  white-space: nowrap;
+  @media (max-width: 1024px) {
+    padding: 12rem 24rem;
+  }
+}
+.exitBtn {
+  padding: 12rem 32rem;
+  font-weight: 500;
+  background-color: var(--back-color);
+  border: 3rem solid var(--accent1-color);
+  border-radius: 16rem;
+  white-space: nowrap;
+  @media (max-width: 1024px) {
+    padding: 12rem 24rem;
+  }
+}
+.icon {
+  width: 32rem;
+  height: 32rem;
+  fill: none;
+  flex-shrink: 0;
+  @media (max-width: 480px) {
+    width: 24rem;
+    height: 24rem;
+  }
 }

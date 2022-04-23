@@ -6,7 +6,7 @@ import { Scene } from './components/Scene/Scene';
 import s from './Game.module.scss';
 
 export const Game: FC = () => {
-  const { isGameStarted } = useGame();
+  const { isGameStarted, isGameEnd } = useGame();
 
   const start = () => {
     startGame();
@@ -15,7 +15,7 @@ export const Game: FC = () => {
   return (
     <>
       <Background />
-      {!isGameStarted && (
+      {!isGameStarted && !isGameEnd && (
         <button onClick={start} className={s.playBtn}>
           Play
         </button>
