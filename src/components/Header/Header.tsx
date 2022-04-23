@@ -26,7 +26,7 @@ export const Header: FC<HeaderProps> = ({}) => {
           </a>
         </nav>
         <div className={s.score}>
-          Score: {globalScore}
+          <span> Score: {globalScore}</span>
           <img className={s.logoImg} src="/pics/cake.png" />
         </div>
       </div>
