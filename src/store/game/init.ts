@@ -19,7 +19,6 @@ import {
   setNoteCount,
   startGame,
 } from './index';
-import { getScore } from './utils';
 
 gameStore
   .on(setIsLoading, (state, isLoading) => ({ ...state, isLoading }))
@@ -66,9 +65,8 @@ guard({
 endGame.watch(() => {
   const { hitCount } = gameStore.getState();
   const { score: oldScore } = currentLevelStore.getState();
-  const levelNoteCount = levelDataManager.getCurrentLevelData().markup.notes.length;
 
-  const newScore = getScore(hitCount, levelNoteCount);
+  const newScore = hitCount;
   setCurrentLevelScore(newScore);
   if (newScore > oldScore) {
     rewriteCurrentLevelScore(newScore);
