@@ -19,7 +19,7 @@ export const Scene: FC<SceneProps> = ({}) => {
     return () => {
       game.keyboardManager.disable();
       game.mouseManager.disable();
-      app.destroy(true, true);
+      app.destroy(true);
     };
   }, []);
 
