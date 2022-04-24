@@ -1,6 +1,8 @@
 .main {
+  height: 100%;
   display: flex;
   flex-direction: column;
   font-size: 24rem;
-  overflow-y: hidden;
+  scroll-snap-type: y proximity;
+  overflow: scroll;
 }
