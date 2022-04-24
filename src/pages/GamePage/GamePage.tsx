@@ -1,4 +1,5 @@
 import { Loader } from '@components/Loader/Loader';
+import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { Game } from '@pages/GamePage/components/Game/Game';
 import { useLevels } from '@store/levels';
 import { closeModal } from '@store/modals';
@@ -30,6 +31,11 @@ export const GamePage: FC = () => {
 
     closeModal();
     loadGame(levelNumber);
+
+    return () => {
+      closeModal();
+      levelDataManager.stopLevelMusic();
+    };
   }, [levelNumber]);
 
   return <div className={s.main}>{isLoading ? <Loader /> : <Game />}</div>;
