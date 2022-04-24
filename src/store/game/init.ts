@@ -73,7 +73,7 @@ guard({
 
 // Do end game stuff
 endGame.watch(() => {
-  const { hitCount } = gameStore.getState();
+  const { hitCount, noteCount } = gameStore.getState();
   const { score: oldScore } = currentLevelStore.getState();
 
   const newScore = hitCount;
@@ -82,6 +82,10 @@ endGame.watch(() => {
     rewriteCurrentLevelScore(newScore);
   }
 
-  openGameEndModal();
-  levelDataManager.stopLevelMusic();
+  const timeout = noteCount === 0 ? 3000 : 0;
+
+  setTimeout(() => {
+    openGameEndModal();
+    levelDataManager.stopLevelMusic();
+  }, timeout);
 });
