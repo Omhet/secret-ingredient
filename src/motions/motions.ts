@@ -53,6 +53,18 @@ export const authorLinkVariants = {
   }),
 };
 
+export const authorVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { type: 'tween', ease: 'easeOut', duration: 0.5, delay: 0.2 },
+  },
+  exit: {
+    opacity: 0,
+    transition: { type: 'tween', duration: 0.3, ease: 'easeInOut' },
+  },
+};
+
 export const mobileNavItemVariants = {
   hover: {
     scale: 1.3,

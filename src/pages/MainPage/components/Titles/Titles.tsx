@@ -1,6 +1,6 @@
 import { Arrow } from '@icons/Arrow';
 import { motion } from 'framer-motion';
-import { authorLinkVariants } from 'motions/motions';
+import { authorLinkVariants, authorVariants } from 'motions/motions';
 import React, { FC, useState } from 'react';
 import { useMedia } from 'react-use';
 import s from './Titles.module.scss';
@@ -90,33 +90,39 @@ export const Titles: FC = () => {
         </motion.div>
       </div>
       {!isDariaVisible && !isVladimirVisible && !isSmall && (
-        <div className={s.emptyContainer}>
+        <motion.div
+          className={s.emptyContainer}
+          variants={authorVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
           <Arrow className={s.arrow} />
           <div className={s.titleContainer}>
             <span className={s.title}>Authors</span>
             <span className={s.note}>Hover over our names to see more info</span>
           </div>
-        </div>
+        </motion.div>
       )}
       {(isDariaVisible || isSmall) && (
-        <div className={s.aboutAuthor}>
+        <motion.div className={s.aboutAuthor} variants={authorVariants} initial="hidden" animate="visible" exit="exit">
           <img src="/pics/Dasha.png" />
           <span className={s.authorDescription}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem neque, repellendus distinctio cum enim
             totam id esse iusto? Laudantium hic neque soluta libero adipisci quaerat cupiditate ipsam excepturi cumque
             omnis.
           </span>
-        </div>
+        </motion.div>
       )}
       {(isVladimirVisible || isSmall) && (
-        <div className={s.aboutAuthor}>
+        <motion.div className={s.aboutAuthor} variants={authorVariants} initial="hidden" animate="visible" exit="exit">
           <img src="/pics/Vova.png" />
           <span className={s.authorDescription}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem neque, repellendus distinctio cum enim
             totam id esse iusto? Laudantium hic neque soluta libero adipisci quaerat cupiditate ipsam excepturi cumque
             omnis.
           </span>
-        </div>
+        </motion.div>
       )}
     </section>
   );
