@@ -65,6 +65,7 @@ export class AudioManager {
     if (audio) {
       await adjustVolume(audio, 0);
       audio.pause();
+      audio.currentTime = 0;
     }
   }
 }

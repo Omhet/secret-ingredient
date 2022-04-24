@@ -54,6 +54,7 @@ loadGame.use(async (levelNumber: number) => {
 
 startGame.watch(() => {
   setGameStatus(GameStatus.InProgress);
+  levelDataManager.playLevelMusic();
 });
 
 // Set end game status

@@ -75,8 +75,6 @@ export const pixiGame = (app: Application) => {
   const { particlesEmitter: tableLeftParticlesEmitter } = createTableParticleContainer({ isLeft: true });
   const { particlesEmitter: tableRightParticlesEmitter } = createTableParticleContainer({ isLeft: false });
 
-  levelDataManager.playLevelMusic();
-
   function removeFoodItem(foodItem: FoodItem) {
     app.stage.removeChild(foodItem.sprite);
     food = food.filter((item) => item.beat !== foodItem.beat);
