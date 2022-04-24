@@ -23,7 +23,9 @@ export const Rules: FC = () => {
       </div>
       <div className={s.playSection}>
         <span>OK, clear, let&apos;s play!</span>
-        <button className={s.levelsBtn}>See levels</button>
+        <a href="#levels" className={s.levelsBtn}>
+          See levels
+        </a>
       </div>
     </section>
   );

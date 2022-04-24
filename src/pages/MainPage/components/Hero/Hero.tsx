@@ -12,8 +12,12 @@ export const Hero: FC = () => {
           Let&apos;s find the secret ingredient to help you to become the greatest chef ever!
         </span>
         <div className={s.buttonsContainer}>
-          <button className={s.accentBtn}>Play game</button>
-          <button className={s.secondaryBtn}>Read story</button>
+          <a href="#levels" className={s.accentBtn}>
+            Play game
+          </a>
+          <a href="#story" className={s.secondaryBtn}>
+            Read story
+          </a>
         </div>
       </div>
       <div className={s.imgContainer}>
