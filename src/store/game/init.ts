@@ -45,7 +45,7 @@ loadGame.use(async (levelNumber: number) => {
   const { markup } = await levelDataManager.loadLevelData(levelNumber);
 
   setNoteCount(markup.notes.length);
-  setBlastCount(Math.round(markup.notes.length * 1.25));
+  setBlastCount(Math.round(markup.notes.length * 1.15));
 
   setIsLoading(false);
 
