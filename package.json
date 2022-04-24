@@ -65,7 +65,7 @@
     "stylelint-config-prettier": "8.0.2",
     "stylelint-config-standard": "21.0.0",
     "typescript": "4.1.2",
-    "vite": "2.1.5",
+    "vite": "2.9.5",
     "vite-plugin-react-svg": "0.2.0",
     "vite-tsconfig-paths": "^3.3.12"
   },
