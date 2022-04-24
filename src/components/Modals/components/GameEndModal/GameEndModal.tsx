@@ -2,7 +2,7 @@ import { Exit } from '@icons/Exit';
 import { Next } from '@icons/Next';
 import { Restart } from '@icons/Restart';
 import { levelDataManager } from '@lib/levels/LevelDataManager';
-import { useLevels, useNextLevel } from '@store/levels';
+import { useCurrentLevel, useLevels, useNextLevel } from '@store/levels';
 import { closeModal } from '@store/modals';
 import classnames from 'classnames';
 import React, { FC } from 'react';
@@ -24,6 +24,7 @@ const getMasterWords = (currentLevelNumber: number): string => {
 
 export const GameEndModal: FC = () => {
   const { currentLevelScore, currentLevelNumber } = useLevels();
+  const { isEnoughScore } = useCurrentLevel();
   const nextLevel = useNextLevel();
   const { markup, imgUrls } = levelDataManager.getCurrentLevelData();
   const maxLevelScore = markup.notes.length;
@@ -37,6 +38,7 @@ export const GameEndModal: FC = () => {
         </h2>
         <img className={s.scoreImg} src="/pics/cake.png" />
       </div>
+      {!isEnoughScore && <div>Not enough score</div>}
       <div className={s.masterContainer}>
         <span className={s.masterWords}>{getMasterWords(currentLevelNumber)}</span>
         <img className={s.master} src={imgUrls.master} />
