@@ -16,9 +16,5 @@ export const GamePage: FC = () => {
     openGameStartModal();
   }, [currentLevelNumber, restartCounter]);
 
-  return (
-    <div className={s.main}>
-      <Loader />
-    </div>
-  );
+  return <div className={s.main}>{isLoading ? <Loader /> : <Game />}</div>;
 };
