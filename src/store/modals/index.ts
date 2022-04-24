@@ -3,6 +3,7 @@ import { useStore } from 'effector-react';
 
 export enum ModalId {
   GameEnd = 'GameEnd',
+  GameStart = 'GameStart',
 }
 
 type ModalsStore = {
@@ -10,7 +11,7 @@ type ModalsStore = {
 };
 
 export const modalsStore = createStore<ModalsStore>({
-  id: undefined,
+  id: ModalId.GameStart,
 });
 
 export const useModals = () => {
