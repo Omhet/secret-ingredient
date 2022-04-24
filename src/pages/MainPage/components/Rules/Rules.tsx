@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+import { buttonVariants } from 'motions/motions';
 import React, { FC } from 'react';
 import s from './Rules.module.scss';
 
@@ -23,9 +25,9 @@ export const Rules: FC = () => {
       </div>
       <div className={s.playSection}>
         <span>OK, clear, let&apos;s play!</span>
-        <a href="#levels" className={s.levelsBtn}>
+        <motion.a whileHover="hover" variants={buttonVariants} href="#levels" className={s.levelsBtn}>
           See levels
-        </a>
+        </motion.a>
       </div>
     </section>
   );

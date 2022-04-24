@@ -61,6 +61,8 @@
   background-color: var(--accent2-color);
   border-radius: 16rem;
   white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
   @media (max-width: 1024px) {
     padding: 12rem 32rem;
   }
@@ -71,6 +73,8 @@
   border: 3rem solid var(--accent2-color);
   border-radius: 16rem;
   white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
   @media (max-width: 1024px) {
     padding: 12rem 32rem;
   }
