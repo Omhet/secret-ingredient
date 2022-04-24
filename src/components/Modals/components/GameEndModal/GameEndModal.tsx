@@ -9,16 +9,24 @@ import React, { FC } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import s from './GameEndModal.module.scss';
 
-const getMasterWords = (currentLevelNumber: number): string => {
+const getMasterWords = (currentLevelNumber: number, isEnoughScore: boolean): string => {
   switch (currentLevelNumber) {
     case 1:
-      return 'Subarashī. Now you know the secret of the best susi. Use it wisely.';
+      return isEnoughScore
+        ? 'Subarashī. Now you know the secret of the best susi. Use it wisely.'
+        : 'Oh, you have to be more accurate. Try one more time.';
     case 2:
-      return '¡Fabuloso! Remember, good chili is the head of everything. Find the right spiciness.';
+      return isEnoughScore
+        ? '¡Fabuloso! Remember, good chili is the head of everything. Find the right spiciness.'
+        : '¡Oh no! Not enough chili. Try again!';
     case 3:
-      return 'Отлично! Nothing improves a dish like a sour cream with herbs. Now you know that.';
+      return isEnoughScore
+        ? 'Отлично! Nothing improves a dish like a sour cream with herbs. Now you know that.'
+        : 'Эх... I think you can do better. Try once again.';
     default:
-      return 'Meowtastic! Remember to cook with all your heart.';
+      return isEnoughScore
+        ? 'Meowtastic! Remember to cook with all your heart.'
+        : 'Honey, that is not exactly what I meant. Try again with all your heart.';
   }
 };
 
@@ -38,9 +46,8 @@ export const GameEndModal: FC = () => {
         </h2>
         <img className={s.scoreImg} src="/pics/cake.png" />
       </div>
-      {!isEnoughScore && <div>Not enough score</div>}
       <div className={s.masterContainer}>
-        <span className={s.masterWords}>{getMasterWords(currentLevelNumber)}</span>
+        <span className={s.masterWords}>{getMasterWords(currentLevelNumber, isEnoughScore)}</span>
         <img className={s.master} src={imgUrls.master} />
       </div>
       <div className={s.buttonsContainer}>
@@ -48,7 +55,7 @@ export const GameEndModal: FC = () => {
           <Restart className={s.icon} />
           Retry
         </button>
-        {nextLevel && (
+        {isEnoughScore && nextLevel && (
           <button
             className={classnames(s.button, s.nextBtn)}
             disabled={!nextLevel.isOpen}
