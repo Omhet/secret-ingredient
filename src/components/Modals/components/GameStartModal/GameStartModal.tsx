@@ -1,7 +1,7 @@
 import { Exit } from '@icons/Exit';
 import { Play } from '@icons/Play';
 import { startGame } from '@store/game';
-import { restartCurrentLevel, useLevels, useNextLevel } from '@store/levels';
+import { useLevels } from '@store/levels';
 import { closeModal } from '@store/modals';
 import classnames from 'classnames';
 import React, { FC } from 'react';
@@ -38,6 +38,7 @@ export const GameStartModal: FC = () => {
   const { currentLevelNumber } = useLevels();
   const start = () => {
     startGame();
+    closeModal();
   };
 
   return (

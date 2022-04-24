@@ -24,3 +24,4 @@ export const openModal = createEvent<ModalId>();
 export const closeModal = createEvent();
 
 export const openGameEndModal = openModal.prepend(() => ModalId.GameEnd);
+export const openGameStartModal = openModal.prepend(() => ModalId.GameStart);

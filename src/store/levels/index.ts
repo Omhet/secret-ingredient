@@ -5,6 +5,7 @@ import { useStore } from 'effector-react';
 type Level = {
   number: number;
   unlockScore: number;
+  maxScore: number;
   score: number;
 };
 
@@ -19,7 +20,9 @@ export const levelsStore = createStore<LevelsStore>({
   currentLevelNumber: 1,
   currentLevelScore: 0,
   restartCounter: 0,
-  levels: levelDataManager.getAllLevels().map(({ score, unlockScore, number }) => ({ score, unlockScore, number })),
+  levels: levelDataManager
+    .getAllLevels()
+    .map(({ score, unlockScore, maxScore, number }) => ({ score, unlockScore, maxScore, number })),
 });
 
 export const globalScoreStore = levelsStore.map(({ levels }) => levels.reduce((a, b) => a + b.score, 0));

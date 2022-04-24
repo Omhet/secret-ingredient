@@ -5,13 +5,13 @@ import s from './Level.module.scss';
 export type LevelProps = {
   title: string;
   imgSrc: string;
-  levelNumber: number;
   score: number;
+  maxLevelScore: number;
   isOpen: boolean;
   onClick: () => void;
 };
 
-export const Level: FC<LevelProps> = ({ title, imgSrc, levelNumber, score, isOpen, onClick }) => {
+export const Level: FC<LevelProps> = ({ title, imgSrc, score, maxLevelScore, isOpen, onClick }) => {
   return (
     <div
       style={{
@@ -23,7 +23,7 @@ export const Level: FC<LevelProps> = ({ title, imgSrc, levelNumber, score, isOpe
         <div className={s.levelTitle}>{title}</div>
         {isOpen && (
           <div className={s.levelScore}>
-            {score} / 3 <img className={s.cakeIcon} src="/pics/cake.png" />
+            {score} / {maxLevelScore} <img className={s.cakeIcon} src="/pics/cake.png" />
           </div>
         )}
         {isOpen && (

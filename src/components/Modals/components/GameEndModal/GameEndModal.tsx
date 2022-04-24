@@ -1,6 +1,7 @@
 import { Exit } from '@icons/Exit';
 import { Next } from '@icons/Next';
 import { Restart } from '@icons/Restart';
+import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { restartCurrentLevel, startNextLevel, useLevels, useNextLevel } from '@store/levels';
 import { closeModal } from '@store/modals';
 import classnames from 'classnames';
@@ -37,11 +38,14 @@ const getMasterWords = (currentLevelNumber: number): string => {
 export const GameEndModal: FC = () => {
   const { currentLevelScore, currentLevelNumber } = useLevels();
   const nextLevel = useNextLevel();
+  const maxLevelScore = levelDataManager.getCurrentLevelData().markup.notes.length;
 
   return (
     <div className={s.root}>
       <div className={s.scoreContainer}>
-        <h2>Score: {currentLevelScore} / 3</h2>
+        <h2>
+          Score: {currentLevelScore} / {maxLevelScore}
+        </h2>
         <img className={s.scoreImg} src="/pics/cake.png" />
       </div>
       <div className={s.masterContainer}>

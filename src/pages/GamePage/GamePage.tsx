@@ -1,6 +1,6 @@
 import { Game } from '@pages/GamePage/components/Game/Game';
 import { useLevels } from '@store/levels';
-import { closeModal } from '@store/modals';
+import { closeModal, openGameStartModal } from '@store/modals';
 import React, { FC, useEffect } from 'react';
 import { loadGame, useGame } from '../../store/game/index';
 import s from './GamePage.module.scss';
@@ -12,6 +12,7 @@ export const GamePage: FC = () => {
   useEffect(() => {
     closeModal();
     loadGame(currentLevelNumber);
+    openGameStartModal();
   }, [currentLevelNumber, restartCounter]);
 
   return <div className={s.main}>{isLoading ? 'Loading...' : <Game />}</div>;

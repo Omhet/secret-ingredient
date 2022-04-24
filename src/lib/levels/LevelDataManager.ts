@@ -7,28 +7,32 @@ const LEVELS_DATA = [
   {
     name: 'Japan',
     unlockScore: 0,
+    maxScore: 66,
     ingredientColors: ['#4B2507', '#C1956B'],
   },
   {
     name: 'Mexico',
     unlockScore: 0,
+    maxScore: 83,
     ingredientColors: ['#FF4D00'],
   },
   {
     name: 'Russia',
     unlockScore: 0,
+    maxScore: 153,
     ingredientColors: ['#FFF5E9', '#5C9E69'],
   },
   {
     name: 'Grandma',
     unlockScore: 0,
+    maxScore: 104,
     ingredientColors: ['#C55350', '#DE9D81'],
   },
 ];
 
 const LEVELS_FROM_STORAGE = JSON.parse(localStorage.getItem('levels') ?? '[]');
 
-const LEVELS = LEVELS_DATA.map(({ name, unlockScore, ingredientColors }, index) => {
+const LEVELS = LEVELS_DATA.map(({ name, unlockScore, maxScore, ingredientColors }, index) => {
   const number = index + 1;
   const score = LEVELS_FROM_STORAGE[index]?.score ?? 0;
 
@@ -51,6 +55,7 @@ const LEVELS = LEVELS_DATA.map(({ name, unlockScore, ingredientColors }, index) 
     number,
     score,
     unlockScore,
+    maxScore,
     ingredientColors,
     musicUrl: `music/${number}.mp3`,
     midiUrl: `midi/${number}.mid`,
@@ -62,6 +67,7 @@ type LevelType = {
   name: string;
   score: number;
   unlockScore: number;
+  maxScore: number;
   number: number;
   ingredientColors: string[];
   audio: HTMLAudioElement;
@@ -127,6 +133,10 @@ class LevelDataManager {
 
   getCurrentLevelData() {
     return this.levels[this.currentLevel - 1];
+  }
+
+  getLevelData(number: number) {
+    return this.levels[number - 1];
   }
 }
 
