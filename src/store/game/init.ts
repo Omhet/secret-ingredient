@@ -82,10 +82,9 @@ endGame.watch(() => {
     rewriteCurrentLevelScore(newScore);
   }
 
-  const timeout = noteCount === 0 ? 3000 : 0;
-
-  setTimeout(() => {
-    openGameEndModal();
+  openGameEndModal();
+  // Do not stop music at the end of the whole level. Let it play till the end
+  if (noteCount !== 0) {
     levelDataManager.stopLevelMusic();
-  }, timeout);
+  }
 });
