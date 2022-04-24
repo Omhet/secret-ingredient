@@ -1,4 +1,15 @@
-import { userStore } from './index';
+import { signIn as nearSignIn, signOut as nearSignOut } from '@lib/auth/near';
+import { resetUser, signIn, signOut, userStore } from './index';
 
-userStore;
-//
+userStore
+  //
+  .on(resetUser, () => ({ isSignedIn: false, name: undefined }));
+
+signOut.watch(() => {
+  nearSignOut();
+  resetUser();
+});
+
+signIn.watch(() => {
+  nearSignIn();
+});

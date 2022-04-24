@@ -1,5 +1,5 @@
 import { getWalletAccountNickname, isNEARSignedIn } from '@lib/auth/near';
-import { createStore } from 'effector';
+import { createEvent, createStore } from 'effector';
 import { useStore } from 'effector-react';
 
 type UserStore = {
@@ -17,3 +17,8 @@ export const useUser = () => {
 
   return state;
 };
+
+export const resetUser = createEvent();
+
+export const signIn = createEvent();
+export const signOut = createEvent();

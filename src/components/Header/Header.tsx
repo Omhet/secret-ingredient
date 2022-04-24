@@ -1,8 +1,7 @@
 import { NavigationItem } from '@app-types/navigationItem';
 import { Burger } from '@icons/Burger';
-import { signIn } from '@lib/auth/near';
 import { useLevels } from '@store/levels';
-import { useUser } from '@store/user';
+import { signIn, signOut, useUser } from '@store/user';
 import React, { FC } from 'react';
 import { useMedia } from 'react-use';
 import s from './Header.module.scss';
@@ -38,7 +37,11 @@ export const Header: FC<HeaderProps> = ({ navigation, onOpenMenu }) => {
           <img className={s.logoImg} src="/pics/cake.png" />
         </div>
         {user.isSignedIn ? (
-          <div>Hi, {user.name}</div>
+          <>
+            <button className={s.menuBtn} onClick={() => signOut()}>
+              Disconnect
+            </button>
+          </>
         ) : (
           <button className={s.menuBtn} onClick={() => signIn()}>
             Connect
