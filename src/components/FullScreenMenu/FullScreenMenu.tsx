@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import s from './FullScreenMenu.module.scss';
 import { motion } from 'framer-motion';
 import { Close } from '@icons/Close';
-import { menuVariants } from 'motions/FullScreenMenu';
+import { menuVariants, mobileNavItemVariants } from 'motions/motions';
 import { NavigationItem } from '@app-types/navigationItem';
 
 type FullScreenMenuProps = {
@@ -27,9 +27,16 @@ export const FullScreenMenu: FC<FullScreenMenuProps> = ({ isOpen, navigation, on
       </button>
       <nav className={s.menu}>
         {navigation.map(({ id, title }) => (
-          <a key={id} href={id} className={s.link} onClick={onCloseMenu}>
+          <motion.a
+            key={id}
+            href={id}
+            className={s.link}
+            onClick={onCloseMenu}
+            variants={mobileNavItemVariants}
+            whileHover="hover"
+          >
             {title}
-          </a>
+          </motion.a>
         ))}
       </nav>
     </motion.div>

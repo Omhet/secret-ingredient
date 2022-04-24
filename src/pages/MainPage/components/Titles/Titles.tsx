@@ -1,4 +1,6 @@
 import { Arrow } from '@icons/Arrow';
+import { motion } from 'framer-motion';
+import { authorLinkVariants } from 'motions/motions';
 import React, { FC, useState } from 'react';
 import { useMedia } from 'react-use';
 import s from './Titles.module.scss';
@@ -13,7 +15,7 @@ export const Titles: FC = () => {
       {isSmall && <span className={s.titlesTitle}>Authors</span>}
       <div className={s.titles}>
         <span className={s.titleName}>Design</span>
-        <div className={s.titleAuthors}>
+        <motion.div className={s.titleAuthors} variants={authorLinkVariants} animate="animate" custom={0}>
           <a
             onMouseOver={() => setIsDariaVisible(true)}
             onMouseOut={() => setIsDariaVisible(false)}
@@ -35,9 +37,9 @@ export const Titles: FC = () => {
           >
             Vladimir
           </a>
-        </div>
+        </motion.div>
         <span className={s.titleName}>Development</span>
-        <div className={s.titleAuthors}>
+        <motion.div className={s.titleAuthors} variants={authorLinkVariants} animate="animate" custom={0.2}>
           <a
             onMouseOver={() => setIsVladimirVisible(true)}
             onMouseOut={() => setIsVladimirVisible(false)}
@@ -59,9 +61,9 @@ export const Titles: FC = () => {
           >
             Daria
           </a>
-        </div>
+        </motion.div>
         <span className={s.titleName}>Music</span>
-        <div className={s.titleAuthors}>
+        <motion.div className={s.titleAuthors} variants={authorLinkVariants} animate="animate" custom={0.4}>
           <a
             onMouseOver={() => setIsVladimirVisible(true)}
             onMouseOut={() => setIsVladimirVisible(false)}
@@ -72,9 +74,9 @@ export const Titles: FC = () => {
           >
             Vladimir
           </a>
-        </div>
+        </motion.div>
         <span className={s.titleName}>Illustrations</span>
-        <div className={s.titleAuthors}>
+        <motion.div className={s.titleAuthors} variants={authorLinkVariants} animate="animate" custom={0.6}>
           <a
             onMouseOver={() => setIsDariaVisible(true)}
             onMouseOut={() => setIsDariaVisible(false)}
@@ -85,7 +87,7 @@ export const Titles: FC = () => {
           >
             Daria
           </a>
-        </div>
+        </motion.div>
       </div>
       {!isDariaVisible && !isVladimirVisible && !isSmall && (
         <div className={s.emptyContainer}>

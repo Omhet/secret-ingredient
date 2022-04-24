@@ -1,6 +1,8 @@
 import { NavigationItem } from '@app-types/navigationItem';
 import { Burger } from '@icons/Burger';
 import { useLevels } from '@store/levels';
+import { motion } from 'framer-motion';
+import { buttonVariants, navItemVariants } from 'motions/motions';
 import React, { FC } from 'react';
 import { useMedia } from 'react-use';
 import s from './Header.module.scss';
@@ -15,17 +17,17 @@ export const Header: FC<HeaderProps> = ({ navigation, onOpenMenu }) => {
   const isSmall = useMedia('(max-width: 1024px)');
   return (
     <header className={s.headerContainer}>
-      <div className={s.logo}>Secret Ingredient</div>
+      <div className={s.logo}>
+        Secret <br />
+        Ingredient
+      </div>
       <div className={s.headerContent}>
-        <a href="#levels" className={s.playBtn}>
-          Play
-        </a>
         {!isSmall && (
           <nav className={s.navContainer}>
             {navigation.map(({ id, title }) => (
-              <a key={id} href={id} className={s.navItem}>
+              <motion.a whileHover="hover" variants={navItemVariants} key={id} href={id} className={s.navItem}>
                 {title}
-              </a>
+              </motion.a>
             ))}
           </nav>
         )}
