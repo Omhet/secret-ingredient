@@ -5,6 +5,8 @@ import { startGame } from '@store/game';
 import { useLevels } from '@store/levels';
 import { closeModal } from '@store/modals';
 import classnames from 'classnames';
+import { motion } from 'framer-motion';
+import { buttonVariants } from 'motions/motions';
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import s from './GameStartModal.module.scss';
@@ -36,14 +38,21 @@ export const GameStartModal: FC = () => {
         <img className={s.master} src={levelDataManager.getCurrentLevelData().imgUrls.master} />
       </div>
       <div className={s.buttonsContainer}>
-        <button className={classnames(s.button, s.playBtn)} onClick={() => start()}>
+        <motion.button
+          className={classnames(s.button, s.playBtn)}
+          onClick={() => start()}
+          whileHover="hover"
+          variants={buttonVariants}
+        >
           <Play className={s.icon} />
           Let&apos;s try
-        </button>
-        <Link className={classnames(s.button, s.exitBtn)} onClick={() => closeModal()} to="/#levels">
-          <Exit className={s.icon} />
-          Menu
-        </Link>
+        </motion.button>
+        <motion.button whileHover="hover" variants={buttonVariants}>
+          <Link className={classnames(s.button, s.exitBtn)} onClick={() => closeModal()} to="/#levels">
+            <Exit className={s.icon} />
+            Menu
+          </Link>
+        </motion.button>
       </div>
     </div>
   );

@@ -5,6 +5,8 @@ import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { useCurrentLevel, useLevels, useNextLevel } from '@store/levels';
 import { closeModal } from '@store/modals';
 import classnames from 'classnames';
+import { motion } from 'framer-motion';
+import { buttonVariants } from 'motions/motions';
 import React, { FC } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import s from './GameEndModal.module.scss';
@@ -51,24 +53,33 @@ export const GameEndModal: FC = () => {
         <img className={s.master} src={imgUrls.master} />
       </div>
       <div className={s.buttonsContainer}>
-        <button className={classnames(s.button, s.restartBtn)} onClick={() => window.location.reload()}>
+        <motion.button
+          className={classnames(s.button, s.restartBtn)}
+          onClick={() => window.location.reload()}
+          whileHover="hover"
+          variants={buttonVariants}
+        >
           <Restart className={s.icon} />
           Retry
-        </button>
+        </motion.button>
         {isEnoughScore && nextLevel && (
-          <button
+          <motion.button
             className={classnames(s.button, s.nextBtn)}
             disabled={!nextLevel.isOpen}
             onClick={() => history.replace(`/game?level=${currentLevelNumber + 1}`)}
+            whileHover="hover"
+            variants={buttonVariants}
           >
             <Next className={s.icon} />
             Next level
-          </button>
+          </motion.button>
         )}
-        <Link className={classnames(s.button, s.exitBtn)} onClick={() => closeModal()} to="/#levels">
-          <Exit className={s.icon} />
-          Menu
-        </Link>
+        <motion.button whileHover="hover" variants={buttonVariants}>
+          <Link className={classnames(s.button, s.exitBtn)} onClick={() => closeModal()} to="/#levels">
+            <Exit className={s.icon} />
+            Menu
+          </Link>
+        </motion.button>
       </div>
     </div>
   );

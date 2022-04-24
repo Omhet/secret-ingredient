@@ -1,4 +1,6 @@
 import { Arrow } from '@icons/Arrow';
+import { motion } from 'framer-motion';
+import { authorLinkVariants, authorVariants } from 'motions/motions';
 import React, { FC, useState } from 'react';
 import { useMedia } from 'react-use';
 import s from './Titles.module.scss';
@@ -13,7 +15,7 @@ export const Titles: FC = () => {
       {isSmall && <span className={s.titlesTitle}>Authors</span>}
       <div className={s.titles}>
         <span className={s.titleName}>Design</span>
-        <div className={s.titleAuthors}>
+        <motion.div className={s.titleAuthors} variants={authorLinkVariants} animate="animate" custom={0}>
           <a
             onMouseOver={() => setIsDariaVisible(true)}
             onMouseOut={() => setIsDariaVisible(false)}
@@ -35,9 +37,9 @@ export const Titles: FC = () => {
           >
             Vladimir
           </a>
-        </div>
+        </motion.div>
         <span className={s.titleName}>Development</span>
-        <div className={s.titleAuthors}>
+        <motion.div className={s.titleAuthors} variants={authorLinkVariants} animate="animate" custom={0.2}>
           <a
             onMouseOver={() => setIsVladimirVisible(true)}
             onMouseOut={() => setIsVladimirVisible(false)}
@@ -59,9 +61,9 @@ export const Titles: FC = () => {
           >
             Daria
           </a>
-        </div>
+        </motion.div>
         <span className={s.titleName}>Music</span>
-        <div className={s.titleAuthors}>
+        <motion.div className={s.titleAuthors} variants={authorLinkVariants} animate="animate" custom={0.4}>
           <a
             onMouseOver={() => setIsVladimirVisible(true)}
             onMouseOut={() => setIsVladimirVisible(false)}
@@ -72,9 +74,9 @@ export const Titles: FC = () => {
           >
             Vladimir
           </a>
-        </div>
+        </motion.div>
         <span className={s.titleName}>Illustrations</span>
-        <div className={s.titleAuthors}>
+        <motion.div className={s.titleAuthors} variants={authorLinkVariants} animate="animate" custom={0.6}>
           <a
             onMouseOver={() => setIsDariaVisible(true)}
             onMouseOut={() => setIsDariaVisible(false)}
@@ -85,36 +87,42 @@ export const Titles: FC = () => {
           >
             Daria
           </a>
-        </div>
+        </motion.div>
       </div>
       {!isDariaVisible && !isVladimirVisible && !isSmall && (
-        <div className={s.emptyContainer}>
+        <motion.div
+          className={s.emptyContainer}
+          variants={authorVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
           <Arrow className={s.arrow} />
           <div className={s.titleContainer}>
             <span className={s.title}>Authors</span>
             <span className={s.note}>Hover over our names to see more info</span>
           </div>
-        </div>
+        </motion.div>
       )}
       {(isDariaVisible || isSmall) && (
-        <div className={s.aboutAuthor}>
+        <motion.div className={s.aboutAuthor} variants={authorVariants} initial="hidden" animate="visible" exit="exit">
           <img src="/pics/Dasha.png" />
           <span className={s.authorDescription}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem neque, repellendus distinctio cum enim
             totam id esse iusto? Laudantium hic neque soluta libero adipisci quaerat cupiditate ipsam excepturi cumque
             omnis.
           </span>
-        </div>
+        </motion.div>
       )}
       {(isVladimirVisible || isSmall) && (
-        <div className={s.aboutAuthor}>
+        <motion.div className={s.aboutAuthor} variants={authorVariants} initial="hidden" animate="visible" exit="exit">
           <img src="/pics/Vova.png" />
           <span className={s.authorDescription}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem neque, repellendus distinctio cum enim
             totam id esse iusto? Laudantium hic neque soluta libero adipisci quaerat cupiditate ipsam excepturi cumque
             omnis.
           </span>
-        </div>
+        </motion.div>
       )}
     </section>
   );

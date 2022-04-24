@@ -1,4 +1,6 @@
 import classnames from 'classnames';
+import { motion } from 'framer-motion';
+import { button2Variants, levelContainerVariants, levelVariants } from 'motions/motions';
 import React, { FC } from 'react';
 import s from './Level.module.scss';
 
@@ -13,13 +15,15 @@ export type LevelProps = {
 
 export const Level: FC<LevelProps> = ({ title, imgSrc, score, maxLevelScore, isOpen, onClick }) => {
   return (
-    <div
+    <motion.div
       style={{
         backgroundImage: `url(${imgSrc})`,
       }}
       className={classnames(s.levelCard, { [s.closedLevel]: !isOpen })}
+      variants={levelContainerVariants}
+      whileHover="hover"
     >
-      <div className={s.infoContainer}>
+      <motion.div className={s.infoContainer} variants={levelVariants} whileHover="hover">
         <div className={s.levelTitle}>{title}</div>
         {isOpen && (
           <div className={s.levelScore}>
@@ -27,11 +31,17 @@ export const Level: FC<LevelProps> = ({ title, imgSrc, score, maxLevelScore, isO
           </div>
         )}
         {isOpen && (
-          <button className={s.playBtn} disabled={!isOpen} onClick={() => onClick()}>
+          <motion.button
+            whileHover="hover"
+            variants={button2Variants}
+            className={s.playBtn}
+            disabled={!isOpen}
+            onClick={() => onClick()}
+          >
             Play
-          </button>
+          </motion.button>
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };

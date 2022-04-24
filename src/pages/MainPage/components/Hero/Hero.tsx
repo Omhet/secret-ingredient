@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+import { buttonVariants } from 'motions/motions';
 import React, { FC } from 'react';
 import s from './Hero.module.scss';
 
@@ -12,12 +14,12 @@ export const Hero: FC = () => {
           Let&apos;s find the secret ingredient to help you to become the greatest chef ever!
         </span>
         <div className={s.buttonsContainer}>
-          <a href="#levels" className={s.accentBtn}>
+          <motion.a whileHover="hover" variants={buttonVariants} href="#levels" className={s.accentBtn}>
             Play game
-          </a>
-          <a href="#story" className={s.secondaryBtn}>
+          </motion.a>
+          <motion.a whileHover="hover" variants={buttonVariants} href="#story" className={s.secondaryBtn}>
             Read story
-          </a>
+          </motion.a>
         </div>
       </div>
       <div className={s.imgContainer}>
