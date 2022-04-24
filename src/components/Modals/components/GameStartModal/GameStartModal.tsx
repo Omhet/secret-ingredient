@@ -1,5 +1,6 @@
 import { Exit } from '@icons/Exit';
 import { Play } from '@icons/Play';
+import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { startGame } from '@store/game';
 import { useLevels } from '@store/levels';
 import { closeModal } from '@store/modals';
@@ -7,19 +8,6 @@ import classnames from 'classnames';
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import s from './GameStartModal.module.scss';
-
-const getMasterImg = (currentLevelNumber: number): string => {
-  switch (currentLevelNumber) {
-    case 1:
-      return '/pics/JapanMaster.png';
-    case 2:
-      return '/pics/MexicaMaster.png';
-    case 3:
-      return '/pics/RussiaMaster.png';
-    default:
-      return '/pics/GrandmaMaster.png';
-  }
-};
 
 const getMasterWords = (currentLevelNumber: number): string => {
   switch (currentLevelNumber) {
@@ -45,7 +33,7 @@ export const GameStartModal: FC = () => {
     <div className={s.root}>
       <div className={s.masterContainer}>
         <span className={s.masterWords}>{getMasterWords(currentLevelNumber)}</span>
-        <img className={s.master} src={getMasterImg(currentLevelNumber)} />
+        <img className={s.master} src={levelDataManager.getCurrentLevelData().imgUrls.master} />
       </div>
       <div className={s.buttonsContainer}>
         <button className={classnames(s.button, s.playBtn)} onClick={() => start()}>

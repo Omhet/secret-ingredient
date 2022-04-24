@@ -73,6 +73,7 @@ type LevelType = {
   audio: HTMLAudioElement;
   markup: Markup;
   images: LevelImages;
+  imgUrls: LevelImageUrls;
 };
 
 class LevelDataManager {

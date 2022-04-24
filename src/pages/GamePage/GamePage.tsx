@@ -1,7 +1,7 @@
 import { Loader } from '@components/Loader/Loader';
 import { Game } from '@pages/GamePage/components/Game/Game';
 import { useLevels } from '@store/levels';
-import { closeModal, openGameStartModal } from '@store/modals';
+import { closeModal } from '@store/modals';
 import React, { FC, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSearchParam } from 'react-use';
@@ -30,8 +30,7 @@ export const GamePage: FC = () => {
 
     closeModal();
     loadGame(levelNumber);
-    openGameStartModal();
   }, [levelNumber]);
 
-  return <div className={s.main}>{isLoading ? <Loader levelNumber={levelNumber} /> : <Game />}</div>;
+  return <div className={s.main}>{isLoading ? <Loader /> : <Game />}</div>;
 };

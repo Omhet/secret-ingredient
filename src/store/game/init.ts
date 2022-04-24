@@ -6,7 +6,7 @@ import {
   setCurrentLevelNumber,
   setCurrentLevelScore,
 } from '@store/levels';
-import { openGameEndModal } from '@store/modals';
+import { openGameEndModal, openGameStartModal } from '@store/modals';
 import { guard } from 'effector';
 import {
   decreaseBlastCount,
@@ -48,6 +48,8 @@ loadGame.use(async (levelNumber: number) => {
   setBlastCount(Math.round(markup.notes.length * 1.25));
 
   setIsLoading(false);
+
+  openGameStartModal();
 });
 
 startGame.watch(() => {

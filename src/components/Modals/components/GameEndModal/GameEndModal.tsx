@@ -9,19 +9,6 @@ import React, { FC } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import s from './GameEndModal.module.scss';
 
-const getMasterImg = (currentLevelNumber: number): string => {
-  switch (currentLevelNumber) {
-    case 1:
-      return '/pics/JapanMaster.png';
-    case 2:
-      return '/pics/MexicaMaster.png';
-    case 3:
-      return '/pics/RussiaMaster.png';
-    default:
-      return '/pics/GrandmaMaster.png';
-  }
-};
-
 const getMasterWords = (currentLevelNumber: number): string => {
   switch (currentLevelNumber) {
     case 1:
@@ -38,7 +25,8 @@ const getMasterWords = (currentLevelNumber: number): string => {
 export const GameEndModal: FC = () => {
   const { currentLevelScore, currentLevelNumber } = useLevels();
   const nextLevel = useNextLevel();
-  const maxLevelScore = levelDataManager.getCurrentLevelData().markup.notes.length;
+  const { markup, imgUrls } = levelDataManager.getCurrentLevelData();
+  const maxLevelScore = markup.notes.length;
   const history = useHistory();
 
   return (
@@ -51,7 +39,7 @@ export const GameEndModal: FC = () => {
       </div>
       <div className={s.masterContainer}>
         <span className={s.masterWords}>{getMasterWords(currentLevelNumber)}</span>
-        <img className={s.master} src={getMasterImg(currentLevelNumber)} />
+        <img className={s.master} src={imgUrls.master} />
       </div>
       <div className={s.buttonsContainer}>
         <button className={classnames(s.button, s.restartBtn)} onClick={() => window.location.reload()}>

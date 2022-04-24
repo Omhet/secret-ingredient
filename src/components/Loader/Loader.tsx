@@ -1,16 +1,14 @@
+import { levelDataManager } from '@lib/levels/LevelDataManager';
 import React, { FC } from 'react';
 import s from './Loader.module.scss';
 
-type LoaderProps = {
-  levelNumber: number;
-};
-
-export const Loader: FC<LoaderProps> = ({ levelNumber }) => {
-  const currentLevelFoodSrc = `/pics/levels/${levelNumber}/food/1.png`;
-
+export const Loader: FC = () => {
   return (
     <div className={s.loaderContainer}>
-      <div className={s.loader} style={{ backgroundImage: `url(${currentLevelFoodSrc})` }}>
+      <div
+        className={s.loader}
+        style={{ backgroundImage: `url(${levelDataManager.getCurrentLevelData().imgUrls.food[0]})` }}
+      >
         <div></div>
         <div></div>
         <div></div>
