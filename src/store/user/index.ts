@@ -1,15 +1,15 @@
-import { getWalletAccountId, isNEARSignedIn } from '@lib/auth/near';
+import { getWalletAccountNickname, isNEARSignedIn } from '@lib/auth/near';
 import { createStore } from 'effector';
 import { useStore } from 'effector-react';
 
 type UserStore = {
   isSignedIn: boolean;
-  id: string;
+  name?: string;
 };
 
 export const userStore = createStore<UserStore>({
   isSignedIn: isNEARSignedIn(),
-  id: getWalletAccountId(),
+  name: getWalletAccountNickname(),
 });
 
 export const useUser = () => {

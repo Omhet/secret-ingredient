@@ -31,6 +31,16 @@ export const isNEARSignedIn = (): boolean => {
   return wallet.isSignedIn();
 };
 
-export const getWalletAccountId = (): string => {
+export const getWalletAccountId = (): string | undefined => {
   return wallet.getAccountId();
+};
+
+export const getWalletAccountNickname = (): string | undefined => {
+  const id = getWalletAccountId();
+
+  if (!id) {
+    return undefined;
+  }
+
+  return id.split('.')[0] || id;
 };

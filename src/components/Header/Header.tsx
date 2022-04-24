@@ -37,7 +37,9 @@ export const Header: FC<HeaderProps> = ({ navigation, onOpenMenu }) => {
           <span> Score: {globalScore}</span>
           <img className={s.logoImg} src="/pics/cake.png" />
         </div>
-        {!user.isSignedIn && (
+        {user.isSignedIn ? (
+          <div>Hi, {user.name}</div>
+        ) : (
           <button className={s.menuBtn} onClick={() => signIn()}>
             Connect
           </button>
