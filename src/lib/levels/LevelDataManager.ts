@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Markup } from '@app-types/music';
 import { AudioManager } from './AudioManager';
 import { ImagesManager, LevelImages, LevelImageUrls } from './ImagesManager';
@@ -25,7 +26,7 @@ const LEVELS_DATA = [
   {
     name: 'Grandma',
     unlockScore: 0,
-    maxScore: 104,
+    maxScore: 102,
     ingredientColors: ['#C55350', '#DE9D81'],
   },
 ];
@@ -151,3 +152,5 @@ const imageUrls = LEVELS.map(({ imgUrls }) => imgUrls);
 const imagesManager = new ImagesManager(imageUrls);
 
 export const levelDataManager = new LevelDataManager(audioManager, markupManager, imagesManager);
+// @ts-ignore
+window.getCurrentLevelData = levelDataManager.getCurrentLevelData.bind(levelDataManager);
