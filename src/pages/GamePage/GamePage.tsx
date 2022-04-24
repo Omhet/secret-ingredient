@@ -1,3 +1,4 @@
+import { Loader } from '@components/Loader/Loader';
 import { Game } from '@pages/GamePage/components/Game/Game';
 import { closeModal, openGameStartModal } from '@store/modals';
 import React, { FC, useEffect } from 'react';
@@ -16,5 +17,5 @@ export const GamePage: FC = () => {
     openGameStartModal();
   }, [levelNumber]);
 
-  return <div className={s.main}>{isLoading ? 'Loading...' : <Game />}</div>;
+  return <div className={s.main}>{isLoading ? <Loader /> : <Game />}</div>;
 };
