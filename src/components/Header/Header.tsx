@@ -1,6 +1,8 @@
 import { NavigationItem } from '@app-types/navigationItem';
 import { Burger } from '@icons/Burger';
+import { signIn } from '@lib/auth/near';
 import { useLevels } from '@store/levels';
+import { useUser } from '@store/user';
 import React, { FC } from 'react';
 import { useMedia } from 'react-use';
 import s from './Header.module.scss';
@@ -12,6 +14,8 @@ export type HeaderProps = {
 
 export const Header: FC<HeaderProps> = ({ navigation, onOpenMenu }) => {
   const { globalScore } = useLevels();
+  const user = useUser();
+
   const isSmall = useMedia('(max-width: 1024px)');
   return (
     <header className={s.headerContainer}>
@@ -33,6 +37,11 @@ export const Header: FC<HeaderProps> = ({ navigation, onOpenMenu }) => {
           <span> Score: {globalScore}</span>
           <img className={s.logoImg} src="/pics/cake.png" />
         </div>
+        {!user.isSignedIn && (
+          <button className={s.menuBtn} onClick={() => signIn()}>
+            Connect
+          </button>
+        )}
         {isSmall && (
           <button className={s.menuBtn} onClick={onOpenMenu}>
             <Burger className={s.menuBtn} />
