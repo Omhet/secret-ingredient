@@ -1,6 +1,11 @@
 import { GameStatus } from '@app-types/game';
 import { levelDataManager } from '@lib/levels/LevelDataManager';
-import { currentLevelStore, rewriteCurrentLevelScore, setCurrentLevelScore } from '@store/levels';
+import {
+  currentLevelStore,
+  rewriteCurrentLevelScore,
+  setCurrentLevelNumber,
+  setCurrentLevelScore,
+} from '@store/levels';
 import { openGameEndModal } from '@store/modals';
 import { guard } from 'effector';
 import {
@@ -34,6 +39,8 @@ loadGame.use(async (levelNumber: number) => {
   setIsLoading(true);
 
   resetGameData();
+
+  setCurrentLevelNumber(levelNumber);
 
   const { markup } = await levelDataManager.loadLevelData(levelNumber);
 

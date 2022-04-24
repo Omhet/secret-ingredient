@@ -2,11 +2,11 @@ import { Exit } from '@icons/Exit';
 import { Next } from '@icons/Next';
 import { Restart } from '@icons/Restart';
 import { levelDataManager } from '@lib/levels/LevelDataManager';
-import { restartCurrentLevel, startNextLevel, useLevels, useNextLevel } from '@store/levels';
+import { useLevels, useNextLevel } from '@store/levels';
 import { closeModal } from '@store/modals';
 import classnames from 'classnames';
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import s from './GameEndModal.module.scss';
 
 const getMasterImg = (currentLevelNumber: number): string => {
@@ -39,6 +39,7 @@ export const GameEndModal: FC = () => {
   const { currentLevelScore, currentLevelNumber } = useLevels();
   const nextLevel = useNextLevel();
   const maxLevelScore = levelDataManager.getCurrentLevelData().markup.notes.length;
+  const history = useHistory();
 
   return (
     <div className={s.root}>
@@ -53,7 +54,7 @@ export const GameEndModal: FC = () => {
         <img className={s.master} src={getMasterImg(currentLevelNumber)} />
       </div>
       <div className={s.buttonsContainer}>
-        <button className={classnames(s.button, s.restartBtn)} onClick={() => restartCurrentLevel()}>
+        <button className={classnames(s.button, s.restartBtn)} onClick={() => window.location.reload()}>
           <Restart className={s.icon} />
           Retry
         </button>
@@ -61,7 +62,7 @@ export const GameEndModal: FC = () => {
           <button
             className={classnames(s.button, s.nextBtn)}
             disabled={!nextLevel.isOpen}
-            onClick={() => startNextLevel()}
+            onClick={() => history.replace(`/game?level=${currentLevelNumber + 1}`)}
           >
             <Next className={s.icon} />
             Next level

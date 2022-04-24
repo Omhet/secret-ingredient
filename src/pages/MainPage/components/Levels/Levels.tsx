@@ -1,4 +1,4 @@
-import { startLevel, useLevels } from '@store/levels';
+import { setCurrentLevelNumber, useLevels } from '@store/levels';
 import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Level } from '../Level/Level';
@@ -13,8 +13,8 @@ export const Levels: FC = () => {
   const history = useHistory();
 
   const handlePlayClick = (levelNumber: number) => {
-    startLevel(levelNumber);
-    history.push('/game');
+    setCurrentLevelNumber(levelNumber);
+    history.push(`/game?level=${levelNumber}`);
   };
 
   return (
