@@ -11,7 +11,7 @@ type ModalsStore = {
 };
 
 export const modalsStore = createStore<ModalsStore>({
-  id: ModalId.GameStart,
+  id: undefined,
 });
 
 export const useModals = () => {
