@@ -20,6 +20,7 @@ export const pixiGame = (app: Application) => {
 
   const {
     images,
+    number: levelNumber,
     markup: { bps, notes: markupNotes },
   } = levelDataManager.getCurrentLevelData();
   const music = levelDataManager.getLevelMusic();
@@ -119,8 +120,8 @@ export const pixiGame = (app: Application) => {
 
   const minZoneScale = 3;
   const maxZoneScale = 3.06;
-  const minFoodScale = 0.18;
-  const maxFoodScale = 0.21;
+  const minFoodScale = levelNumber === 4 ? 0.15 : 0.18;
+  const maxFoodScale = levelNumber === 4 ? 0.18 : 0.21;
 
   let elapsed = 0.0;
   function gameLoop() {
@@ -192,9 +193,9 @@ export const pixiGame = (app: Application) => {
   const zoneWidth = zoneRect.width;
   const zoneHeight = zoneRect.height;
   const getRandomTargetX = createNotRepeatingRandomArrayItemFn([
-    zoneRect.left + zoneWidth * 0.2,
+    zoneRect.left,
     zoneRect.left + zoneWidth * 0.45,
-    zoneRect.left + zoneWidth * 0.8,
+    zoneRect.right,
   ]);
   const targetY = zoneRect.top + zoneHeight * 0.1;
 

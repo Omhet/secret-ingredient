@@ -17,7 +17,9 @@ export const Header: FC<HeaderProps> = ({ navigation, onOpenMenu }) => {
     <header className={s.headerContainer}>
       <div className={s.logo}>Secret Ingredient</div>
       <div className={s.headerContent}>
-        <button className={s.playBtn}>Play</button>
+        <a href="#levels" className={s.playBtn}>
+          Play
+        </a>
         {!isSmall && (
           <nav className={s.navContainer}>
             {navigation.map(({ id, title }) => (

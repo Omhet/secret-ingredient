@@ -73,7 +73,7 @@ guard({
 
 // Do end game stuff
 endGame.watch(() => {
-  const { hitCount } = gameStore.getState();
+  const { hitCount, noteCount } = gameStore.getState();
   const { score: oldScore } = currentLevelStore.getState();
 
   const newScore = hitCount;
@@ -83,5 +83,8 @@ endGame.watch(() => {
   }
 
   openGameEndModal();
-  levelDataManager.stopLevelMusic();
+  // Do not stop music at the end of the whole level. Let it play till the end
+  if (noteCount !== 0) {
+    levelDataManager.stopLevelMusic();
+  }
 });
