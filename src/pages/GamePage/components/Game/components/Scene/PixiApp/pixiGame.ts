@@ -193,9 +193,9 @@ export const pixiGame = (app: Application) => {
   const zoneWidth = zoneRect.width;
   const zoneHeight = zoneRect.height;
   const getRandomTargetX = createNotRepeatingRandomArrayItemFn([
-    zoneRect.left + zoneWidth * 0.2,
+    zoneRect.left,
     zoneRect.left + zoneWidth * 0.45,
-    zoneRect.left + zoneWidth * 0.8,
+    zoneRect.right,
   ]);
   const targetY = zoneRect.top + zoneHeight * 0.1;
 
