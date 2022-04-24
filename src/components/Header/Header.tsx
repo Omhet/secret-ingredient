@@ -3,7 +3,7 @@ import { Burger } from '@icons/Burger';
 import { useLevels } from '@store/levels';
 import { signIn, signOut, useUser } from '@store/user';
 import { motion } from 'framer-motion';
-import { navItemVariants } from 'motions/motions';
+import { buttonVariants, navItemVariants } from 'motions/motions';
 import React, { FC } from 'react';
 import { useMedia } from 'react-use';
 import s from './Header.module.scss';
@@ -40,14 +40,19 @@ export const Header: FC<HeaderProps> = ({ navigation, onOpenMenu }) => {
         </div>
         {user.isSignedIn ? (
           <>
-            <button className={s.menuBtn} onClick={() => signOut()}>
+            <motion.button
+              className={s.disconnectBtn}
+              onClick={() => signOut()}
+              whileHover="hover"
+              variants={buttonVariants}
+            >
               Disconnect
-            </button>
+            </motion.button>
           </>
         ) : (
-          <button className={s.menuBtn} onClick={() => signIn()}>
+          <motion.button className={s.connectBtn} onClick={() => signIn()} whileHover="hover" variants={buttonVariants}>
             Connect
-          </button>
+          </motion.button>
         )}
         {isSmall && (
           <button className={s.menuBtn} onClick={onOpenMenu}>

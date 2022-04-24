@@ -31,12 +31,19 @@
   align-items: center;
   gap: 48rem;
 }
-.playBtn {
+.connectBtn,
+.disconnectBtn {
   padding: 8rem 24rem;
   font-size: 16rem;
   font-weight: 900;
-  background-color: var(--accent2-color);
   border-radius: 16rem;
+}
+.connectBtn {
+  background-color: var(--accent2-color);
+}
+.disconnectBtn {
+  color: var(--back-color);
+  background-color: var(--accent1-color);
 }
 .navContainer {
   display: flex;
@@ -79,13 +86,14 @@
     width: 100%;
     justify-content: space-between;
   }
-  .playBtn {
-    order: 2;
+  .connectBtn,
+  .disconnectBtn {
+    order: 3;
   }
   .score {
-    order: 1;
+    order: 2;
   }
   .menuBtn {
-    order: 3;
+    order: 1;
   }
 }
