@@ -4,9 +4,7 @@
   margin: auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   flex-shrink: 0;
-  scroll-snap-align: start;
   @media (max-width: 1024px) {
     height: calc(100vh - 72rem);
     flex-direction: column;

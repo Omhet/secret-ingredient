@@ -5,9 +5,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  flex-shrink: 0;
   gap: 32rem;
-  scroll-snap-align: start;
   @media (max-width: 480px) {
     padding: 24rem;
   }

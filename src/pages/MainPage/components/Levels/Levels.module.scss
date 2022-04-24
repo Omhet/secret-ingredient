@@ -4,9 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  flex-shrink: 0;
   gap: 32rem;
-  scroll-snap-align: start;
   @media (max-width: 1024px) {
     height: 100%;
   }
