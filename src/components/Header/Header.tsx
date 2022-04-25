@@ -23,7 +23,7 @@ export const Header: FC<HeaderProps> = ({ navigation, onOpenMenu }) => {
         Ingredient
       </div>
       <div className={s.headerContent}>
-        <motion.a whileHover="hover" variants={navItemVariants} href="#levels" className={s.playBtn}>
+        <motion.a whileHover="hover" variants={buttonVariants} href="#levels" className={s.playBtn}>
           Play
         </motion.a>
         {!isSmall && (
@@ -35,10 +35,6 @@ export const Header: FC<HeaderProps> = ({ navigation, onOpenMenu }) => {
             ))}
           </nav>
         )}
-        {/* <div className={s.score}>
-          <span> Score: {globalScore}</span>
-          <img className={s.logoImg} src="/pics/cake.png" />
-        </div> */}
         {!user.isError && (
           <>
             {user.isSignedIn ? (
