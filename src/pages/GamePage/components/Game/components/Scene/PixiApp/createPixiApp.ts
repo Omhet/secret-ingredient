@@ -11,21 +11,21 @@ export const createPixiApp = () => {
     backgroundAlpha: 0,
   });
 
-  window.addEventListener('resize', function () {
-    app.renderer.resize(
-      document.documentElement.clientWidth * SCALE_FACTOR,
-      document.documentElement.clientHeight * SCALE_FACTOR
-    );
-  });
-
-  app.view.addEventListener('contextmenu', (e) => {
+  const disableContextMenu = (e: Event) => {
     e.preventDefault();
-  });
+  };
+
+  app.view.addEventListener('contextmenu', disableContextMenu);
+
+  const removeEventListeners = () => {
+    app.view.removeEventListener('contextmenu', disableContextMenu);
+  };
 
   const game = pixiGame(app);
 
   return {
     app,
     game,
+    removeEventListeners,
   };
 };

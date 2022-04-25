@@ -3,9 +3,13 @@ import * as PIXI from 'pixi.js';
 export default class MouseManager extends PIXI.utils.EventEmitter {
   isEnabled = false;
   private isDown = false;
+  onDownCallback: (evt: any) => void;
+  onUpCallback: (evt: any) => void;
 
   constructor() {
     super();
+    this.onDownCallback = this.onMouseDown.bind(this);
+    this.onUpCallback = this.onMouseUp.bind(this);
   }
 
   enable() {
@@ -16,10 +20,10 @@ export default class MouseManager extends PIXI.utils.EventEmitter {
   }
 
   _enableEvents() {
-    window.addEventListener('mousedown', this.onMouseDown.bind(this), true);
-    window.addEventListener('touchstart', this.onMouseDown.bind(this), true);
-    window.addEventListener('mouseup', this.onMouseUp.bind(this), true);
-    window.addEventListener('touchend', this.onMouseUp.bind(this), true);
+    window.addEventListener('mousedown', this.onDownCallback);
+    window.addEventListener('mouseup', this.onUpCallback);
+    window.addEventListener('touchstart', this.onDownCallback);
+    window.addEventListener('touchend', this.onUpCallback);
   }
 
   disable() {
@@ -30,8 +34,10 @@ export default class MouseManager extends PIXI.utils.EventEmitter {
   }
 
   _disableEvents() {
-    window.removeEventListener('mousedown', this.onMouseDown, true);
-    window.removeEventListener('mouseup', this.onMouseUp, true);
+    window.removeEventListener('mousedown', this.onDownCallback);
+    window.removeEventListener('mouseup', this.onUpCallback);
+    window.removeEventListener('touchstart', this.onDownCallback);
+    window.removeEventListener('touchend', this.onUpCallback);
   }
 
   onMouseDown(evt: any) {
