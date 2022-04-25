@@ -6,7 +6,6 @@ import React, { FC, useState } from 'react';
 import { toggleFreezePage } from 'utils/toggleFreezePage';
 import { Hero } from './components/Hero/Hero';
 import { Levels } from './components/Levels/Levels';
-import { RankingsTest } from './components/RankingsTest/RankingsTest';
 import { Rules } from './components/Rules/Rules';
 import { Story } from './components/Story/Story';
 import { Titles } from './components/Titles/Titles';
@@ -39,7 +38,6 @@ export const MainPage: FC = () => {
         <Story />
         <Rules />
         <Levels />
-        <RankingsTest />
         <Titles />
       </main>
       <AnimatePresence exitBeforeEnter>

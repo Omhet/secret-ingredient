@@ -1,4 +1,4 @@
-import { loadRankings, useRankings } from '@store/rankings';
+import { loadRankings, updateUserRankings, useRankings } from '@store/rankings';
 import React, { FC, useEffect } from 'react';
 import s from './RankingsTest.module.scss';
 
@@ -17,6 +17,7 @@ export const RankingsTest: FC<RankingsTestProps> = ({}) => {
 
   return (
     <div className={s.main}>
+      <button onClick={() => updateUserRankings(100)}>Update</button>
       {rankings.map(({ name, score }) => (
         <div key={name}>
           User: {name} | Score: {score}
