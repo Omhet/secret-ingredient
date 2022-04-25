@@ -15,11 +15,13 @@ export type UpdateStatus = 'Init' | 'InProgress' | 'Done';
 
 type RankingsStore = {
   rankings: Rankings;
+  userRankingScore: number | undefined;
   updateStatus: UpdateStatus;
 };
 
 export const rankingsStore = createStore<RankingsStore>({
   rankings: [],
+  userRankingScore: undefined,
   updateStatus: 'Init',
 });
 
@@ -34,6 +36,7 @@ export const useRankings = () => {
 };
 
 export const setUpdateStatus = createEvent<UpdateStatus>();
+export const setUserRankingScore = createEvent<number>();
 
 export const loadRankings = createEffect<void, Rankings, Error>(async () => {
   const rankingsEntries = await getRankings();
@@ -49,6 +52,11 @@ export const loadRankings = createEffect<void, Rankings, Error>(async () => {
       isCurrentUser: name === user.name,
     };
   });
+
+  const userRankingScore = rankings.find(({ name }) => name === user.name)?.score;
+  if (userRankingScore) {
+    setUserRankingScore(userRankingScore);
+  }
 
   return rankings.sort((a, b) => b.score - a.score);
 });

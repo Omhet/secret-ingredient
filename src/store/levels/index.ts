@@ -1,4 +1,5 @@
 import { levelDataManager } from '@lib/levels/LevelDataManager';
+import { rankingsStore } from '@store/rankings';
 import { combine, createEvent, createStore } from 'effector';
 import { useStore } from 'effector-react';
 
@@ -22,7 +23,13 @@ export const levelsStore = createStore<LevelsStore>({
   levels: levelDataManager.getAllLevels().map(({ score, maxScore, number }) => ({ score, maxScore, number })),
 });
 
-export const globalScoreStore = levelsStore.map(({ levels }) => levels.reduce((a, b) => a + b.score, 0));
+export const globalScoreStore = combine(levelsStore, rankingsStore, ({ levels }, rankings) => {
+  if (rankings.userRankingScore) {
+    return rankings.userRankingScore;
+  }
+
+  return levels.reduce((a, b) => a + b.score, 0);
+});
 
 const getIsEnoughScore = (score: number, maxScore: number) => score >= Math.floor(maxScore * 0.3);
 
