@@ -7,6 +7,8 @@ export interface RankingsTestProps {}
 export const RankingsTest: FC<RankingsTestProps> = ({}) => {
   const { rankings, isRankingsLoading } = useRankings();
 
+  console.log(rankings);
+
   useEffect(() => {
     loadRankings();
   }, []);
@@ -17,11 +19,11 @@ export const RankingsTest: FC<RankingsTestProps> = ({}) => {
 
   return (
     <div className={s.main}>
-      {rankings.map(({ name, score }) => (
-        <div key={name}>
-          User: {name} | Score: {score}
+      {/* {rankings.map(({ user, score }) => (
+        <div key={user}>
+          User: {user} | Score: {score}
         </div>
-      ))}
+      ))} */}
     </div>
   );
 };

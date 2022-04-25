@@ -1,14 +1,11 @@
-import { Ranking, rankings } from './model';
+import { context, MapEntry, PersistentUnorderedMap } from 'near-sdk-as';
+
+const rankings = new PersistentUnorderedMap<string, i32>('r');
 
 export function updateRankings(score: i32): void {
-  const ranking = new Ranking(score);
-  rankings.push(ranking);
+  rankings.set(context.sender, score);
 }
 
-export function getRankings(): Ranking[] {
-  const result = new Array<Ranking>(rankings.length);
-  for (let i = 0; i < rankings.length; i++) {
-    result[i] = rankings[i];
-  }
-  return result;
+export function getRankings(): MapEntry<string, i32>[] {
+  return rankings.entries();
 }

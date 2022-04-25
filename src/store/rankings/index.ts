@@ -3,7 +3,7 @@ import { createEffect, createEvent, createStore } from 'effector';
 import { useStore } from 'effector-react';
 
 export type Ranking = {
-  user: string;
+  name: string;
   score: number;
 };
 
@@ -33,7 +33,16 @@ export const useRankings = () => {
 
 export const setUpdateStatus = createEvent<UpdateStatus>();
 
-export const loadRankings = createEffect<void, Rankings, Error>(() => getRankings());
+export const loadRankings = createEffect<void, Rankings, Error>(async () => {
+  const rankingsEntries = await getRankings();
+
+  const rankings: Rankings = rankingsEntries.map(({ key, value }: { key: string; value: number }) => ({
+    name: key.split('.')[0],
+    score: value,
+  }));
+
+  return rankings.sort((a, b) => b.score - a.score);
+});
 export const updateUserRankings = createEffect<number, void, Error>(async (score) => {
   setUpdateStatus('InProgress');
   await updateRankings(score);
