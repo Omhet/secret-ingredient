@@ -11,12 +11,14 @@ type Level = {
 type LevelsStore = {
   currentLevelNumber: number;
   currentLevelScore: number;
+  isBetterScoreThanEarlier: boolean;
   levels: Level[];
 };
 
 export const levelsStore = createStore<LevelsStore>({
   currentLevelNumber: 1,
   currentLevelScore: 0,
+  isBetterScoreThanEarlier: false,
   levels: levelDataManager.getAllLevels().map(({ score, maxScore, number }) => ({ score, maxScore, number })),
 });
 
@@ -76,3 +78,4 @@ export const useNextLevel = () => {
 export const setCurrentLevelNumber = createEvent<number>();
 export const setCurrentLevelScore = createEvent<number>();
 export const rewriteCurrentLevelScore = createEvent<number>();
+export const setIsBetterScoreThanEarlier = createEvent<boolean>();

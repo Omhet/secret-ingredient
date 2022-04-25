@@ -4,6 +4,7 @@ import { Restart } from '@icons/Restart';
 import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { useCurrentLevel, useLevels, useNextLevel } from '@store/levels';
 import { closeModal } from '@store/modals';
+import { updateUserRankings, useRankings } from '@store/rankings';
 import classnames from 'classnames';
 import { motion } from 'framer-motion';
 import { buttonVariants } from 'motions/motions';
@@ -33,7 +34,8 @@ const getMasterWords = (currentLevelNumber: number, isEnoughScore: boolean): str
 };
 
 export const GameEndModal: FC = () => {
-  const { currentLevelScore, currentLevelNumber } = useLevels();
+  const { updateStatus } = useRankings();
+  const { currentLevelScore, currentLevelNumber, isBetterScoreThanEarlier } = useLevels();
   const { isEnoughScore } = useCurrentLevel();
   const nextLevel = useNextLevel();
   const { markup, imgUrls } = levelDataManager.getCurrentLevelData();
@@ -80,6 +82,17 @@ export const GameEndModal: FC = () => {
             Menu
           </Link>
         </motion.button>
+        {isBetterScoreThanEarlier && (
+          <>
+            {updateStatus === 'Init' && (
+              <button onClick={() => updateUserRankings(currentLevelScore)}>
+                Update your ranking in blockchain tournament table
+              </button>
+            )}
+            {updateStatus === 'InProgress' && <div>Loading</div>}
+            {updateStatus === 'Done' && <div>Done</div>}
+          </>
+        )}
       </div>
     </div>
   );

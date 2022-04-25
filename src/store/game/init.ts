@@ -5,6 +5,7 @@ import {
   rewriteCurrentLevelScore,
   setCurrentLevelNumber,
   setCurrentLevelScore,
+  setIsBetterScoreThanEarlier,
 } from '@store/levels';
 import { openGameEndModal, openGameStartModal } from '@store/modals';
 import { guard } from 'effector';
@@ -79,7 +80,10 @@ endGame.watch(() => {
   const newScore = hitCount;
   setCurrentLevelScore(newScore);
   if (newScore > oldScore) {
+    setIsBetterScoreThanEarlier(true);
     rewriteCurrentLevelScore(newScore);
+  } else {
+    setIsBetterScoreThanEarlier(false);
   }
 
   openGameEndModal();

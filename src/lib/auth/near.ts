@@ -31,7 +31,7 @@ const contract = await new Contract(wallet.account(), contractName, {
   sender: wallet.getAccountId(),
 });
 
-export const updateRankings = (score: number) => {
+export const updateRankings = async (score: number) => {
   return contract.updateRankings({ score }, BOATLOAD_OF_GAS);
 };
 

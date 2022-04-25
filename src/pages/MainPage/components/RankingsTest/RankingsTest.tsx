@@ -5,13 +5,13 @@ import s from './RankingsTest.module.scss';
 export interface RankingsTestProps {}
 
 export const RankingsTest: FC<RankingsTestProps> = ({}) => {
-  const { rankings, isLoading } = useRankings();
+  const { rankings, isRankingsLoading } = useRankings();
 
   useEffect(() => {
     loadRankings();
   }, []);
 
-  if (isLoading) {
+  if (isRankingsLoading) {
     return <div>Loading</div>;
   }
 
