@@ -2,11 +2,16 @@ import { Modals } from '@components/Modals/Modals';
 import { GamePage } from '@pages/GamePage/GamePage';
 import { MainPage } from '@pages/MainPage/MainPage';
 import { NotFoundPage } from '@pages/NotFoundPage/NotFoundPage';
-import React, { FC } from 'react';
+import { initUser } from '@store/user';
+import React, { FC, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import s from './App.module.scss';
 
 export const App: FC = () => {
+  useEffect(() => {
+    initUser();
+  }, []);
+
   return (
     <>
       {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}

@@ -1,16 +1,17 @@
 import { NavigationItem } from '@app-types/navigationItem';
 import { FullScreenMenu } from '@components/FullScreenMenu/FullScreenMenu';
 import { Header } from '@components/Header/Header';
+import { useUser } from '@store/user';
 import { AnimatePresence } from 'framer-motion';
 import React, { FC, useState } from 'react';
 import { toggleFreezePage } from 'utils/toggleFreezePage';
 import { Hero } from './components/Hero/Hero';
 import { Levels } from './components/Levels/Levels';
+import { Rankings } from './components/Rankings/Rankings';
 import { Rules } from './components/Rules/Rules';
 import { Story } from './components/Story/Story';
 import { Titles } from './components/Titles/Titles';
 import s from './MainPage.module.scss';
-import { Rankings } from './components/Rankings/Rankings';
 
 const navigation: NavigationItem[] = [
   { id: '#story', title: 'Story' },
@@ -23,6 +24,8 @@ const navigation: NavigationItem[] = [
 export type MainPageProps = {};
 
 export const MainPage: FC = () => {
+  const user = useUser();
+
   const [isMenuOpen, setMenuOpen] = useState(false);
   const openMenu = () => {
     setMenuOpen(true);
@@ -40,7 +43,7 @@ export const MainPage: FC = () => {
         <Story />
         <Rules />
         <Levels />
-        <Rankings />
+        {!user.isError && <Rankings />}
         <Titles />
       </main>
       <AnimatePresence exitBeforeEnter>

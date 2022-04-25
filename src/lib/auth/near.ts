@@ -22,24 +22,43 @@ const config = {
   headers: {},
 };
 
-const near = await connect(config);
-const wallet = new WalletConnection(near, null);
+// @ts-ignore
+let near: any, wallet: any, contract: any;
 
-const contract = await new Contract(wallet.account(), contractName, {
-  viewMethods: ['getRankings'],
-  changeMethods: ['updateRankings'],
-  sender: wallet.getAccountId(),
-});
+export const initNear = async () => {
+  near = await connect(config);
+  wallet = new WalletConnection(near, null);
+
+  contract = await new Contract(wallet.account(), contractName, {
+    viewMethods: ['getRankings'],
+    changeMethods: ['updateRankings'],
+    sender: wallet.getAccountId(),
+  });
+};
+
+initNear();
 
 export const updateRankings = async (score: number) => {
+  if (!contract) {
+    return;
+  }
+
   return contract.updateRankings({ score }, BOATLOAD_OF_GAS);
 };
 
 export const getRankings = () => {
+  if (!contract) {
+    return;
+  }
+
   return contract.getRankings();
 };
 
 export const signIn = () => {
+  if (!wallet) {
+    return;
+  }
+
   wallet.requestSignIn(
     { contractId: contractName, methodNames: [contract.updateRankings.name] },
     'Secret Ingredient | Rhythm Game',
@@ -48,14 +67,26 @@ export const signIn = () => {
 };
 
 export const signOut = () => {
+  if (!wallet) {
+    return;
+  }
+
   wallet.signOut();
 };
 
 export const isNEARSignedIn = (): boolean => {
+  if (!wallet) {
+    return false;
+  }
+
   return wallet.isSignedIn();
 };
 
 export const getWalletAccountId = (): string | undefined => {
+  if (!wallet) {
+    return;
+  }
+
   return wallet.getAccountId();
 };
 

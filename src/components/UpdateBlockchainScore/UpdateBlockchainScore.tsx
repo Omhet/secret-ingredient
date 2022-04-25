@@ -1,6 +1,7 @@
 import { Spinner } from '@components/Spinner/Spinner';
 import { useLevels } from '@store/levels';
 import { updateUserRankings, useRankings } from '@store/rankings';
+import { useUser } from '@store/user';
 import classnames from 'classnames';
 import { motion } from 'framer-motion';
 import { buttonVariants } from 'motions/motions';
@@ -8,8 +9,13 @@ import React, { FC } from 'react';
 import s from './UpdateBlockchainScore.module.scss';
 
 export const UpdateBlockchainScore: FC = () => {
+  const user = useUser();
   const { updateStatus } = useRankings();
   const { globalScore } = useLevels();
+
+  if (user.isError) {
+    return null;
+  }
 
   return (
     <div className={s.main}>

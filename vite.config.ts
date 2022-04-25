@@ -22,8 +22,5 @@ export default ({ command }) => {
       }),
       tsconfigPaths(),
     ],
-    build: {
-      target: 'esnext',
-    },
   });
 };

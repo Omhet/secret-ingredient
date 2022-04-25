@@ -38,21 +38,30 @@ export const Header: FC<HeaderProps> = ({ navigation, onOpenMenu }) => {
           <span> Score: {globalScore}</span>
           <img className={s.logoImg} src="/pics/cake.png" />
         </div>
-        {user.isSignedIn ? (
+        {!user.isError && (
           <>
-            <motion.button
-              className={s.disconnectBtn}
-              onClick={() => signOut()}
-              whileHover="hover"
-              variants={buttonVariants}
-            >
-              Disconnect
-            </motion.button>
+            {user.isSignedIn ? (
+              <>
+                <motion.button
+                  className={s.disconnectBtn}
+                  onClick={() => signOut()}
+                  whileHover="hover"
+                  variants={buttonVariants}
+                >
+                  Disconnect
+                </motion.button>
+              </>
+            ) : (
+              <motion.button
+                className={s.connectBtn}
+                onClick={() => signIn()}
+                whileHover="hover"
+                variants={buttonVariants}
+              >
+                Connect
+              </motion.button>
+            )}
           </>
-        ) : (
-          <motion.button className={s.connectBtn} onClick={() => signIn()} whileHover="hover" variants={buttonVariants}>
-            Connect
-          </motion.button>
         )}
         {isSmall && (
           <button className={s.menuBtn} onClick={onOpenMenu}>
