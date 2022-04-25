@@ -157,7 +157,7 @@ export const pixiGame = (app: Application) => {
 
       foodItem.sprite.angle += elapsed / 20000;
 
-      if (foodItem.sprite.y > app.screen.height) {
+      if (foodItem.sprite.y > app.screen.height + foodItem.sprite.height * 2) {
         removeFoodItem(foodItem);
       }
     }
