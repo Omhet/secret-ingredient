@@ -10,11 +10,13 @@ import { Rules } from './components/Rules/Rules';
 import { Story } from './components/Story/Story';
 import { Titles } from './components/Titles/Titles';
 import s from './MainPage.module.scss';
+import { Rankings } from './components/Rankings/Rankings';
 
 const navigation: NavigationItem[] = [
   { id: '#story', title: 'Story' },
   { id: '#rules', title: 'How to play' },
   { id: '#levels', title: 'Levels' },
+  { id: '#rankings', title: 'Rankings' },
   { id: '#titles', title: 'Titles' },
 ];
 
@@ -38,6 +40,7 @@ export const MainPage: FC = () => {
         <Story />
         <Rules />
         <Levels />
+        <Rankings />
         <Titles />
       </main>
       <AnimatePresence exitBeforeEnter>
