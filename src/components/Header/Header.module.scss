@@ -35,19 +35,25 @@
     gap: unset;
   }
 }
-.connectBtn,
-.disconnectBtn {
+.playBtn {
   padding: 8rem 24rem;
   font-size: 16rem;
   font-weight: 900;
+  background-color: var(--accent2-color);
+  border-radius: 16rem;
+}
+.connectBtn,
+.disconnectBtn {
+  padding: 8rem 16rem;
+  font-size: 12rem;
+  font-weight: 600;
   border-radius: 16rem;
 }
 .connectBtn {
-  background-color: var(--accent2-color);
+  border: 2rem solid var(--accent2-color);
 }
 .disconnectBtn {
-  color: var(--back-color);
-  background-color: var(--accent1-color);
+  border: 2rem solid var(--accent1-color);
 }
 .navContainer {
   display: flex;
@@ -94,7 +100,7 @@
   .disconnectBtn {
     order: 3;
   }
-  .score {
+  .playBtn {
     order: 2;
   }
   .menuBtn {

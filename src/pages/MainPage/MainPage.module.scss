@@ -4,3 +4,31 @@
   font-size: 24rem;
   overflow-y: hidden;
 }
+
+.logoImg {
+  width: 32rem;
+  height: 32rem;
+}
+.score {
+  width: fit-content;
+  padding: 4rem 8rem;
+  position: fixed;
+  top: 80rem;
+  right: 24rem;
+  display: flex;
+  align-items: center;
+  gap: 8rem;
+  flex-shrink: 0;
+  font-size: 16rem;
+  font-weight: 500;
+  font-family: var(--header-font);
+  //color: var(--accent1-color);
+  border: 2rem solid var(--accent1-color);
+  background-color: var(--back-color);
+  border-radius: 16rem;
+  cursor: default;
+  & > span {
+    width: fit-content;
+    white-space: nowrap;
+  }
+}
