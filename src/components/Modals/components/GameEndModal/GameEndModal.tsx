@@ -5,7 +5,7 @@ import { Restart } from '@icons/Restart';
 import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { useCurrentLevel, useLevels, useNextLevel } from '@store/levels';
 import { closeModal } from '@store/modals';
-import { useUser } from '@store/user';
+import { signIn, useUser } from '@store/user';
 import classnames from 'classnames';
 import { motion } from 'framer-motion';
 import { buttonVariants } from 'motions/motions';
@@ -90,6 +90,19 @@ export const GameEndModal: FC = () => {
         </motion.button>
       </div>
       {isBetterScoreThanEarlier && isSignedIn && <UpdateBlockchainScore />}
+      {!isSignedIn && currentLevelNumber === 4 && (
+        <div className={s.connectContainer}>
+          <span>Please connect to participate in rankings</span>
+          <motion.button
+            className={classnames(s.button, s.connectBtn)}
+            onClick={() => signIn()}
+            whileHover="hover"
+            variants={buttonVariants}
+          >
+            Connect
+          </motion.button>
+        </div>
+      )}
     </div>
   );
 };

@@ -90,6 +90,8 @@
   align-items: center;
   justify-content: center;
   gap: 12rem;
+  border-radius: 16rem;
+  white-space: nowrap;
   @media (max-width: 1024px) {
     padding: 12rem 24rem;
   }
@@ -101,21 +103,15 @@
   font-weight: 500;
   background-color: var(--back-color);
   border: 3rem solid var(--accent2-color);
-  border-radius: 16rem;
-  white-space: nowrap;
 }
 .nextBtn {
   font-weight: 800;
   background-color: var(--accent2-color);
-  border-radius: 16rem;
-  white-space: nowrap;
 }
 .exitBtn {
   font-weight: 500;
   background-color: var(--back-color);
   border: 3rem solid var(--accent1-color);
-  border-radius: 16rem;
-  white-space: nowrap;
 }
 .icon {
   width: 32rem;
@@ -126,4 +122,20 @@
     width: 24rem;
     height: 24rem;
   }
+}
+
+.connectContainer {
+  display: flex;
+  align-items: center;
+  gap: 18rem;
+  font-size: 18rem;
+  @media (max-width: 1024px) {
+    font-size: 16rem;
+  }
+}
+.connectBtn {
+  width: fit-content;
+  font-weight: 500;
+  background-color: var(--back-color);
+  border: 3rem solid var(--accent2-color);
 }
