@@ -1,10 +1,12 @@
 import { getRankings, updateRankings } from '@lib/auth/near';
+import { userStore } from '@store/user';
 import { createEffect, createEvent, createStore } from 'effector';
 import { useStore } from 'effector-react';
 
 export type Ranking = {
   name: string;
   score: number;
+  isCurrentUser: boolean;
 };
 
 export type Rankings = Ranking[];
@@ -36,10 +38,17 @@ export const setUpdateStatus = createEvent<UpdateStatus>();
 export const loadRankings = createEffect<void, Rankings, Error>(async () => {
   const rankingsEntries = await getRankings();
 
-  const rankings: Rankings = rankingsEntries.map(({ key, value }: { key: string; value: number }) => ({
-    name: key.split('.')[0],
-    score: value,
-  }));
+  const user = userStore.getState();
+
+  const rankings: Rankings = rankingsEntries.map(({ key, value }: { key: string; value: number }) => {
+    const name = key.split('.')[0];
+
+    return {
+      name,
+      score: value,
+      isCurrentUser: name === user.name,
+    };
+  });
 
   return rankings.sort((a, b) => b.score - a.score);
 });

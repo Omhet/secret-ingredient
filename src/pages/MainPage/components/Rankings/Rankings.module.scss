@@ -41,6 +41,12 @@
 .tableHeader {
   padding: 12rem 24rem;
   font-weight: 700;
+  @media (max-width: 1024px) {
+    padding: 12rem 18rem;
+  }
+  @media (max-width: 480px) {
+    padding: 12rem 16rem;
+  }
 }
 .tableItem {
   padding: 12rem 24rem;
