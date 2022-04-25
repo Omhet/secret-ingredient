@@ -1,6 +1,5 @@
 import { UpdateBlockchainScore } from '@components/UpdateBlockchainScore/UpdateBlockchainScore';
 import { Exit } from '@icons/Exit';
-import { Next } from '@icons/Next';
 import { Restart } from '@icons/Restart';
 import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { useCurrentLevel, useLevels, useNextLevel } from '@store/levels';
@@ -45,6 +44,8 @@ export const GameEndModal: FC = () => {
   const history = useHistory();
   const isSmall = useMedia('(max-width: 1024px)');
 
+  const isNextLevelButtonShown = isEnoughScore && nextLevel && nextLevel.isOpen;
+
   return (
     <div className={s.root}>
       <div className={s.scoreContainer}>
@@ -67,20 +68,13 @@ export const GameEndModal: FC = () => {
           <Restart className={s.icon} />
           {!isSmall && 'Retry'}
         </motion.button>
-        {isEnoughScore && nextLevel && (
-          <motion.button
-            className={classnames(s.button, s.nextBtn)}
-            disabled={!nextLevel.isOpen}
-            onClick={() => {
-              history.replace(`/game?level=${currentLevelNumber + 1}`);
-              window.location.reload();
-            }}
-            whileHover="hover"
-            variants={buttonVariants}
-          >
-            <Next className={s.icon} />
-            {!isSmall && 'Next level'}
-          </motion.button>
+        {isNextLevelButtonShown && (
+          <motion.div className={classnames(s.button, s.nextBtn)} whileHover="hover" variants={buttonVariants}>
+            <Link to={`/game?level=${currentLevelNumber + 1}`}>
+              {/* {isSmall && <Next className={s.icon} />} */}
+              Next level
+            </Link>
+          </motion.div>
         )}
         <motion.button whileHover="hover" variants={buttonVariants}>
           <Link className={classnames(s.button, s.exitBtn)} onClick={() => closeModal()} to="/#levels">

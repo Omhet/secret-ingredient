@@ -46,7 +46,7 @@ loadGame.use(async (levelNumber: number) => {
   const { markup } = await levelDataManager.loadLevelData(levelNumber);
 
   setNoteCount(markup.notes.length);
-  setBlastCount(Math.round(markup.notes.length * 1.15));
+  setBlastCount(Math.round(markup.notes.length * 1.05));
 
   setIsLoading(false);
 
@@ -56,6 +56,10 @@ loadGame.use(async (levelNumber: number) => {
 startGame.watch(() => {
   setGameStatus(GameStatus.InProgress);
   levelDataManager.playLevelMusic();
+
+  // setTimeout(() => {
+  //   preGameEnd();
+  // }, 5000);
 });
 
 const preGameEnd = createEvent();
