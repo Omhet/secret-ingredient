@@ -1,9 +1,10 @@
 .headerContainer {
+  width: 100%;
   padding: 12rem clamp(12rem, 15vw, 250rem);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
+  position: fixed;
   top: 0;
   font-size: 12rem;
   background-color: var(--back-color);

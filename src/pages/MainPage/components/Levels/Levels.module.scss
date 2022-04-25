@@ -43,5 +43,6 @@
   gap: 48rem;
   @media (max-width: 480px) {
     padding: 0 24rem;
+    gap: 0;
   }
 }
