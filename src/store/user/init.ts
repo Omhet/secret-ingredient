@@ -23,8 +23,8 @@ signOut.watch(() => {
   resetUser();
 });
 
-signIn.watch(() => {
-  nearSignIn();
+signIn.watch(({ withUpdate }) => {
+  nearSignIn(withUpdate);
 });
 
 initUser.use(() => initNear());

@@ -9,7 +9,7 @@ import classnames from 'classnames';
 import { motion } from 'framer-motion';
 import { buttonVariants } from 'motions/motions';
 import React, { FC } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useMedia } from 'react-use';
 import s from './GameEndModal.module.scss';
 
@@ -41,7 +41,6 @@ export const GameEndModal: FC = () => {
   const nextLevel = useNextLevel();
   const { markup, imgUrls } = levelDataManager.getCurrentLevelData();
   const maxLevelScore = markup.notes.length;
-  const history = useHistory();
   const isSmall = useMedia('(max-width: 1024px)');
 
   const isNextLevelButtonShown = isEnoughScore && nextLevel && nextLevel.isOpen;
@@ -70,10 +69,7 @@ export const GameEndModal: FC = () => {
         </motion.button>
         {isNextLevelButtonShown && (
           <motion.div className={classnames(s.button, s.nextBtn)} whileHover="hover" variants={buttonVariants}>
-            <Link to={`/game?level=${currentLevelNumber + 1}`}>
-              {/* {isSmall && <Next className={s.icon} />} */}
-              Next level
-            </Link>
+            <Link to={`/game?level=${currentLevelNumber + 1}`}>Next level</Link>
           </motion.div>
         )}
         <motion.button whileHover="hover" variants={buttonVariants}>
@@ -89,7 +85,7 @@ export const GameEndModal: FC = () => {
           <span>Please connect to participate in rankings</span>
           <motion.button
             className={classnames(s.button, s.connectBtn)}
-            onClick={() => signIn()}
+            onClick={() => signIn({ withUpdate: true })}
             whileHover="hover"
             variants={buttonVariants}
           >
