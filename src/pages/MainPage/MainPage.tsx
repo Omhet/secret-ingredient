@@ -41,10 +41,12 @@ export const MainPage: FC = () => {
     <>
       <Header onOpenMenu={openMenu} navigation={navigation} />
       <main className={s.main}>
-        <div className={s.score}>
-          <span> Score: {globalScore}</span>
-          <img className={s.logoImg} src="/pics/cake.png" />
-        </div>
+        {globalScore > 0 && (
+          <div className={s.score}>
+            <span> Score: {globalScore}</span>
+            <img className={s.logoImg} src="/pics/cake.png" />
+          </div>
+        )}
         <Hero />
         <Story />
         <Rules />
