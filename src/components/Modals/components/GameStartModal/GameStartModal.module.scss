@@ -1,6 +1,4 @@
 .root {
-  max-width: 70%;
-  max-height: 70%;
   padding: 32rem;
   margin: auto;
   display: flex;
@@ -12,13 +10,10 @@
   background-color: #fffdf988;
   border-radius: 16rem;
   @media (max-width: 1024px) {
-    max-width: 90%;
-    max-height: 85%;
     font-size: 18rem;
     gap: 32rem;
   }
   @media (max-width: 480px) {
-    width: 90%;
     padding: 24rem;
     gap: 24rem;
   }
@@ -49,10 +44,11 @@
   }
 }
 .master {
-  width: 250rem;
-  @media (max-width: 1024px) {
-    width: 200rem;
-  }
+  height: 55vh;
+  // width: 250rem;
+  // @media (max-width: 1024px) {
+  //   width: 200rem;
+  // }
 }
 .buttonsContainer {
   display: flex;

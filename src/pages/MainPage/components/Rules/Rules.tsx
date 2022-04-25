@@ -23,12 +23,6 @@ export const Rules: FC = () => {
           <span className={s.description}>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</span>
         </div>
       </div>
-      <div className={s.playSection}>
-        <span>OK, clear, let&apos;s play!</span>
-        <motion.a whileHover="hover" variants={buttonVariants} href="#levels" className={s.levelsBtn}>
-          See levels
-        </motion.a>
-      </div>
     </section>
   );
 };
