@@ -8,7 +8,11 @@ import { buttonVariants } from 'motions/motions';
 import React, { FC } from 'react';
 import s from './UpdateBlockchainScore.module.scss';
 
-export const UpdateBlockchainScore: FC = () => {
+export type UpdateBlockchainScoreProps = {
+  className?: string;
+};
+
+export const UpdateBlockchainScore: FC<UpdateBlockchainScoreProps> = ({ className }) => {
   const user = useUser();
   const { updateStatus } = useRankings();
   const { globalScore } = useLevels();
@@ -17,28 +21,24 @@ export const UpdateBlockchainScore: FC = () => {
     return null;
   }
 
-  return (
-    <div className={s.main}>
-      {updateStatus === 'Init' && (
-        <div className={s.updateRankingContainer}>
-          <span>Update your ranking in blockchain tournament table</span>
-          <motion.button
-            className={classnames(s.button, s.updateBtn)}
-            onClick={() => updateUserRankings(globalScore)}
-            whileHover="hover"
-            variants={buttonVariants}
-          >
-            Update
-          </motion.button>
-        </div>
-      )}
-      {updateStatus === 'InProgress' && (
-        <div className={s.loadingContainer}>
-          <Spinner />
-          Loading
-        </div>
-      )}
-      {updateStatus === 'Done' && <div>OK, good</div>}
+  return updateStatus === 'Init' ? (
+    <div className={classnames(s.updateRankingContainer, className)}>
+      <span>Update your ranking in blockchain tournament table</span>
+      <motion.button
+        className={classnames(s.button, s.updateBtn)}
+        onClick={() => updateUserRankings(globalScore)}
+        whileHover="hover"
+        variants={buttonVariants}
+      >
+        Update
+      </motion.button>
     </div>
+  ) : updateStatus === 'InProgress' ? (
+    <div className={s.loadingContainer}>
+      <Spinner />
+      Loading
+    </div>
+  ) : (
+    <div>OK, good</div>
   );
 };
