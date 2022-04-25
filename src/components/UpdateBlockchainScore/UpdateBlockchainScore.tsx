@@ -7,12 +7,16 @@ import { buttonVariants } from 'motions/motions';
 import React, { FC } from 'react';
 import s from './UpdateBlockchainScore.module.scss';
 
-export const UpdateBlockchainScore: FC = () => {
+export type UpdateBlockchainScoreProps = {
+  className?: string;
+};
+
+export const UpdateBlockchainScore: FC<UpdateBlockchainScoreProps> = ({ className }) => {
   const { updateStatus } = useRankings();
   const { globalScore } = useLevels();
 
   return updateStatus === 'Init' ? (
-    <div className={s.updateRankingContainer}>
+    <div className={classnames(s.updateRankingContainer, className)}>
       <span>Update your ranking in blockchain tournament table</span>
       <motion.button
         className={classnames(s.button, s.updateBtn)}
