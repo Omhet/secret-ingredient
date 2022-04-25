@@ -37,7 +37,7 @@ const getMasterWords = (currentLevelNumber: number, isEnoughScore: boolean): str
 
 export const GameEndModal: FC = () => {
   const { updateStatus } = useRankings();
-  const { currentLevelScore, currentLevelNumber, isBetterScoreThanEarlier } = useLevels();
+  const { currentLevelScore, currentLevelNumber, isBetterScoreThanEarlier, globalScore } = useLevels();
   const { isSignedIn } = useUser();
   const { isEnoughScore } = useCurrentLevel();
   const nextLevel = useNextLevel();
@@ -93,7 +93,7 @@ export const GameEndModal: FC = () => {
               <span>Update your ranking in blockchain tournament table</span>
               <motion.button
                 className={classnames(s.button, s.updateBtn)}
-                onClick={() => updateUserRankings(currentLevelScore)}
+                onClick={() => updateUserRankings(globalScore)}
                 whileHover="hover"
                 variants={buttonVariants}
               >
