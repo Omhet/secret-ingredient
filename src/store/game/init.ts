@@ -8,7 +8,7 @@ import {
   setIsBetterScoreThanEarlier,
 } from '@store/levels';
 import { openGameEndModal, openGameStartModal } from '@store/modals';
-import { guard } from 'effector';
+import { createEvent, guard } from 'effector';
 import {
   decreaseBlastCount,
   decreaseNoteCount,
@@ -58,12 +58,18 @@ startGame.watch(() => {
   levelDataManager.playLevelMusic();
 });
 
+const preGameEnd = createEvent();
 // Set end game status
 guard({
   source: gameStore,
   filter: ({ status, blastCount, noteCount }) =>
     status === GameStatus.InProgress && (blastCount === 0 || noteCount === 0),
-  target: setGameStatus.prepend(() => GameStatus.End),
+  target: preGameEnd,
+});
+preGameEnd.watch(() => {
+  setTimeout(() => {
+    setGameStatus(GameStatus.End);
+  }, 300);
 });
 // Call end game
 guard({
