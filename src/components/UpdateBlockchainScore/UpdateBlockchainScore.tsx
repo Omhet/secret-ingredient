@@ -11,28 +11,24 @@ export const UpdateBlockchainScore: FC = () => {
   const { updateStatus } = useRankings();
   const { globalScore } = useLevels();
 
-  return (
-    <div className={s.main}>
-      {updateStatus === 'Init' && (
-        <div className={s.updateRankingContainer}>
-          <span>Update your ranking in blockchain tournament table</span>
-          <motion.button
-            className={classnames(s.button, s.updateBtn)}
-            onClick={() => updateUserRankings(globalScore)}
-            whileHover="hover"
-            variants={buttonVariants}
-          >
-            Update
-          </motion.button>
-        </div>
-      )}
-      {updateStatus === 'InProgress' && (
-        <div className={s.loadingContainer}>
-          <Spinner />
-          Loading
-        </div>
-      )}
-      {updateStatus === 'Done' && <div>OK, good</div>}
+  return updateStatus === 'Init' ? (
+    <div className={s.updateRankingContainer}>
+      <span>Update your ranking in blockchain tournament table</span>
+      <motion.button
+        className={classnames(s.button, s.updateBtn)}
+        onClick={() => updateUserRankings(globalScore)}
+        whileHover="hover"
+        variants={buttonVariants}
+      >
+        Update
+      </motion.button>
     </div>
+  ) : updateStatus === 'InProgress' ? (
+    <div className={s.loadingContainer}>
+      <Spinner />
+      Loading
+    </div>
+  ) : (
+    <div>OK, good</div>
   );
 };

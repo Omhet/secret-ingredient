@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 48rem;
-  font-size: 24rem;
+  font-size: 18rem;
   background-color: #fffdf988;
   border-radius: 16rem;
   @media (max-width: 1024px) {
@@ -21,6 +21,7 @@
     width: 90%;
     padding: 24rem;
     gap: 18rem;
+    justify-content: flex-start;
   }
 }
 .scoreContainer {
@@ -94,12 +95,9 @@
   @media (max-width: 1024px) {
     gap: 18rem;
   }
-  @media (max-width: 480px) {
-    flex-direction: column;
-  }
 }
 .button {
-  padding: 12rem 32rem;
+  padding: 8rem 24rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -140,23 +138,4 @@
     width: 24rem;
     height: 24rem;
   }
-}
-.updateRankingContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18rem;
-}
-.loadingContainer {
-  display: flex;
-  align-items: center;
-  gap: 12rem;
-}
-.updateBtn {
-  width: fit-content;
-  font-weight: 500;
-  background-color: var(--back-color);
-  border: 3rem solid var(--accent2-color);
-  border-radius: 16rem;
-  white-space: nowrap;
 }
