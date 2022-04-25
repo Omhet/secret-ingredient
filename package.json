@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
+    "build:contract": "asb",
+    "build:contract:debug": "asb --target debug",
     "serve": "vite preview",
     "typecheck": "tsc -p ./tsconfig.json --noEmit",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
@@ -24,6 +26,7 @@
   "dependencies": {
     "@pixi/particle-emitter": "^5.0.5",
     "@tonejs/midi": "^2.0.28",
+    "big.js": "^6.1.1",
     "effector": "^22.2.0",
     "effector-react": "^22.0.6",
     "framer-motion": "^6.3.1",

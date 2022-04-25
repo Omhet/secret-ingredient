@@ -3,7 +3,8 @@ import { context, PersistentVector } from 'near-sdk-as';
 @nearBindgen
 export class Ranking {
   user: string;
-  constructor(public score: number) {
+
+  constructor(public score: i32) {
     this.user = context.sender;
   }
 }

@@ -1,6 +1,6 @@
 import { Ranking, rankings } from './model';
 
-export function updateRanking(score: number): void {
+export function updateRankings(score: i32): void {
   const ranking = new Ranking(score);
   rankings.push(ranking);
 }
