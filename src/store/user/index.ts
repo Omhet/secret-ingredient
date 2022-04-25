@@ -26,7 +26,7 @@ export const useUser = () => {
 
 export const resetUser = createEvent();
 
-export const signIn = createEvent();
+export const signIn = createEvent<{ withUpdate?: boolean } | undefined>();
 export const signOut = createEvent();
 
 export const initUser = createEffect<void, void, Error>();

@@ -54,16 +54,17 @@ export const getRankings = () => {
   return contract.getRankings();
 };
 
-export const signIn = () => {
+export const signIn = (withUpdate = false) => {
   if (!wallet) {
     return;
   }
 
-  wallet.requestSignIn(
-    { contractId: contractName, methodNames: [contract.updateRankings.name] },
-    'Secret Ingredient | Rhythm Game',
-    document.location.origin
-  );
+  let redirectSuccessUrl = document.location.origin;
+  if (withUpdate) {
+    redirectSuccessUrl = `${redirectSuccessUrl}?withUpdate=true`;
+  }
+
+  wallet.requestSignIn(contractName, 'Secret Ingredient | Rhythm Game', redirectSuccessUrl);
 };
 
 export const signOut = () => {
