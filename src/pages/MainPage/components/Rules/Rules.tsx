@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-import { buttonVariants } from 'motions/motions';
 import React, { FC } from 'react';
 import s from './Rules.module.scss';
 
@@ -10,18 +8,9 @@ export const Rules: FC = () => {
     <section id="rules" className={s.rulesSection}>
       <h2 className={s.rulesTitle}>How to play</h2>
       <div className={s.rulesContainer}>
-        <div className={s.ruleItem}>
-          <img className={s.image} src="/pics/japanCard.png" />
-          <span className={s.description}>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</span>
-        </div>
-        <div className={s.ruleItem}>
-          <img className={s.image} src="/pics/mexicaCard.png" />
-          <span className={s.description}>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</span>
-        </div>
-        <div className={s.ruleItem}>
-          <img className={s.image} src="/pics/russiaCard.png" />
-          <span className={s.description}>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</span>
-        </div>
+        <img className={s.ruleItem} src="/pics/htp1.png" />
+        <img className={s.ruleItem} src="/pics/htp2.png" />
+        <img className={s.ruleItem} src="/pics/htp3.png" />
       </div>
     </section>
   );

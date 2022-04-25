@@ -1,17 +1,20 @@
 .rulesSection {
   min-height: calc(100vh - 58rem);
-  padding: 32rem clamp(12rem, 15vw, 250rem);
+  padding: 32rem 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
   gap: 32rem;
+  @media (max-width: 1024px) {
+    height: 100%;
+  }
   @media (max-width: 480px) {
-    padding: 24rem;
+    padding: 24rem 0;
   }
 }
 .rulesTitle {
   height: fit-content;
+  padding-left: clamp(12rem, 15vw, 250rem);
   font-size: 48rem;
   font-weight: 900;
   font-family: var(--header-font);
@@ -20,63 +23,28 @@
     font-size: 32rem;
   }
   @media (max-width: 480px) {
-    padding: 0;
+    padding-left: 24rem;
     font-size: 24rem;
   }
 }
 .rulesContainer {
   width: 100%;
-  height: fit-content;
-  display: flex;
+  max-width: 1350rem;
+  height: 100%;
+  padding: 0 32rem;
+  margin: auto;
+  align-self: center;
+  justify-self: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300rem);
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
+  gap: 48rem;
   @media (max-width: 480px) {
-    flex-direction: column;
+    padding: 0 24rem;
   }
 }
 .ruleItem {
-  width: 25%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  @media (max-width: 480px) {
-    width: 100%;
-  }
-}
-.description {
-  font-size: 18rem;
-  font-weight: 300;
-}
-.image {
   border-radius: 16rem;
-}
-.levelsBtn {
-  padding: 12rem 48rem;
-  font-size: 24rem;
-  font-weight: 800;
-  background-color: var(--accent2-color);
-  border-radius: 16rem;
-  @media (max-width: 1024px) {
-    padding: 12rem 32rem;
-    font-size: 24rem;
-  }
-  @media (max-width: 480px) {
-    padding: 12rem 24rem;
-    font-size: 18rem;
-  }
-}
-.playSection {
-  margin-bottom: 32rem;
-  align-self: flex-end;
-  display: flex;
-  align-items: center;
-  gap: 32rem;
-  @media (max-width: 1024px) {
-    font-size: 24rem;
-  }
-  @media (max-width: 480px) {
-    margin: 0;
-    flex-direction: column;
-    font-size: 18rem;
-  }
+  object-fit: contain;
 }
