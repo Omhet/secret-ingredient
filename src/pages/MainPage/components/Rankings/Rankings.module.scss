@@ -1,0 +1,56 @@
+.main {
+  height: calc(100vh - 58rem);
+  padding: 32rem clamp(12rem, 15vw, 250rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 48rem;
+  @media (max-width: 1024px) {
+    height: calc(100vh - 72rem);
+    gap: 32rem;
+  }
+  @media (max-width: 480px) {
+    padding: 24rem;
+    gap: 24rem;
+  }
+}
+
+.sectionTitle {
+  height: fit-content;
+  font-size: 48rem;
+  font-weight: 900;
+  font-family: var(--header-font);
+  white-space: nowrap;
+  @media (max-width: 1024px) {
+    font-size: 32rem;
+  }
+  @media (max-width: 480px) {
+    padding: 0;
+    font-size: 24rem;
+  }
+}
+.table {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  border: 2px solid var(--accent2-color);
+  border-radius: 16rem;
+  @media (max-width: 1024px) {
+    font-size: 18rem;
+  }
+}
+.tableHeader {
+  padding: 12rem 24rem;
+  font-weight: 700;
+  @media (max-width: 1024px) {
+    padding: 12rem 18rem;
+  }
+  @media (max-width: 480px) {
+    padding: 12rem 16rem;
+  }
+}
+.tableItem {
+  padding: 12rem 24rem;
+}
+.isCurrentUser {
+  background-color: #aeda7733;
+}

@@ -30,6 +30,10 @@
   display: flex;
   align-items: center;
   gap: 48rem;
+  @media (max-width: 1024px) {
+    justify-content: space-between;
+    gap: unset;
+  }
 }
 .connectBtn,
 .disconnectBtn {
