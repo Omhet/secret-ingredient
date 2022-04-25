@@ -1,11 +1,10 @@
-import { Spinner } from '@components/Spinner/Spinner';
+import { UpdateBlockchainScore } from '@components/UpdateBlockchainScore/UpdateBlockchainScore';
 import { Exit } from '@icons/Exit';
 import { Next } from '@icons/Next';
 import { Restart } from '@icons/Restart';
 import { levelDataManager } from '@lib/levels/LevelDataManager';
 import { useCurrentLevel, useLevels, useNextLevel } from '@store/levels';
 import { closeModal } from '@store/modals';
-import { updateUserRankings, useRankings } from '@store/rankings';
 import { useUser } from '@store/user';
 import classnames from 'classnames';
 import { motion } from 'framer-motion';
@@ -36,8 +35,7 @@ const getMasterWords = (currentLevelNumber: number, isEnoughScore: boolean): str
 };
 
 export const GameEndModal: FC = () => {
-  const { updateStatus } = useRankings();
-  const { currentLevelScore, currentLevelNumber, isBetterScoreThanEarlier, globalScore } = useLevels();
+  const { currentLevelScore, currentLevelNumber, isBetterScoreThanEarlier } = useLevels();
   const { isSignedIn } = useUser();
   const { isEnoughScore } = useCurrentLevel();
   const nextLevel = useNextLevel();
@@ -86,30 +84,7 @@ export const GameEndModal: FC = () => {
           </Link>
         </motion.button>
       </div>
-      {isBetterScoreThanEarlier && isSignedIn && (
-        <>
-          {updateStatus === 'Init' && (
-            <div className={s.updateRankingContainer}>
-              <span>Update your ranking in blockchain tournament table</span>
-              <motion.button
-                className={classnames(s.button, s.updateBtn)}
-                onClick={() => updateUserRankings(globalScore)}
-                whileHover="hover"
-                variants={buttonVariants}
-              >
-                Update
-              </motion.button>
-            </div>
-          )}
-          {updateStatus === 'InProgress' && (
-            <div className={s.loadingContainer}>
-              <Spinner />
-              Loading
-            </div>
-          )}
-          {updateStatus === 'Done' && <div>OK, good</div>}
-        </>
-      )}
+      {isBetterScoreThanEarlier && isSignedIn && <UpdateBlockchainScore />}
     </div>
   );
 };

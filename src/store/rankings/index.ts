@@ -64,4 +64,6 @@ export const updateUserRankings = createEffect<number, void, Error>(async (score
   setUpdateStatus('InProgress');
   await updateRankings(score);
   setUpdateStatus('Done');
+
+  loadRankings();
 });

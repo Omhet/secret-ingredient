@@ -1,10 +1,15 @@
+import { UpdateBlockchainScore } from '@components/UpdateBlockchainScore/UpdateBlockchainScore';
+import { useLevels } from '@store/levels';
 import { loadRankings, useRankings } from '@store/rankings';
+import { useUser } from '@store/user';
 import classnames from 'classnames';
 import React, { FC, useEffect } from 'react';
 import s from './Rankings.module.scss';
 
 export const Rankings: FC = () => {
-  const { rankings, isRankingsLoading } = useRankings();
+  const { rankings, isRankingsLoading, userRankingScore = 0 } = useRankings();
+  const { isSignedIn } = useUser();
+  const { globalScore } = useLevels();
 
   useEffect(() => {
     loadRankings();
@@ -17,6 +22,7 @@ export const Rankings: FC = () => {
   return (
     <section id="rankings" className={s.main}>
       <h2 className={s.sectionTitle}>Rankings</h2>
+      {globalScore > userRankingScore && isSignedIn && <UpdateBlockchainScore />}
       <div className={s.table}>
         <span className={s.tableHeader}>Place</span>
         <span className={s.tableHeader}>User name</span>

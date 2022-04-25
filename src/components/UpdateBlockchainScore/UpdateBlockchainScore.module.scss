@@ -1,0 +1,22 @@
+.button {
+  padding: 12rem 32rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rem;
+  @media (max-width: 1024px) {
+    padding: 12rem 24rem;
+  }
+  @media (max-width: 480px) {
+    padding: 8rem 16rem;
+  }
+}
+
+.updateBtn {
+  width: fit-content;
+  font-weight: 500;
+  background-color: var(--back-color);
+  border: 3rem solid var(--accent2-color);
+  border-radius: 16rem;
+  white-space: nowrap;
+}
