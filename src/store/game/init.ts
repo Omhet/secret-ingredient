@@ -50,8 +50,7 @@ loadGame.use(async (levelNumber: number) => {
 
   setIsLoading(false);
 
-  openGameEndModal();
-  // openGameStartModal();
+  openGameStartModal();
 });
 
 startGame.watch(() => {

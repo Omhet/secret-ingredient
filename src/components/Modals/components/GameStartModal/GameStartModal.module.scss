@@ -26,20 +26,17 @@
 .masterContainer {
   width: fit-content;
   height: fit-content;
-  max-height: 60%;
   display: flex;
   gap: 32rem;
   @media (max-width: 1024px) {
-    max-height: 50%;
     flex-direction: column;
     align-items: center;
-    gap: 24rem;
+    gap: 18rem;
   }
 }
 .masterWords {
-  width: fit-content;
+  width: 250rem;
   height: fit-content;
-  max-width: 50%;
   padding: 48rem;
   position: relative;
   background-color: var(--back-color);
@@ -48,15 +45,13 @@
     padding: 32rem;
   }
   @media (max-width: 480px) {
-    max-width: 100%;
     padding: 24rem;
   }
 }
 .master {
-  width: fit-content;
-  max-height: 100%;
+  width: 250rem;
   @media (max-width: 1024px) {
-    max-height: 60%;
+    width: 200rem;
   }
 }
 .buttonsContainer {
@@ -71,31 +66,30 @@
   }
 }
 .button {
+  padding: 8rem 24rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12rem;
+  @media (max-width: 1024px) {
+    padding: 12rem 24rem;
+  }
+  @media (max-width: 480px) {
+    padding: 8rem 16rem;
+  }
 }
 .playBtn {
-  padding: 12rem 32rem;
   font-weight: 800;
   background-color: var(--accent2-color);
   border-radius: 16rem;
   white-space: nowrap;
-  @media (max-width: 1024px) {
-    padding: 12rem 24rem;
-  }
 }
 .exitBtn {
-  padding: 12rem 32rem;
   font-weight: 500;
   background-color: var(--back-color);
   border: 3rem solid var(--accent1-color);
   border-radius: 16rem;
   white-space: nowrap;
-  @media (max-width: 1024px) {
-    padding: 12rem 24rem;
-  }
 }
 .icon {
   width: 32rem;

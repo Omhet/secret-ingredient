@@ -89,7 +89,7 @@ export const GameEndModal: FC = () => {
           </Link>
         </motion.button>
       </div>
-      {true && <UpdateBlockchainScore />}
+      {isBetterScoreThanEarlier && isSignedIn && <UpdateBlockchainScore />}
     </div>
   );
 };
