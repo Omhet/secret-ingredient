@@ -120,8 +120,8 @@ export const pixiGame = (app: Application) => {
 
   const minZoneScale = 3;
   const maxZoneScale = 3.06;
-  const minFoodScale = levelNumber === 4 ? 0.15 : 0.18;
-  const maxFoodScale = levelNumber === 4 ? 0.18 : 0.21;
+  const minFoodScale = levelNumber >= 2 ? 0.15 : 0.18;
+  const maxFoodScale = levelNumber >= 2 ? 0.18 : 0.21;
 
   let elapsed = 0.0;
   function gameLoop() {

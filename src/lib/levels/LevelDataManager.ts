@@ -12,7 +12,7 @@ const LEVELS_DATA = [
   },
   {
     name: 'Mexico',
-    maxScore: 83,
+    maxScore: 76,
     ingredientColors: ['#FF4D00'],
   },
   {
