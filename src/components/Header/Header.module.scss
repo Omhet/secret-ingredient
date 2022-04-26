@@ -42,6 +42,7 @@
   font-weight: 900;
   background-color: var(--accent2-color);
   border-radius: 16rem;
+  cursor: pointer;
 }
 .connectBtn,
 .disconnectBtn {
@@ -49,6 +50,7 @@
   font-size: 12rem;
   font-weight: 600;
   border-radius: 16rem;
+  cursor: pointer;
 }
 .connectBtn {
   border: 2rem solid var(--accent2-color);
@@ -94,6 +96,7 @@
   width: 32rem;
   height: 32rem;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 @media (max-width: 1024px) {
