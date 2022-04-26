@@ -14,7 +14,7 @@ export const Levels: FC = () => {
 
   const handlePlayClick = (levelNumber: number) => {
     setCurrentLevelNumber(levelNumber);
-    history.push(`/game?level=${levelNumber}`);
+    history.push(`/game`);
   };
 
   return (

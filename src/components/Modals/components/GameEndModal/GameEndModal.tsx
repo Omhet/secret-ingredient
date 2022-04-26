@@ -2,7 +2,7 @@ import { UpdateBlockchainScore } from '@components/UpdateBlockchainScore/UpdateB
 import { Exit } from '@icons/Exit';
 import { Restart } from '@icons/Restart';
 import { levelDataManager } from '@lib/levels/LevelDataManager';
-import { useCurrentLevel, useLevels, useNextLevel } from '@store/levels';
+import { setCurrentLevelNumber, useCurrentLevel, useLevels, useNextLevel } from '@store/levels';
 import { closeModal } from '@store/modals';
 import { signIn, useUser } from '@store/user';
 import classnames from 'classnames';
@@ -36,7 +36,6 @@ const getMasterWords = (currentLevelNumber: number, isEnoughScore: boolean): str
 
 export const GameEndModal: FC = () => {
   const history = useHistory();
-
   const { currentLevelScore, currentLevelNumber, isBetterScoreThanEarlier } = useLevels();
   const { isSignedIn } = useUser();
   const { isEnoughScore } = useCurrentLevel();
@@ -62,7 +61,7 @@ export const GameEndModal: FC = () => {
       <div className={s.buttonsContainer}>
         <motion.button
           className={classnames(s.button, s.restartBtn)}
-          onClick={() => window.location.reload()}
+          onClick={() => history.go(0)}
           whileHover="hover"
           variants={buttonVariants}
         >
@@ -72,7 +71,7 @@ export const GameEndModal: FC = () => {
         {isNextLevelButtonShown && (
           <motion.button
             onClick={() => {
-              history.replace(`/game?level=${currentLevelNumber + 1}`);
+              setCurrentLevelNumber(currentLevelNumber + 1);
             }}
             className={classnames(s.button, s.nextBtn)}
             whileHover="hover"
