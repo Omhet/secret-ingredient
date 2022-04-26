@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
+  position: sticky;
   top: 0;
   font-size: 12rem;
   background-color: var(--back-color);
@@ -70,6 +70,9 @@
 .score {
   width: fit-content;
   padding: 4rem 8rem;
+  position: absolute;
+  top: 120%;
+  right: 24rem;
   display: flex;
   align-items: center;
   gap: 8rem;
@@ -79,6 +82,7 @@
   font-family: var(--header-font);
   //color: var(--accent1-color);
   border: 2rem solid var(--accent1-color);
+  background-color: var(--back-color);
   border-radius: 16rem;
   cursor: default;
   & > span {

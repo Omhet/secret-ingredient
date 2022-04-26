@@ -1,13 +1,13 @@
 import { NavigationItem } from '@app-types/navigationItem';
 import { FullScreenMenu } from '@components/FullScreenMenu/FullScreenMenu';
 import { Header } from '@components/Header/Header';
-import { useLevels } from '@store/levels';
 import { useUser } from '@store/user';
 import { AnimatePresence } from 'framer-motion';
 import React, { FC, useState } from 'react';
 import { toggleFreezePage } from 'utils/toggleFreezePage';
 import { Hero } from './components/Hero/Hero';
 import { Levels } from './components/Levels/Levels';
+import { MonetizationBanner } from './components/MonetizationBanner/MonetizationBanner';
 import { Rankings } from './components/Rankings/Rankings';
 import { Rules } from './components/Rules/Rules';
 import { Story } from './components/Story/Story';
@@ -28,7 +28,6 @@ export const MainPage: FC = () => {
   const user = useUser();
 
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const { globalScore } = useLevels();
   const openMenu = () => {
     setMenuOpen(true);
     toggleFreezePage();
@@ -39,14 +38,9 @@ export const MainPage: FC = () => {
   };
   return (
     <>
-      <Header onOpenMenu={openMenu} navigation={navigation} />
+      <MonetizationBanner />
       <main className={s.main}>
-        {globalScore > 0 && (
-          <div className={s.score}>
-            <span> Score: {globalScore}</span>
-            <img className={s.logoImg} src="/pics/cake.png" />
-          </div>
-        )}
+        <Header onOpenMenu={openMenu} navigation={navigation} />
         <Hero />
         <Story />
         <Rules />

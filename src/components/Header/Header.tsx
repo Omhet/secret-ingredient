@@ -1,5 +1,6 @@
 import { NavigationItem } from '@app-types/navigationItem';
 import { Burger } from '@icons/Burger';
+import { useLevels } from '@store/levels';
 import { signIn, signOut, useUser } from '@store/user';
 import { motion } from 'framer-motion';
 import { buttonVariants, navItemVariants } from 'motions/motions';
@@ -14,6 +15,7 @@ export type HeaderProps = {
 
 export const Header: FC<HeaderProps> = ({ navigation, onOpenMenu }) => {
   const user = useUser();
+  const { globalScore } = useLevels();
 
   const isSmall = useMedia('(max-width: 1024px)');
   return (
@@ -66,6 +68,12 @@ export const Header: FC<HeaderProps> = ({ navigation, onOpenMenu }) => {
           </button>
         )}
       </div>
+      {globalScore > 0 && (
+        <div className={s.score}>
+          <span> Score: {globalScore}</span>
+          <img className={s.logoImg} src="/pics/cake.png" />
+        </div>
+      )}
     </header>
   );
 };
