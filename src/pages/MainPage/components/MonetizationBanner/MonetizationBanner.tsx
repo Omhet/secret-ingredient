@@ -55,7 +55,13 @@ export const MonetizationBanner: FC = () => {
           <img className={s.head} src="/pics/excitedHead.png" />
           <div className={s.textContainer}>
             <span className={s.text}>Thank you! Here is your content. Enjoy!</span>
-            <motion.a whileHover="hover" variants={buttonVariants} className={s.downloadBtn}>
+            <motion.a
+              whileHover="hover"
+              variants={buttonVariants}
+              className={s.downloadBtn}
+              href="https://drive.google.com/drive/folders/1WnKUkRkK5YpwwXnHSiLR-0hGgusfzZpZ?usp=sharing"
+              target="_blank"
+            >
               Download
             </motion.a>
           </div>
