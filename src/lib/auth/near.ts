@@ -9,8 +9,8 @@ const BOATLOAD_OF_GAS = Big(3)
 // @ts-ignore
 const { keyStores, connect, WalletConnection, Contract } = window.nearApi;
 
-// const contractName = 'secret-ingredient.testnet';
-const contractName = 'dev-1650888802724-27747003947333';
+const contractName = 'secret-ingredient-rankings.testnet';
+// const contractName = 'dev-1650888802724-27747003947333';
 
 const config = {
   networkId: 'testnet',
