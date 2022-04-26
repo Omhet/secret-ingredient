@@ -5,12 +5,14 @@ import { buttonVariants } from 'motions/motions';
 import React, { FC } from 'react';
 import s from './MonetizationBanner.module.scss';
 
+const backgroundSrc = '/pics/banner.png';
+
 export const MonetizationBanner: FC = () => {
   const { isEnabled, status } = useMonetization();
 
   if (!isEnabled) {
     return (
-      <div className={s.main}>
+      <div style={{ backgroundImage: `url("${backgroundSrc}")` }} className={s.main}>
         <div className={s.content}>
           <img className={s.head} src="/pics/smilingHead.png" />
           <div className={s.textContent}>
@@ -30,7 +32,7 @@ export const MonetizationBanner: FC = () => {
 
   if (status === 'stop' || status === undefined) {
     return (
-      <div className={s.main}>
+      <div style={{ backgroundImage: `url("${backgroundSrc}")` }} className={s.main}>
         <div className={s.content}>
           <img className={s.head} src="/pics/smilingHead.png" />
           <div className={s.textContent}>
@@ -43,7 +45,7 @@ export const MonetizationBanner: FC = () => {
   }
 
   return (
-    <div className={s.main}>
+    <div style={{ backgroundImage: `url("${backgroundSrc}")` }} className={s.main}>
       {status === 'pending' && (
         <div className={s.loading}>
           <Spinner className={s.spinner} />
