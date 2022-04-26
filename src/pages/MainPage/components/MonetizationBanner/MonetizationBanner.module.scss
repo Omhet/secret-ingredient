@@ -1,11 +1,97 @@
 .main {
   min-height: 25vh;
-  font-size: 16rem;
+  padding: 12rem clamp(12rem, 15vw, 250rem);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
-  background-color: black;
-  color: white;
-  margin-bottom: 32rem;
+  background-image: url('/pics/banner.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 32rem;
+  @media (max-width: 1024px) {
+    padding: 32rem;
+    font-size: 24rem;
+  }
+  @media (max-width: 480px) {
+    padding: 24rem;
+    font-size: 18rem;
+  }
+}
+.content,
+.loading {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fffdf988;
+  border-radius: 16rem;
+}
+.loading {
+  height: 80%;
+  gap: 12rem;
+  justify-content: center;
+}
+.textContent {
+  padding: 32rem;
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 1024px) {
+    padding: 12rem;
+  }
+}
+.header {
+  font-family: var(--header-font);
+}
+.text {
+  font-size: 24rem;
+  font-weight: 900;
+  @media (max-width: 1024px) {
+    font-size: 18rem;
+  }
+  @media (max-width: 480px) {
+    font-size: 16rem;
+  }
+}
+.head {
+  height: 20vh;
+  @media (max-width: 1024px) {
+    height: 15vh;
+  }
+}
+.spinner {
+  width: 48rem;
+  height: 48rem;
+  div {
+    width: 40rem;
+    height: 40rem;
+    margin: 4rem;
+  }
+}
+.downloadBtn {
+  padding: 12rem 48rem;
+  font-family: var(--regular-font);
+  font-weight: 800;
+  background-color: var(--accent2-color);
+  border-radius: 16rem;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  @media (max-width: 1024px) {
+    padding: 12rem 32rem;
+  }
+  @media (max-width: 480px) {
+    padding: 12rem 24rem;
+  }
+}
+.textContainer {
+  padding: 32rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24rem;
+  @media (max-width: 1024px) {
+    padding: 12rem;
+  }
 }
