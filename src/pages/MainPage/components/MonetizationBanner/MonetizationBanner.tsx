@@ -8,20 +8,6 @@ import s from './MonetizationBanner.module.scss';
 export const MonetizationBanner: FC = () => {
   const { isEnabled, status } = useMonetization();
 
-  return (
-    <div className={s.main}>
-      <div className={s.content}>
-        <img className={s.head} src="/pics/excitedHead.png" />
-        <div className={s.textContainer}>
-          <span className={s.text}>Thank you! Here is your content. Enjoy!</span>
-          <motion.a whileHover="hover" variants={buttonVariants} className={s.downloadBtn}>
-            Download
-          </motion.a>
-        </div>
-      </div>
-    </div>
-  );
-
   if (!isEnabled || status === 'stop' || status === undefined) {
     return (
       <div className={s.main}>
