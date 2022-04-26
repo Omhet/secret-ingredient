@@ -9,7 +9,7 @@ import classnames from 'classnames';
 import { motion } from 'framer-motion';
 import { buttonVariants } from 'motions/motions';
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useMedia } from 'react-use';
 import s from './GameEndModal.module.scss';
 
@@ -35,6 +35,8 @@ const getMasterWords = (currentLevelNumber: number, isEnoughScore: boolean): str
 };
 
 export const GameEndModal: FC = () => {
+  const history = useHistory();
+
   const { currentLevelScore, currentLevelNumber, isBetterScoreThanEarlier } = useLevels();
   const { isSignedIn } = useUser();
   const { isEnoughScore } = useCurrentLevel();
@@ -68,9 +70,16 @@ export const GameEndModal: FC = () => {
           {!isSmall && 'Retry'}
         </motion.button>
         {isNextLevelButtonShown && (
-          <motion.div className={classnames(s.button, s.nextBtn)} whileHover="hover" variants={buttonVariants}>
-            <Link to={`/game?level=${currentLevelNumber + 1}`}>Next level</Link>
-          </motion.div>
+          <motion.button
+            onClick={() => {
+              history.replace(`/game?level=${currentLevelNumber + 1}`);
+            }}
+            className={classnames(s.button, s.nextBtn)}
+            whileHover="hover"
+            variants={buttonVariants}
+          >
+            Next level
+          </motion.button>
         )}
         <motion.button whileHover="hover" variants={buttonVariants}>
           <Link className={classnames(s.button, s.exitBtn)} onClick={() => closeModal()} to="/#levels">
