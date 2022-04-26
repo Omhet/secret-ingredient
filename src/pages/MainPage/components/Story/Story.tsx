@@ -13,7 +13,7 @@ export const Story: FC = () => {
         </div>
         <span className={s.description1}>
           Once upon a time there lived a little kitten boy who loved to cook. He got that passion for culinary from his
-          grandma. She was and amazing home chef, it was really fascinating to watch her cook. And the taste was just
+          grandma. She was an amazing home chef, it was really fascinating to watch her cooking. And the taste was just
           meowtastic!
         </span>
       </div>
@@ -39,8 +39,8 @@ export const Story: FC = () => {
       </div>
       <div className={s.storyItem4}>
         <span className={s.description4}>
-          Fortunately, he had no habit of despair! He brainstormed a little bit and made up with a plan. So was going to
-          travel all over the world and visit the best local chefs to learn their secrets.
+          Fortunately, he had no habit of despair! He brainstormed a little bit and made up with a plan. So he was going
+          to travel all over the world and visit the best local chefs to learn their secrets.
         </span>
         <div className={classnames(s.imgContainer, s.img4)}>
           <img className={s.image} src="pics/illustration4.png" />

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Level } from '../Level/Level';
 import s from './Levels.module.scss';
 
-const LevelTitles = ['Japanese meditation', 'Wild wild west', 'Somewhere in Eastern Europe', 'The greatest secret'];
+const LevelTitles = ['Asian meditation', 'Wild spicy west', 'Among the birch trees', 'The greatest secret'];
 
 const LevelImages = ['/pics/japanCard.png', '/pics/mexicaCard.png', '/pics/russiaCard.png', '/pics/grandmaCard.png'];
 

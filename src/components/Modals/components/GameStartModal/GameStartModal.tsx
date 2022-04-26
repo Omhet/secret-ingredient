@@ -14,13 +14,13 @@ import s from './GameStartModal.module.scss';
 const getMasterWords = (currentLevelNumber: number): string => {
   switch (currentLevelNumber) {
     case 1:
-      return 'Konnichiwa.';
+      return 'Konnichiwa. The secret is in soy sauce. But you must keep balance. Turn on the volume and try to meditate with me.';
     case 2:
-      return '¡Hola! ';
+      return "¡Hola! I like it spicy. Put more chili sauce and shake your booty, c'mon!";
     case 3:
-      return 'Доброго дня!';
+      return 'Здравствуй! Use sour cream to make the taste soft and creamy. Add herbs to create variety of taste.';
     default:
-      return 'Hello, my dear!';
+      return "Hello, my dear! You silly little kitten, there are no secrets, just cook with love. That's all!";
   }
 };
 

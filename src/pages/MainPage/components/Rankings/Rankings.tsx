@@ -26,7 +26,7 @@ export const Rankings: FC = () => {
       <h2 className={s.sectionTitle}>Rankings</h2>
       {!isSignedIn && (
         <div className={s.connectContainer}>
-          <span>Please connect to participate in rankings</span>
+          <span>Please connect to participate in rankings. You will have a chance to win our special prize.</span>
           <motion.button
             className={classnames(s.connectBtn)}
             onClick={() => signIn()}

@@ -100,28 +100,18 @@ export const Titles: FC = () => {
           <Arrow className={s.arrow} />
           <div className={s.titleContainer}>
             <span className={s.title}>Authors</span>
-            <span className={s.note}>Hover over our names to see more info</span>
+            <span className={s.note}>Follow the links to know more about us</span>
           </div>
         </motion.div>
       )}
       {(isDariaVisible || isSmall) && (
         <motion.div className={s.aboutAuthor} variants={authorVariants} initial="hidden" animate="visible" exit="exit">
           <img src="/pics/Dasha.png" />
-          <span className={s.authorDescription}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem neque, repellendus distinctio cum enim
-            totam id esse iusto? Laudantium hic neque soluta libero adipisci quaerat cupiditate ipsam excepturi cumque
-            omnis.
-          </span>
         </motion.div>
       )}
       {(isVladimirVisible || isSmall) && (
         <motion.div className={s.aboutAuthor} variants={authorVariants} initial="hidden" animate="visible" exit="exit">
           <img src="/pics/Vova.png" />
-          <span className={s.authorDescription}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem neque, repellendus distinctio cum enim
-            totam id esse iusto? Laudantium hic neque soluta libero adipisci quaerat cupiditate ipsam excepturi cumque
-            omnis.
-          </span>
         </motion.div>
       )}
     </section>

@@ -19,7 +19,7 @@ const navigation: NavigationItem[] = [
   { id: '#rules', title: 'How to play' },
   { id: '#levels', title: 'Levels' },
   { id: '#rankings', title: 'Rankings' },
-  { id: '#titles', title: 'Titles' },
+  { id: '#titles', title: 'Authors' },
 ];
 
 export type MainPageProps = {};
