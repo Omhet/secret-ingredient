@@ -61,7 +61,7 @@ export const GameEndModal: FC = () => {
       <div className={s.buttonsContainer}>
         <motion.button
           className={classnames(s.button, s.restartBtn)}
-          onClick={() => history.push('/game#restart')}
+          onClick={() => history.go(0)}
           whileHover="hover"
           variants={buttonVariants}
         >
