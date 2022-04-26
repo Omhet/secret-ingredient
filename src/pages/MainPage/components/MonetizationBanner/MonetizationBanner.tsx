@@ -8,7 +8,27 @@ import s from './MonetizationBanner.module.scss';
 export const MonetizationBanner: FC = () => {
   const { isEnabled, status } = useMonetization();
 
-  if (!isEnabled || status === 'stop' || status === undefined) {
+  if (!isEnabled) {
+    return (
+      <div className={s.main}>
+        <div className={s.content}>
+          <img className={s.head} src="/pics/smilingHead.png" />
+          <div className={s.textContent}>
+            <span className={s.header}>Hey there!</span>
+            <span className={s.text}>
+              <span>We have exclusive content. Please, sign up for </span>
+              <a className={s.link} href="https://coil.com/" target="_blank" rel="noreferrer">
+                Coil
+              </a>
+              <span> to access it</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (status === 'stop' || status === undefined) {
     return (
       <div className={s.main}>
         <div className={s.content}>
